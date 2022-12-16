@@ -5,10 +5,13 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Table(name = "car")
@@ -24,4 +27,7 @@ public class AdminCar {
     private String brand;
     private String model;
     private int year;
+    @OneToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "car_technical_specification_id")
+    private AdminCarTechnicalSpecification adminCarTechnicalSpecification;
 }
