@@ -8,16 +8,20 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import pl.domanski.carRent.admin.adminCar.controller.dto.AdminCarDto;
 import pl.domanski.carRent.admin.adminCar.controller.dto.AdminCarTechnicalSpecificationDto;
 import pl.domanski.carRent.admin.adminCar.model.AdminCar;
+import pl.domanski.carRent.admin.adminCar.model.AdminCarEquipment;
 import pl.domanski.carRent.admin.adminCar.model.AdminCarTechnicalSpecification;
+import pl.domanski.carRent.admin.adminCar.repository.AdminCarEquipmentRepository;
 import pl.domanski.carRent.admin.adminCar.repository.AdminCarRepository;
 import pl.domanski.carRent.admin.adminCar.repository.AdminCarTechnicalSpecificationRepository;
 
+import java.util.List;
 import java.util.Optional;
 
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.hasSize;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 class AdminCarServiceTest {
@@ -26,6 +30,8 @@ class AdminCarServiceTest {
     AdminCarRepository adminCarRepository;
     @Mock
     AdminCarTechnicalSpecificationRepository adminCarTechSpecRepository;
+    @Mock
+    AdminCarEquipmentRepository adminCarEquipmentRepository;
 
     @InjectMocks
     AdminCarService adminCarService;
@@ -36,7 +42,9 @@ class AdminCarServiceTest {
         Long carId = 1L;
         AdminCarDto adminCarDto = createAdminCarDto();
         given(adminCarRepository.findById(carId)).willReturn(Optional.of(createTestAdminCar()));
-        when(adminCarTechSpecRepository.save(any())).thenReturn(createAdminTechSpec());
+        given(adminCarEquipmentRepository.findAllByCarId(carId))
+                .willReturn(List.of());
+        given(adminCarTechSpecRepository.save(any())).willReturn(createAdminTechSpec());
         given(adminCarRepository.save(any())).willReturn(createAdminCar());
         //when
         AdminCar result = adminCarService.updateCar(adminCarDto, 1L);
@@ -47,6 +55,7 @@ class AdminCarServiceTest {
         assertEquals(2010, result.getYear());
         assertEquals(200, result.getAdminCarTechnicalSpecification().getPower());
         assertEquals(2L, result.getAdminCarTechnicalSpecification().getId());
+        assertThat(result.getEquipments(), hasSize(3));
     }
 
     private static AdminCar createTestAdminCar() {
@@ -86,6 +95,7 @@ class AdminCarServiceTest {
                 )
                 .build();
     }
+
     private AdminCar createAdminCar() {
         return AdminCar.builder()
                 .id(1L)
@@ -104,6 +114,9 @@ class AdminCarServiceTest {
                                 .seats("5")
                                 .build()
                 )
+                .equipments(List.of(AdminCarEquipment.builder().build(),
+                        AdminCarEquipment.builder().build(),
+                        AdminCarEquipment.builder().build()))
                 .build();
     }
 }

@@ -11,8 +11,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import java.util.List;
 
 @Table(name = "car")
 @Entity
@@ -30,4 +32,7 @@ public class AdminCar {
     @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
     @JoinColumn(name = "car_technical_specification_id")
     private AdminCarTechnicalSpecification adminCarTechnicalSpecification;
+    @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
+    @JoinColumn(name = "carId")
+    private List<AdminCarEquipment> equipments;
 }
