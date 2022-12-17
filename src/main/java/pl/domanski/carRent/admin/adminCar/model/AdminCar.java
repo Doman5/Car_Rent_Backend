@@ -27,7 +27,7 @@ public class AdminCar {
     private String brand;
     private String model;
     private int year;
-    @OneToOne(cascade = CascadeType.PERSIST)
+    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
     @JoinColumn(name = "car_technical_specification_id")
     private AdminCarTechnicalSpecification adminCarTechnicalSpecification;
 }

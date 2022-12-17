@@ -21,7 +21,7 @@ import pl.domanski.carRent.admin.adminCar.service.AdminCarService;
 @RequiredArgsConstructor
 public class AdminCarController {
 
-    private final static Long EMPTY_ID = null;
+
 
     private final AdminCarService adminCarService;
 
@@ -37,12 +37,12 @@ public class AdminCarController {
 
     @PostMapping
     public AdminCar createCar(@RequestBody AdminCarDto adminCarDto) {
-        return adminCarService.createCar(mapCar(adminCarDto, EMPTY_ID));
+        return adminCarService.createCar(adminCarDto);
     }
 
     @PutMapping("/{id}")
     public AdminCar updateCar(@PathVariable Long id, @RequestBody AdminCarDto adminCarDto) {
-        return adminCarService.updateCar(mapCar(adminCarDto, id));
+        return adminCarService.updateCar(adminCarDto, id);
     }
 
     @DeleteMapping("/{id}")
@@ -50,15 +50,4 @@ public class AdminCarController {
         adminCarService.deleteCar(id);
     }
 
-
-    private static AdminCar mapCar(AdminCarDto adminCarDto, Long id) {
-        return AdminCar.builder()
-                .id(id)
-                .brand(adminCarDto.getBrand())
-                .model(adminCarDto.getModel())
-                .year(adminCarDto.getYear())
-                .adminCarTechnicalSpecification(
-                        adminCarDto.getAdminCarTechnicalSpecification())
-                .build();
-    }
 }

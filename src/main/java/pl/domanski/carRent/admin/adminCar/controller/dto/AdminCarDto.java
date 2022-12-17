@@ -1,13 +1,14 @@
 package pl.domanski.carRent.admin.adminCar.controller.dto;
 
+import lombok.Builder;
 import lombok.Getter;
-import pl.domanski.carRent.admin.adminCar.model.AdminCarTechnicalSpecification;
 
 @Getter
+@Builder
 public class AdminCarDto {
     private Long id;
     private String brand;
     private String model;
     private int year;
-    private AdminCarTechnicalSpecification adminCarTechnicalSpecification;
+    private AdminCarTechnicalSpecificationDto adminCarTechnicalSpecificationDto;
 }
