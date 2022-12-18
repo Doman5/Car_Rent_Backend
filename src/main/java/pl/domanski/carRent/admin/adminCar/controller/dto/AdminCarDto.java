@@ -18,7 +18,8 @@ public class AdminCarDto {
     private String model;
     @Min(0)
     private int year;
-    private AdminCarTechnicalSpecificationDto adminCarTechnicalSpecificationDto;
+    private AdminCarTechnicalSpecificationDto carTechnicalSpecificationDto;
     private List<AdminCarEquipmentDto> equipments;
     private List<AdminCarDescriptionDto> descriptions;
+    private AdminCarPriceDto carPrice;
 }

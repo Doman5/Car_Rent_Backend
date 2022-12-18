@@ -6,13 +6,16 @@ import org.springframework.transaction.annotation.Transactional;
 import pl.domanski.carRent.admin.adminCar.controller.dto.AdminCarBasicInfo;
 import pl.domanski.carRent.admin.adminCar.controller.dto.AdminCarDescriptionDto;
 import pl.domanski.carRent.admin.adminCar.controller.dto.AdminCarEquipmentDto;
+import pl.domanski.carRent.admin.adminCar.controller.dto.AdminCarPriceDto;
 import pl.domanski.carRent.admin.adminCar.controller.dto.AdminCarTechnicalSpecificationDto;
 import pl.domanski.carRent.admin.adminCar.model.AdminCar;
 import pl.domanski.carRent.admin.adminCar.model.AdminCarDescription;
 import pl.domanski.carRent.admin.adminCar.model.AdminCarEquipment;
+import pl.domanski.carRent.admin.adminCar.model.AdminCarPrice;
 import pl.domanski.carRent.admin.adminCar.model.AdminCarTechnicalSpecification;
 import pl.domanski.carRent.admin.adminCar.repository.AdminCarDescriptionRepository;
 import pl.domanski.carRent.admin.adminCar.repository.AdminCarEquipmentRepository;
+import pl.domanski.carRent.admin.adminCar.repository.AdminCarPriceRepository;
 import pl.domanski.carRent.admin.adminCar.repository.AdminCarRepository;
 import pl.domanski.carRent.admin.adminCar.repository.AdminCarTechnicalSpecificationRepository;
 
@@ -28,6 +31,7 @@ public class AdminCarUpdateService {
     private final AdminCarTechnicalSpecificationRepository adminCarTechnicalSpecificationRepository;
     private final AdminCarEquipmentRepository adminCarEquipmentRepository;
     private final AdminCarDescriptionRepository adminCarDescriptionRepository;
+    private final AdminCarPriceRepository adminCarPriceRepository;
 
     @Transactional
     public AdminCarBasicInfo updateBasicInfo(Long id, AdminCarBasicInfo carBasicInfo) {
@@ -58,6 +62,22 @@ public class AdminCarUpdateService {
         return adminCarDescriptionRepository.saveAll(descriptions);
     }
 
+    @Transactional
+    public AdminCarPrice updateCarPrice(Long id, AdminCarPriceDto carPriceDto) {
+        Long carPriceId = adminCarRepository.findById(id).orElseThrow().getCarPrice().getId();
+        AdminCarPrice carPrice = adminCarPriceRepository.findById(carPriceId).orElseThrow();
+        setNewCarPriceValues(carPriceDto, carPrice);
+        return adminCarPriceRepository.save(carPrice);
+    }
+
+    private static void setNewCarPriceValues(AdminCarPriceDto carPriceDto, AdminCarPrice carPrice) {
+        carPrice.setPriceDay(carPriceDto.getPriceDay());
+        carPrice.setPriceHalfWeek(carPriceDto.getPriceHalfWeek());
+        carPrice.setPriceWeek(carPriceDto.getPriceWeek());
+        carPrice.setPriceTwoWeeks(carPriceDto.getPriceTwoWeeks());
+        carPrice.setPriceMonth(carPriceDto.getPriceMonth());
+    }
+
     private static void setNewCarDescriptionValues(List<AdminCarDescriptionDto> descriptionDtoList, List<AdminCarDescription> descriptions) {
         for (int i = 0; i < descriptions.size(); i++) {
             if(descriptionDtoList.get(i) != null) {
@@ -73,7 +93,6 @@ public class AdminCarUpdateService {
             }
         }
     }
-
 
     private static void setNewCarBasicInfoValues(AdminCarBasicInfo carBasicInfo, AdminCar adminCar) {
         adminCar.setBrand(carBasicInfo.getBrand());

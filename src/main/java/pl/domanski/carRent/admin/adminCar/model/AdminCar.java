@@ -31,13 +31,16 @@ public class AdminCar {
     private String brand;
     private String model;
     private int year;
-    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
+    @OneToOne(cascade = {CascadeType.REMOVE})
     @JoinColumn(name = "car_technical_specification_id")
     private AdminCarTechnicalSpecification adminCarTechnicalSpecification;
-    @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
+    @OneToMany(cascade = {CascadeType.REMOVE})
     @JoinColumn(name = "carId")
     private List<AdminCarEquipment> equipments;
-    @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
+    @OneToMany(cascade = {CascadeType.REMOVE})
     @JoinColumn(name = "carId")
     private List<AdminCarDescription> descriptions;
+    @OneToOne(cascade = {CascadeType.REMOVE})
+    @JoinColumn(name = "car_price_id")
+    private AdminCarPrice carPrice;
 }

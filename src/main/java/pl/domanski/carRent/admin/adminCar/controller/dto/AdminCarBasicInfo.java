@@ -5,7 +5,7 @@ import lombok.Getter;
 
 @Getter
 @Builder
-public class AdminCarListDto {
+public class AdminCarBasicInfo {
     private Long id;
     private String brand;
     private String model;

@@ -9,9 +9,11 @@ import org.springframework.web.bind.annotation.RestController;
 import pl.domanski.carRent.admin.adminCar.controller.dto.AdminCarBasicInfo;
 import pl.domanski.carRent.admin.adminCar.controller.dto.AdminCarDescriptionDto;
 import pl.domanski.carRent.admin.adminCar.controller.dto.AdminCarEquipmentDto;
+import pl.domanski.carRent.admin.adminCar.controller.dto.AdminCarPriceDto;
 import pl.domanski.carRent.admin.adminCar.controller.dto.AdminCarTechnicalSpecificationDto;
 import pl.domanski.carRent.admin.adminCar.model.AdminCarDescription;
 import pl.domanski.carRent.admin.adminCar.model.AdminCarEquipment;
+import pl.domanski.carRent.admin.adminCar.model.AdminCarPrice;
 import pl.domanski.carRent.admin.adminCar.model.AdminCarTechnicalSpecification;
 import pl.domanski.carRent.admin.adminCar.service.AdminCarUpdateService;
 
@@ -42,5 +44,10 @@ public class AdminCarUpdateController {
     @PutMapping("/carDescription")
     public List<AdminCarDescription> updateCarDescription(@PathVariable Long id, @RequestBody List<AdminCarDescriptionDto> descriptionList) {
         return adminCarUpdateService.updateCarDescription(id, descriptionList);
+    }
+
+    @PutMapping("/carPrice")
+    public AdminCarPrice updateCarPrice(@PathVariable Long id, @RequestBody AdminCarPriceDto carPriceDto) {
+        return adminCarUpdateService.updateCarPrice(id, carPriceDto);
     }
 }
