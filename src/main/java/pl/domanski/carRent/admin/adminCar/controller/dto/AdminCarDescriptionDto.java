@@ -7,8 +7,8 @@ import lombok.NoArgsConstructor;
 
 @Getter
 @Builder
-@NoArgsConstructor
 @AllArgsConstructor
-public class AdminCarEquipmentDto {
-    private String name;
+@NoArgsConstructor
+public class AdminCarDescriptionDto {
+    private String description;
 }

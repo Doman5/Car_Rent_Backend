@@ -1,5 +1,6 @@
 package pl.domanski.carRent.admin.adminCar.model;
 
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -18,11 +19,12 @@ import javax.persistence.Table;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "car_equipment")
-public class AdminCarEquipment {
+@Table(name = "car_description")
+public class AdminCarDescription {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String name;
+    private String description;
     private Long carId;
+
 }

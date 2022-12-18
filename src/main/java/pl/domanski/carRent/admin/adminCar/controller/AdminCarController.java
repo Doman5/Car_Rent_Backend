@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,12 +15,12 @@ import pl.domanski.carRent.admin.adminCar.controller.dto.AdminCarListDto;
 import pl.domanski.carRent.admin.adminCar.model.AdminCar;
 import pl.domanski.carRent.admin.adminCar.service.AdminCarService;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping("admin/cars")
 @RequiredArgsConstructor
 public class AdminCarController {
-
-
 
     private final AdminCarService adminCarService;
 
@@ -36,13 +35,8 @@ public class AdminCarController {
     }
 
     @PostMapping
-    public AdminCar createCar(@RequestBody AdminCarDto adminCarDto) {
+    public AdminCar createCar(@RequestBody @Valid AdminCarDto adminCarDto) {
         return adminCarService.createCar(adminCarDto);
-    }
-
-    @PutMapping("/{id}")
-    public AdminCar updateCar(@PathVariable Long id, @RequestBody AdminCarDto adminCarDto) {
-        return adminCarService.updateCar(adminCarDto, id);
     }
 
     @DeleteMapping("/{id}")

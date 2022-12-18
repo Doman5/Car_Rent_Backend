@@ -19,5 +19,6 @@ public class AdminCarDto {
     @Min(0)
     private int year;
     private AdminCarTechnicalSpecificationDto adminCarTechnicalSpecificationDto;
-    private List<AdminCarEquipmentDto> carEquipments;
+    private List<AdminCarEquipmentDto> equipments;
+    private List<AdminCarDescriptionDto> descriptions;
 }

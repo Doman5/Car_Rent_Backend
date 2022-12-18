@@ -8,8 +8,10 @@ import org.springframework.transaction.annotation.Transactional;
 import pl.domanski.carRent.admin.adminCar.controller.dto.AdminCarDto;
 import pl.domanski.carRent.admin.adminCar.controller.dto.AdminCarListDto;
 import pl.domanski.carRent.admin.adminCar.model.AdminCar;
+import pl.domanski.carRent.admin.adminCar.model.AdminCarDescription;
 import pl.domanski.carRent.admin.adminCar.model.AdminCarEquipment;
 import pl.domanski.carRent.admin.adminCar.model.AdminCarTechnicalSpecification;
+import pl.domanski.carRent.admin.adminCar.repository.AdminCarDescriptionRepository;
 import pl.domanski.carRent.admin.adminCar.repository.AdminCarEquipmentRepository;
 import pl.domanski.carRent.admin.adminCar.repository.AdminCarRepository;
 import pl.domanski.carRent.admin.adminCar.repository.AdminCarTechnicalSpecificationRepository;
@@ -18,8 +20,10 @@ import pl.domanski.carRent.admin.adminCar.service.mapper.AdminCarMapper;
 import java.util.List;
 
 import static pl.domanski.carRent.admin.adminCar.service.mapper.AdminCarMapper.mapToCar;
+import static pl.domanski.carRent.admin.adminCar.service.mapper.AdminCarMapper.mapToCarDescription;
+import static pl.domanski.carRent.admin.adminCar.service.mapper.AdminCarMapper.mapToCarEquipment;
 import static pl.domanski.carRent.admin.adminCar.service.mapper.AdminCarMapper.mapToCarTechSpec;
-import static pl.domanski.carRent.admin.adminCar.service.mapper.AdminCarMapper.mapToNewCar;
+
 
 @Service
 @RequiredArgsConstructor
@@ -30,6 +34,7 @@ public class AdminCarService {
     private final AdminCarRepository adminCarRepository;
     private final AdminCarTechnicalSpecificationRepository adminCarTechnicalSpecificationRepository;
     private final AdminCarEquipmentRepository adminCarEquipmentRepository;
+    private final AdminCarDescriptionRepository adminCarDescriptionRepository;
 
     public Page<AdminCarListDto> getCars(Pageable pageable) {
         return adminCarRepository.findAll(pageable)
@@ -40,21 +45,17 @@ public class AdminCarService {
         return adminCarRepository.findById(id).orElseThrow();
     }
 
-
-    public AdminCar createCar(AdminCarDto adminCarDto) {
-        return adminCarRepository.save(mapToNewCar(adminCarDto, EMPTY_ID, EMPTY_ID, EMPTY_ID));
-    }
-
     @Transactional
-    public AdminCar updateCar(AdminCarDto adminCarDto, Long id) {
-        Long adminCarTechSpecId = adminCarRepository.findById(id).orElseThrow().getAdminCarTechnicalSpecification().getId();
+    public AdminCar createCar(AdminCarDto adminCarDto) {
+        AdminCar adminCar = adminCarRepository.save(mapToCar(adminCarDto, EMPTY_ID));
 
-        AdminCarTechnicalSpecification adminCarTechSpec = adminCarTechnicalSpecificationRepository
-                .save(mapToCarTechSpec(adminCarDto.getAdminCarTechnicalSpecificationDto(), adminCarTechSpecId));
+        AdminCarTechnicalSpecification adminCarTechnicalSpecification = adminCarTechnicalSpecificationRepository.save(mapToCarTechSpec(adminCarDto.getAdminCarTechnicalSpecificationDto(), EMPTY_ID));
+        List<AdminCarEquipment> adminCarEquipments = adminCarEquipmentRepository.saveAll(adminCarDto.getEquipments().stream().map(eq -> mapToCarEquipment(eq, adminCar.getId())).toList());
+        List<AdminCarDescription> carDescriptions = adminCarDescriptionRepository.saveAll(adminCarDto.getDescriptions().stream().map(des -> mapToCarDescription(des, adminCar.getId())).toList());
 
-        List<AdminCarEquipment> carEquipments = adminCarEquipmentRepository.findAllByCarId(id);
-
-        AdminCar adminCar = mapToCar(adminCarDto, id, adminCarTechSpec.getId(), carEquipments);
+        adminCar.setAdminCarTechnicalSpecification(adminCarTechnicalSpecification);
+        adminCar.setEquipments(adminCarEquipments);
+        adminCar.setDescriptions(carDescriptions);
         return adminCarRepository.save(adminCar);
     }
 
