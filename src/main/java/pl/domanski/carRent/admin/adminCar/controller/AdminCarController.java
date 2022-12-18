@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import pl.domanski.carRent.admin.adminCar.controller.dto.AdminCarDto;
-import pl.domanski.carRent.admin.adminCar.controller.dto.AdminCarListDto;
+import pl.domanski.carRent.admin.adminCar.controller.dto.AdminCarBasicInfo;
 import pl.domanski.carRent.admin.adminCar.model.AdminCar;
 import pl.domanski.carRent.admin.adminCar.service.AdminCarService;
 
@@ -25,7 +25,7 @@ public class AdminCarController {
     private final AdminCarService adminCarService;
 
     @GetMapping
-    public Page<AdminCarListDto> getCars(Pageable pageable) {
+    public Page<AdminCarBasicInfo> getCars(Pageable pageable) {
         return adminCarService.getCars(pageable);
     }
 

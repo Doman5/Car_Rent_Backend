@@ -3,7 +3,7 @@ package pl.domanski.carRent.admin.adminCar.service.mapper;
 import pl.domanski.carRent.admin.adminCar.controller.dto.AdminCarDescriptionDto;
 import pl.domanski.carRent.admin.adminCar.controller.dto.AdminCarDto;
 import pl.domanski.carRent.admin.adminCar.controller.dto.AdminCarEquipmentDto;
-import pl.domanski.carRent.admin.adminCar.controller.dto.AdminCarListDto;
+import pl.domanski.carRent.admin.adminCar.controller.dto.AdminCarBasicInfo;
 import pl.domanski.carRent.admin.adminCar.controller.dto.AdminCarTechnicalSpecificationDto;
 import pl.domanski.carRent.admin.adminCar.model.AdminCar;
 import pl.domanski.carRent.admin.adminCar.model.AdminCarDescription;
@@ -12,8 +12,8 @@ import pl.domanski.carRent.admin.adminCar.model.AdminCarTechnicalSpecification;
 
 public class AdminCarMapper {
 
-    public static AdminCarListDto mapToCarList(AdminCar adminCar) {
-        return AdminCarListDto.builder()
+    public static AdminCarBasicInfo mapToCarBasicInfo(AdminCar adminCar) {
+        return AdminCarBasicInfo.builder()
                 .id(adminCar.getId())
                 .brand(adminCar.getBrand())
                 .model(adminCar.getModel())

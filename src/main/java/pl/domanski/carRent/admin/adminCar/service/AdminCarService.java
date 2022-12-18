@@ -6,7 +6,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.domanski.carRent.admin.adminCar.controller.dto.AdminCarDto;
-import pl.domanski.carRent.admin.adminCar.controller.dto.AdminCarListDto;
+import pl.domanski.carRent.admin.adminCar.controller.dto.AdminCarBasicInfo;
 import pl.domanski.carRent.admin.adminCar.model.AdminCar;
 import pl.domanski.carRent.admin.adminCar.model.AdminCarDescription;
 import pl.domanski.carRent.admin.adminCar.model.AdminCarEquipment;
@@ -36,9 +36,9 @@ public class AdminCarService {
     private final AdminCarEquipmentRepository adminCarEquipmentRepository;
     private final AdminCarDescriptionRepository adminCarDescriptionRepository;
 
-    public Page<AdminCarListDto> getCars(Pageable pageable) {
+    public Page<AdminCarBasicInfo> getCars(Pageable pageable) {
         return adminCarRepository.findAll(pageable)
-                .map(AdminCarMapper::mapToCarList);
+                .map(AdminCarMapper::mapToCarBasicInfo);
     }
 
     public AdminCar getCar(Long id) {
