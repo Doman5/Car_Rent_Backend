@@ -6,15 +6,18 @@ import org.springframework.transaction.annotation.Transactional;
 import pl.domanski.carRent.admin.adminCar.controller.dto.AdminCarBasicInfo;
 import pl.domanski.carRent.admin.adminCar.controller.dto.AdminCarDescriptionDto;
 import pl.domanski.carRent.admin.adminCar.controller.dto.AdminCarEquipmentDto;
+import pl.domanski.carRent.admin.adminCar.controller.dto.AdminCarPhotoDto;
 import pl.domanski.carRent.admin.adminCar.controller.dto.AdminCarPriceDto;
 import pl.domanski.carRent.admin.adminCar.controller.dto.AdminCarTechnicalSpecificationDto;
 import pl.domanski.carRent.admin.adminCar.model.AdminCar;
 import pl.domanski.carRent.admin.adminCar.model.AdminCarDescription;
 import pl.domanski.carRent.admin.adminCar.model.AdminCarEquipment;
+import pl.domanski.carRent.admin.adminCar.model.AdminCarPhoto;
 import pl.domanski.carRent.admin.adminCar.model.AdminCarPrice;
 import pl.domanski.carRent.admin.adminCar.model.AdminCarTechnicalSpecification;
 import pl.domanski.carRent.admin.adminCar.repository.AdminCarDescriptionRepository;
 import pl.domanski.carRent.admin.adminCar.repository.AdminCarEquipmentRepository;
+import pl.domanski.carRent.admin.adminCar.repository.AdminCarPhotoRepository;
 import pl.domanski.carRent.admin.adminCar.repository.AdminCarPriceRepository;
 import pl.domanski.carRent.admin.adminCar.repository.AdminCarRepository;
 import pl.domanski.carRent.admin.adminCar.repository.AdminCarTechnicalSpecificationRepository;
@@ -22,6 +25,7 @@ import pl.domanski.carRent.admin.adminCar.repository.AdminCarTechnicalSpecificat
 import java.util.List;
 
 import static pl.domanski.carRent.admin.adminCar.service.mapper.AdminCarMapper.mapToCarBasicInfo;
+import static pl.domanski.carRent.admin.adminCar.service.mapper.AdminCarMapper.mapToCarPhoto;
 
 @Service
 @RequiredArgsConstructor
@@ -32,6 +36,7 @@ public class AdminCarUpdateService {
     private final AdminCarEquipmentRepository adminCarEquipmentRepository;
     private final AdminCarDescriptionRepository adminCarDescriptionRepository;
     private final AdminCarPriceRepository adminCarPriceRepository;
+    private final AdminCarPhotoRepository adminCarPhotoRepository;
 
     @Transactional
     public AdminCarBasicInfo updateBasicInfo(Long id, AdminCarBasicInfo carBasicInfo) {
@@ -119,4 +124,11 @@ public class AdminCarUpdateService {
     }
 
 
+    public AdminCarPhoto addCarPhoto(AdminCarPhotoDto adminCarPhotoDto, Long carId) {
+        return adminCarPhotoRepository.save(mapToCarPhoto(adminCarPhotoDto, carId));
+    }
+
+    public void deleteCarPhoto(Long photoId) {
+        adminCarPhotoRepository.deleteById(photoId);
+    }
 }

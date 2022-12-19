@@ -3,6 +3,7 @@ package pl.domanski.carRent.admin.adminCar.controller;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,10 +11,12 @@ import org.springframework.web.bind.annotation.RestController;
 import pl.domanski.carRent.admin.adminCar.controller.dto.AdminCarBasicInfo;
 import pl.domanski.carRent.admin.adminCar.controller.dto.AdminCarDescriptionDto;
 import pl.domanski.carRent.admin.adminCar.controller.dto.AdminCarEquipmentDto;
+import pl.domanski.carRent.admin.adminCar.controller.dto.AdminCarPhotoDto;
 import pl.domanski.carRent.admin.adminCar.controller.dto.AdminCarPriceDto;
 import pl.domanski.carRent.admin.adminCar.controller.dto.AdminCarTechnicalSpecificationDto;
 import pl.domanski.carRent.admin.adminCar.model.AdminCarDescription;
 import pl.domanski.carRent.admin.adminCar.model.AdminCarEquipment;
+import pl.domanski.carRent.admin.adminCar.model.AdminCarPhoto;
 import pl.domanski.carRent.admin.adminCar.model.AdminCarPrice;
 import pl.domanski.carRent.admin.adminCar.model.AdminCarTechnicalSpecification;
 import pl.domanski.carRent.admin.adminCar.service.AdminCarUpdateService;
@@ -61,5 +64,15 @@ public class AdminCarUpdateController {
     @PutMapping("/carPrice")
     public AdminCarPrice updateCarPrice(@PathVariable Long id, @RequestBody AdminCarPriceDto carPriceDto) {
         return adminCarUpdateService.updateCarPrice(id, carPriceDto);
+    }
+
+    @PostMapping("carPhoto")
+    public AdminCarPhoto addCarPhoto(@RequestBody AdminCarPhotoDto adminCarPhotoDto, @PathVariable Long carId) {
+        return adminCarUpdateService.addCarPhoto(adminCarPhotoDto, carId);
+    }
+
+    @DeleteMapping("carPhoto/{photoId}")
+    public void addCarPhoto(@PathVariable Long photoId) {
+        adminCarUpdateService.deleteCarPhoto(photoId);
     }
 }

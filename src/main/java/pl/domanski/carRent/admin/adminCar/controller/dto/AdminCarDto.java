@@ -22,4 +22,5 @@ public class AdminCarDto {
     private List<AdminCarEquipmentDto> equipments;
     private List<AdminCarDescriptionDto> descriptions;
     private AdminCarPriceDto carPrice;
+    private List<AdminCarPhotoDto> photos;
 }

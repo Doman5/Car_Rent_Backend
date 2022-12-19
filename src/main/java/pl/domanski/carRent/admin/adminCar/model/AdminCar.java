@@ -43,4 +43,7 @@ public class AdminCar {
     @OneToOne(cascade = {CascadeType.REMOVE})
     @JoinColumn(name = "car_price_id")
     private AdminCarPrice carPrice;
+    @OneToMany(cascade = CascadeType.REMOVE)
+    @JoinColumn(name = "carId")
+    private List<AdminCarPhoto> photos;
 }

@@ -4,11 +4,13 @@ import pl.domanski.carRent.admin.adminCar.controller.dto.AdminCarDescriptionDto;
 import pl.domanski.carRent.admin.adminCar.controller.dto.AdminCarDto;
 import pl.domanski.carRent.admin.adminCar.controller.dto.AdminCarEquipmentDto;
 import pl.domanski.carRent.admin.adminCar.controller.dto.AdminCarBasicInfo;
+import pl.domanski.carRent.admin.adminCar.controller.dto.AdminCarPhotoDto;
 import pl.domanski.carRent.admin.adminCar.controller.dto.AdminCarPriceDto;
 import pl.domanski.carRent.admin.adminCar.controller.dto.AdminCarTechnicalSpecificationDto;
 import pl.domanski.carRent.admin.adminCar.model.AdminCar;
 import pl.domanski.carRent.admin.adminCar.model.AdminCarDescription;
 import pl.domanski.carRent.admin.adminCar.model.AdminCarEquipment;
+import pl.domanski.carRent.admin.adminCar.model.AdminCarPhoto;
 import pl.domanski.carRent.admin.adminCar.model.AdminCarPrice;
 import pl.domanski.carRent.admin.adminCar.model.AdminCarTechnicalSpecification;
 
@@ -67,6 +69,13 @@ public class AdminCarMapper {
                 .priceWeek(carPriceDto.getPriceWeek())
                 .priceTwoWeeks(carPriceDto.getPriceTwoWeeks())
                 .priceMonth(carPriceDto.getPriceMonth())
+                .build();
+    }
+
+    public static AdminCarPhoto mapToCarPhoto(AdminCarPhotoDto photoDto, Long carId) {
+        return AdminCarPhoto.builder()
+                .photo(photoDto.getPhoto())
+                .carId(carId)
                 .build();
     }
 
