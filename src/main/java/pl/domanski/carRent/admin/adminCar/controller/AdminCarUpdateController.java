@@ -1,6 +1,7 @@
 package pl.domanski.carRent.admin.adminCar.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,7 +21,7 @@ import pl.domanski.carRent.admin.adminCar.service.AdminCarUpdateService;
 import java.util.List;
 
 @RestController
-@RequestMapping("/admin/{id}")
+@RequestMapping("/admin/cars/{id}")
 @RequiredArgsConstructor
 public class AdminCarUpdateController {
 
@@ -41,9 +42,20 @@ public class AdminCarUpdateController {
         return adminCarUpdateService.updateCarEquipment(id, equipmentList);
     }
 
+    @DeleteMapping("/carEquipment/{equipmentId}")
+    public void deleteCarEquipment(@PathVariable Long equipmentId) {
+        adminCarUpdateService.deleteCarEquipment(equipmentId);
+    }
+
+
     @PutMapping("/carDescription")
     public List<AdminCarDescription> updateCarDescription(@PathVariable Long id, @RequestBody List<AdminCarDescriptionDto> descriptionList) {
         return adminCarUpdateService.updateCarDescription(id, descriptionList);
+    }
+
+    @DeleteMapping("/carDescription/{descriptionId}")
+    public void deleteCarDescription(@PathVariable Long descriptionId) {
+        adminCarUpdateService.deleteCarDescription(descriptionId);
     }
 
     @PutMapping("/carPrice")

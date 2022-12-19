@@ -55,11 +55,19 @@ public class AdminCarUpdateService {
         return adminCarEquipmentRepository.saveAll(equipments);
     }
 
+    public void deleteCarEquipment(Long equipmentId) {
+        adminCarEquipmentRepository.deleteById(equipmentId);
+    }
+
     @Transactional
     public List<AdminCarDescription> updateCarDescription(Long id, List<AdminCarDescriptionDto> descriptionDtoList) {
         List<AdminCarDescription> descriptions = adminCarDescriptionRepository.findAllByCarId(id);
         setNewCarDescriptionValues(descriptionDtoList, descriptions);
         return adminCarDescriptionRepository.saveAll(descriptions);
+    }
+
+    public void deleteCarDescription(Long descriptionId) {
+        adminCarDescriptionRepository.deleteById(descriptionId);
     }
 
     @Transactional
@@ -109,5 +117,6 @@ public class AdminCarUpdateService {
         carTechSpec.setFuel(carTechSpecDto.getFuel());
         carTechSpec.setSeats(carTechSpecDto.getSeats());
     }
+
 
 }
