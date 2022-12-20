@@ -21,6 +21,7 @@ import pl.domanski.carRent.admin.adminCar.model.AdminCarPrice;
 import pl.domanski.carRent.admin.adminCar.model.AdminCarTechnicalSpecification;
 import pl.domanski.carRent.admin.adminCar.service.AdminCarUpdateService;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -31,28 +32,28 @@ public class AdminCarUpdateController {
     private final AdminCarUpdateService adminCarUpdateService;
 
     @PutMapping("/carBasicInfo")
-    public AdminCarBasicInfo updateBasicInfo(@PathVariable Long id, @RequestBody AdminCarBasicInfo carBasicInfo) {
+    public AdminCarBasicInfo updateBasicInfo(@PathVariable Long id, @RequestBody @Valid AdminCarBasicInfo carBasicInfo) {
         return adminCarUpdateService.updateBasicInfo(id, carBasicInfo);
     }
 
     @PutMapping("/carTechnicalSpecification")
-    public AdminCarTechnicalSpecification updateCarTechSpec(@PathVariable Long id, @RequestBody AdminCarTechnicalSpecificationDto carTechSpec) {
+    public AdminCarTechnicalSpecification updateCarTechSpec(@PathVariable Long id, @RequestBody @Valid AdminCarTechnicalSpecificationDto carTechSpec) {
         return adminCarUpdateService.updateCarTechSpec(id, carTechSpec);
     }
 
     @PutMapping("/carEquipment")
-    public List<AdminCarEquipment> updateCarEquipment(@PathVariable Long id, @RequestBody List<AdminCarEquipmentDto> equipmentList) {
+    public List<AdminCarEquipment> updateCarEquipment(@PathVariable Long id, @RequestBody @Valid List<AdminCarEquipmentDto> equipmentList) {
         return adminCarUpdateService.updateCarEquipment(id, equipmentList);
     }
 
 
     @PutMapping("/carDescription")
-    public List<AdminCarDescription> updateCarDescription(@PathVariable Long id, @RequestBody List<AdminCarDescriptionDto> descriptionList) {
+    public List<AdminCarDescription> updateCarDescription(@PathVariable Long id, @RequestBody @Valid List<AdminCarDescriptionDto> descriptionList) {
         return adminCarUpdateService.updateCarDescription(id, descriptionList);
     }
 
     @PutMapping("/carPrice")
-    public AdminCarPrice updateCarPrice(@PathVariable Long id, @RequestBody AdminCarPriceDto carPriceDto) {
+    public AdminCarPrice updateCarPrice(@PathVariable Long id, @RequestBody @Valid AdminCarPriceDto carPriceDto) {
         return adminCarUpdateService.updateCarPrice(id, carPriceDto);
     }
 
