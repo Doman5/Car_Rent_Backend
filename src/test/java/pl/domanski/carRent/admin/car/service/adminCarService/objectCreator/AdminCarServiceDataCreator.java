@@ -1,29 +1,32 @@
-package pl.domanski.carRent.admin.adminCar.service.objectCreator;
+package pl.domanski.carRent.admin.car.service.adminCarService.objectCreator;
 
-import pl.domanski.carRent.admin.adminCar.controller.dto.AdminCarDescriptionDto;
-import pl.domanski.carRent.admin.adminCar.controller.dto.AdminCarDto;
-import pl.domanski.carRent.admin.adminCar.controller.dto.AdminCarEquipmentDto;
-import pl.domanski.carRent.admin.adminCar.controller.dto.AdminCarPhotoDto;
-import pl.domanski.carRent.admin.adminCar.controller.dto.AdminCarPriceDto;
-import pl.domanski.carRent.admin.adminCar.controller.dto.AdminCarTechnicalSpecificationDto;
-import pl.domanski.carRent.admin.adminCar.model.AdminCar;
-import pl.domanski.carRent.admin.adminCar.model.AdminCarDescription;
-import pl.domanski.carRent.admin.adminCar.model.AdminCarEquipment;
-import pl.domanski.carRent.admin.adminCar.model.AdminCarPhoto;
-import pl.domanski.carRent.admin.adminCar.model.AdminCarPrice;
-import pl.domanski.carRent.admin.adminCar.model.AdminCarTechnicalSpecification;
+import pl.domanski.carRent.admin.car.controller.dto.AdminCarDescriptionDto;
+import pl.domanski.carRent.admin.car.controller.dto.AdminCarDto;
+import pl.domanski.carRent.admin.car.controller.dto.AdminCarEquipmentDto;
+import pl.domanski.carRent.admin.car.controller.dto.AdminCarPhotoDto;
+import pl.domanski.carRent.admin.car.controller.dto.AdminCarPriceDto;
+import pl.domanski.carRent.admin.car.controller.dto.AdminCarTechnicalSpecificationDto;
+import pl.domanski.carRent.admin.car.model.AdminCar;
+import pl.domanski.carRent.admin.car.model.AdminCarDescription;
+import pl.domanski.carRent.admin.car.model.AdminCarEquipment;
+import pl.domanski.carRent.admin.car.model.AdminCarPhoto;
+import pl.domanski.carRent.admin.car.model.AdminCarPrice;
+import pl.domanski.carRent.admin.car.model.AdminCarTechnicalSpecification;
+import pl.domanski.carRent.admin.category.model.AdminCategory;
+import pl.domanski.carRent.admin.common.dto.AdminCategoryDto;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Optional;
 
-public class AdminCarServiceObjectCreator {
+public class AdminCarServiceDataCreator {
 
     public static AdminCarDto createCarDtoWithoutDescriptionEquipmentAndPhotos() {
         return AdminCarDto.builder()
                 .brand("test brand")
                 .model("test model")
                 .year(9999)
-                .carTechnicalSpecificationDto(AdminCarTechnicalSpecificationDto.builder()
+                .carTechnicalSpecification(AdminCarTechnicalSpecificationDto.builder()
                         .power(111)
                         .acceleration("test acceleration1")
                         .seats("test seats1")
@@ -38,6 +41,9 @@ public class AdminCarServiceObjectCreator {
                         .priceWeek(BigDecimal.valueOf(30))
                         .priceTwoWeeks(BigDecimal.valueOf(40))
                         .priceMonth(BigDecimal.valueOf(50))
+                        .build())
+                .category(AdminCategoryDto.builder()
+                        .name("test category")
                         .build())
                 .build();
     }
@@ -118,7 +124,7 @@ public class AdminCarServiceObjectCreator {
                 .brand("test brand")
                 .model("test model")
                 .year(9999)
-                .carTechnicalSpecificationDto(AdminCarTechnicalSpecificationDto.builder()
+                .carTechnicalSpecification(AdminCarTechnicalSpecificationDto.builder()
                         .power(111)
                         .acceleration("test acceleration1")
                         .seats("test seats1")
@@ -152,10 +158,20 @@ public class AdminCarServiceObjectCreator {
                 .photos(List.of(AdminCarPhotoDto.builder()
                         .photo("test photo1")
                         .build()))
+                .category(AdminCategoryDto.builder()
+                        .name("test category")
+                        .build())
                 .build();
     }
 
-    public static AdminCarDto creteCarDtoWithoutBasicInfo() {
+    public static AdminCarDto creteCarDtoWithoutAnyInfo() {
         return AdminCarDto.builder().build();
+    }
+
+    public static Optional<AdminCategory> creteCategory() {
+        return Optional.of(AdminCategory.builder()
+                .id(1L)
+                .name("test category")
+                .build());
     }
 }

@@ -1,18 +1,20 @@
-package pl.domanski.carRent.admin.adminCar.service;
+package pl.domanski.carRent.admin.car.service.adminCarService;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import pl.domanski.carRent.admin.adminCar.controller.dto.AdminCarDto;
-import pl.domanski.carRent.admin.adminCar.model.AdminCar;
-import pl.domanski.carRent.admin.adminCar.repository.AdminCarDescriptionRepository;
-import pl.domanski.carRent.admin.adminCar.repository.AdminCarEquipmentRepository;
-import pl.domanski.carRent.admin.adminCar.repository.AdminCarPhotoRepository;
-import pl.domanski.carRent.admin.adminCar.repository.AdminCarPriceRepository;
-import pl.domanski.carRent.admin.adminCar.repository.AdminCarRepository;
-import pl.domanski.carRent.admin.adminCar.repository.AdminCarTechnicalSpecificationRepository;
+import pl.domanski.carRent.admin.car.controller.dto.AdminCarDto;
+import pl.domanski.carRent.admin.car.model.AdminCar;
+import pl.domanski.carRent.admin.car.repository.AdminCarDescriptionRepository;
+import pl.domanski.carRent.admin.car.repository.AdminCarEquipmentRepository;
+import pl.domanski.carRent.admin.car.repository.AdminCarPhotoRepository;
+import pl.domanski.carRent.admin.car.repository.AdminCarPriceRepository;
+import pl.domanski.carRent.admin.car.repository.AdminCarRepository;
+import pl.domanski.carRent.admin.car.repository.AdminCarTechnicalSpecificationRepository;
+import pl.domanski.carRent.admin.car.service.AdminCarService;
+import pl.domanski.carRent.admin.common.repository.AdminCategoryRepository;
 
 import java.math.BigDecimal;
 
@@ -22,15 +24,16 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyList;
 import static org.mockito.BDDMockito.given;
-import static pl.domanski.carRent.admin.adminCar.service.objectCreator.AdminCarServiceObjectCreator.creatCarDto;
-import static pl.domanski.carRent.admin.adminCar.service.objectCreator.AdminCarServiceObjectCreator.createCar;
-import static pl.domanski.carRent.admin.adminCar.service.objectCreator.AdminCarServiceObjectCreator.createCarDtoWithoutDescriptionEquipmentAndPhotos;
-import static pl.domanski.carRent.admin.adminCar.service.objectCreator.AdminCarServiceObjectCreator.createCarPrice;
-import static pl.domanski.carRent.admin.adminCar.service.objectCreator.AdminCarServiceObjectCreator.createCarTechSpec;
-import static pl.domanski.carRent.admin.adminCar.service.objectCreator.AdminCarServiceObjectCreator.createEquipmentList;
-import static pl.domanski.carRent.admin.adminCar.service.objectCreator.AdminCarServiceObjectCreator.creteCarDtoWithoutBasicInfo;
-import static pl.domanski.carRent.admin.adminCar.service.objectCreator.AdminCarServiceObjectCreator.creteDescriptionList;
-import static pl.domanski.carRent.admin.adminCar.service.objectCreator.AdminCarServiceObjectCreator.cretePhotoList;
+import static pl.domanski.carRent.admin.car.service.adminCarService.objectCreator.AdminCarServiceDataCreator.creatCarDto;
+import static pl.domanski.carRent.admin.car.service.adminCarService.objectCreator.AdminCarServiceDataCreator.createCar;
+import static pl.domanski.carRent.admin.car.service.adminCarService.objectCreator.AdminCarServiceDataCreator.createCarDtoWithoutDescriptionEquipmentAndPhotos;
+import static pl.domanski.carRent.admin.car.service.adminCarService.objectCreator.AdminCarServiceDataCreator.createCarPrice;
+import static pl.domanski.carRent.admin.car.service.adminCarService.objectCreator.AdminCarServiceDataCreator.createCarTechSpec;
+import static pl.domanski.carRent.admin.car.service.adminCarService.objectCreator.AdminCarServiceDataCreator.createEquipmentList;
+import static pl.domanski.carRent.admin.car.service.adminCarService.objectCreator.AdminCarServiceDataCreator.creteCarDtoWithoutAnyInfo;
+import static pl.domanski.carRent.admin.car.service.adminCarService.objectCreator.AdminCarServiceDataCreator.creteCategory;
+import static pl.domanski.carRent.admin.car.service.adminCarService.objectCreator.AdminCarServiceDataCreator.creteDescriptionList;
+import static pl.domanski.carRent.admin.car.service.adminCarService.objectCreator.AdminCarServiceDataCreator.cretePhotoList;
 
 @ExtendWith(MockitoExtension.class)
 class AdminCarServiceTest {
@@ -46,6 +49,9 @@ class AdminCarServiceTest {
     private AdminCarPriceRepository adminCarPriceRepository;
     @Mock
     private AdminCarPhotoRepository adminCarPhotoRepository;
+    @Mock
+    private AdminCategoryRepository adminCategoryRepository;
+
 
     @InjectMocks
     private AdminCarService adminCarService;
@@ -60,6 +66,7 @@ class AdminCarServiceTest {
         given(adminCarDescriptionRepository.saveAll(anyList())).willReturn(creteDescriptionList());
         given(adminCarPriceRepository.save(any())).willReturn(createCarPrice());
         given(adminCarPhotoRepository.saveAll(anyList())).willReturn(cretePhotoList());
+        given(adminCategoryRepository.findByName(any())).willReturn(creteCategory());
         //when
         AdminCar result = adminCarService.createCar(adminCarDto);
         //then
@@ -73,6 +80,8 @@ class AdminCarServiceTest {
         assertEquals("test fuel1", result.getAdminCarTechnicalSpecification().getFuel());
     }
 
+
+
     @Test
     void should_create_car_without_description_equipment_and_photos() {
         //given
@@ -80,6 +89,7 @@ class AdminCarServiceTest {
         given(adminCarRepository.save(any())).willReturn(createCar()).willAnswer(invocationOnMock -> invocationOnMock.getArguments()[0]);
         given(adminCarTechnicalSpecificationRepository.save(any())).willReturn(createCarTechSpec());
         given(adminCarPriceRepository.save(any())).willReturn(createCarPrice());
+        given(adminCategoryRepository.findByName(any())).willReturn(creteCategory());
         //when
         AdminCar result = adminCarService.createCar(adminCarDto);
         //then
@@ -95,7 +105,7 @@ class AdminCarServiceTest {
 
     @Test
     void should_not_crete_car() {
-        AdminCarDto adminCarDto = creteCarDtoWithoutBasicInfo();
+        AdminCarDto adminCarDto = creteCarDtoWithoutAnyInfo();
 
         try {
             adminCarService.createCar(adminCarDto);

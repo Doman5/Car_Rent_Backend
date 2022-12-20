@@ -1,4 +1,4 @@
-package pl.domanski.carRent.admin.adminCar.model;
+package pl.domanski.carRent.admin.car.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -46,4 +46,5 @@ public class AdminCar {
     @OneToMany(cascade = CascadeType.REMOVE)
     @JoinColumn(name = "carId")
     private List<AdminCarPhoto> photos;
+    private Long categoryId;
 }

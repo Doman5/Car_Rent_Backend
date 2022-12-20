@@ -1,4 +1,4 @@
-package pl.domanski.carRent.admin.adminCar.controller;
+package pl.domanski.carRent.admin.car.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -8,18 +8,20 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import pl.domanski.carRent.admin.adminCar.controller.dto.AdminCarBasicInfo;
-import pl.domanski.carRent.admin.adminCar.controller.dto.AdminCarDescriptionDto;
-import pl.domanski.carRent.admin.adminCar.controller.dto.AdminCarEquipmentDto;
-import pl.domanski.carRent.admin.adminCar.controller.dto.AdminCarPhotoDto;
-import pl.domanski.carRent.admin.adminCar.controller.dto.AdminCarPriceDto;
-import pl.domanski.carRent.admin.adminCar.controller.dto.AdminCarTechnicalSpecificationDto;
-import pl.domanski.carRent.admin.adminCar.model.AdminCarDescription;
-import pl.domanski.carRent.admin.adminCar.model.AdminCarEquipment;
-import pl.domanski.carRent.admin.adminCar.model.AdminCarPhoto;
-import pl.domanski.carRent.admin.adminCar.model.AdminCarPrice;
-import pl.domanski.carRent.admin.adminCar.model.AdminCarTechnicalSpecification;
-import pl.domanski.carRent.admin.adminCar.service.AdminCarUpdateService;
+import pl.domanski.carRent.admin.car.controller.dto.AdminCarBasicInfo;
+import pl.domanski.carRent.admin.car.controller.dto.AdminCarDescriptionDto;
+import pl.domanski.carRent.admin.car.controller.dto.AdminCarEquipmentDto;
+import pl.domanski.carRent.admin.car.controller.dto.AdminCarPhotoDto;
+import pl.domanski.carRent.admin.car.controller.dto.AdminCarPriceDto;
+import pl.domanski.carRent.admin.car.controller.dto.AdminCarTechnicalSpecificationDto;
+import pl.domanski.carRent.admin.car.model.AdminCar;
+import pl.domanski.carRent.admin.car.model.AdminCarDescription;
+import pl.domanski.carRent.admin.car.model.AdminCarEquipment;
+import pl.domanski.carRent.admin.car.model.AdminCarPhoto;
+import pl.domanski.carRent.admin.car.model.AdminCarPrice;
+import pl.domanski.carRent.admin.car.model.AdminCarTechnicalSpecification;
+import pl.domanski.carRent.admin.car.service.AdminCarUpdateService;
+import pl.domanski.carRent.admin.common.dto.AdminCategoryDto;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -65,5 +67,10 @@ public class AdminCarUpdateController {
     @DeleteMapping("/carPhoto/{photoId}")
     public void addCarPhoto(@PathVariable Long photoId) {
         adminCarUpdateService.deleteCarPhoto(photoId);
+    }
+
+    @PutMapping("/category")
+    public AdminCar updateCarCategory(@PathVariable Long id, @RequestBody @Valid AdminCategoryDto adminCategoryDto) {
+        return adminCarUpdateService.updateCarCategory(id, adminCategoryDto);
     }
 }
