@@ -22,6 +22,7 @@ public class carUpdateUtils {
         oldValues.setPriceWeek(newValues.getPriceWeek());
         oldValues.setPriceTwoWeeks(newValues.getPriceTwoWeeks());
         oldValues.setPriceMonth(newValues.getPriceMonth());
+        oldValues.setDeposit(newValues.getDeposit());
     }
 
     public static ArrayList<AdminCarDescription> setNewCarDescriptionValues(List<AdminCarDescriptionDto> newValues, List<AdminCarDescription> oldValues) {

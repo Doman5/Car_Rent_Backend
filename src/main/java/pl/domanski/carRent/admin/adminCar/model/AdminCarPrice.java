@@ -29,4 +29,5 @@ public class AdminCarPrice {
     private BigDecimal priceWeek;
     private BigDecimal priceTwoWeeks;
     private BigDecimal priceMonth;
+    private Integer deposit;
 }

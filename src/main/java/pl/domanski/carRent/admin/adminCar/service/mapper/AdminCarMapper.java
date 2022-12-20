@@ -69,6 +69,7 @@ public class AdminCarMapper {
                 .priceWeek(carPriceDto.getPriceWeek())
                 .priceTwoWeeks(carPriceDto.getPriceTwoWeeks())
                 .priceMonth(carPriceDto.getPriceMonth())
+                .deposit(carPriceDto.getDeposit())
                 .build();
     }
 
