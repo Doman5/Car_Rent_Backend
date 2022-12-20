@@ -22,10 +22,16 @@ import pl.domanski.carRent.admin.adminCar.repository.AdminCarPriceRepository;
 import pl.domanski.carRent.admin.adminCar.repository.AdminCarRepository;
 import pl.domanski.carRent.admin.adminCar.repository.AdminCarTechnicalSpecificationRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static pl.domanski.carRent.admin.adminCar.service.mapper.AdminCarMapper.mapToCarBasicInfo;
 import static pl.domanski.carRent.admin.adminCar.service.mapper.AdminCarMapper.mapToCarPhoto;
+import static pl.domanski.carRent.admin.adminCar.service.utils.carUpdateUtils.setNewCarBasicInfoValues;
+import static pl.domanski.carRent.admin.adminCar.service.utils.carUpdateUtils.setNewCarDescriptionValues;
+import static pl.domanski.carRent.admin.adminCar.service.utils.carUpdateUtils.setNewCarEquipmentValues;
+import static pl.domanski.carRent.admin.adminCar.service.utils.carUpdateUtils.setNewCarPriceValues;
+import static pl.domanski.carRent.admin.adminCar.service.utils.carUpdateUtils.setNewCarTechSpecValues;
 
 @Service
 @RequiredArgsConstructor
@@ -46,81 +52,38 @@ public class AdminCarUpdateService {
     }
 
     @Transactional
-    public AdminCarTechnicalSpecification updateCarTechSpec(Long id, AdminCarTechnicalSpecificationDto carTechSpecDto) {
-        Long carTechSpecId = adminCarRepository.findById(id).orElseThrow().getAdminCarTechnicalSpecification().getId();
+    public AdminCarTechnicalSpecification updateCarTechSpec(Long carId, AdminCarTechnicalSpecificationDto carTechSpecDto) {
+        Long carTechSpecId = getCarTechSpecId(carId);
         AdminCarTechnicalSpecification carTechSpec = adminCarTechnicalSpecificationRepository.findById(carTechSpecId).orElseThrow();
         setNewCarTechSpecValues(carTechSpecDto, carTechSpec);
         return adminCarTechnicalSpecificationRepository.save(carTechSpec);
     }
 
+
     @Transactional
     public List<AdminCarEquipment> updateCarEquipment(Long id, List<AdminCarEquipmentDto> carEquipmentDtoList) {
         List<AdminCarEquipment> equipments = adminCarEquipmentRepository.findAllByCarId(id);
-        setNewCarEquipmentValues(carEquipmentDtoList, equipments);
-        return adminCarEquipmentRepository.saveAll(equipments);
+        ArrayList<AdminCarEquipment> newCarEquipment = setNewCarEquipmentValues(carEquipmentDtoList, equipments);
+        deleteEquipmentWhenNewListIsShorter(equipments, newCarEquipment);
+        return adminCarEquipmentRepository.saveAll(newCarEquipment);
     }
 
-    public void deleteCarEquipment(Long equipmentId) {
-        adminCarEquipmentRepository.deleteById(equipmentId);
-    }
+
 
     @Transactional
     public List<AdminCarDescription> updateCarDescription(Long id, List<AdminCarDescriptionDto> descriptionDtoList) {
         List<AdminCarDescription> descriptions = adminCarDescriptionRepository.findAllByCarId(id);
-        setNewCarDescriptionValues(descriptionDtoList, descriptions);
-        return adminCarDescriptionRepository.saveAll(descriptions);
-    }
-
-    public void deleteCarDescription(Long descriptionId) {
-        adminCarDescriptionRepository.deleteById(descriptionId);
+        ArrayList<AdminCarDescription> newCarDescription = setNewCarDescriptionValues(descriptionDtoList, descriptions);
+        deleteDescriptionWhenNewListIsShorter(descriptions, newCarDescription);
+        return adminCarDescriptionRepository.saveAll(newCarDescription);
     }
 
     @Transactional
-    public AdminCarPrice updateCarPrice(Long id, AdminCarPriceDto carPriceDto) {
-        Long carPriceId = adminCarRepository.findById(id).orElseThrow().getCarPrice().getId();
+    public AdminCarPrice updateCarPrice(Long carId, AdminCarPriceDto carPriceDto) {
+        Long carPriceId = getCarPriceId(carId);
         AdminCarPrice carPrice = adminCarPriceRepository.findById(carPriceId).orElseThrow();
         setNewCarPriceValues(carPriceDto, carPrice);
         return adminCarPriceRepository.save(carPrice);
-    }
-
-    private static void setNewCarPriceValues(AdminCarPriceDto carPriceDto, AdminCarPrice carPrice) {
-        carPrice.setPriceDay(carPriceDto.getPriceDay());
-        carPrice.setPriceHalfWeek(carPriceDto.getPriceHalfWeek());
-        carPrice.setPriceWeek(carPriceDto.getPriceWeek());
-        carPrice.setPriceTwoWeeks(carPriceDto.getPriceTwoWeeks());
-        carPrice.setPriceMonth(carPriceDto.getPriceMonth());
-    }
-
-    private static void setNewCarDescriptionValues(List<AdminCarDescriptionDto> descriptionDtoList, List<AdminCarDescription> descriptions) {
-        for (int i = 0; i < descriptions.size(); i++) {
-            if(descriptionDtoList.get(i) != null) {
-                descriptions.get(i).setDescription(descriptionDtoList.get(i).getDescription());
-            }
-        }
-    }
-
-    private static void setNewCarEquipmentValues(List<AdminCarEquipmentDto> carEquipmentList, List<AdminCarEquipment> equipments) {
-        for (int i = 0; i < equipments.size(); i++) {
-            if(carEquipmentList.get(i) != null) {
-                equipments.get(i).setName(carEquipmentList.get(i).getName());
-            }
-        }
-    }
-
-    private static void setNewCarBasicInfoValues(AdminCarBasicInfo carBasicInfo, AdminCar adminCar) {
-        adminCar.setBrand(carBasicInfo.getBrand());
-        adminCar.setModel(carBasicInfo.getModel());
-        adminCar.setYear(carBasicInfo.getYear());
-    }
-
-    private static void setNewCarTechSpecValues(AdminCarTechnicalSpecificationDto carTechSpecDto, AdminCarTechnicalSpecification carTechSpec) {
-        carTechSpec.setPower(carTechSpecDto.getPower());
-        carTechSpec.setEngine(carTechSpecDto.getEngine());
-        carTechSpec.setDrive(carTechSpecDto.getDrive());
-        carTechSpec.setAcceleration(carTechSpecDto.getAcceleration());
-        carTechSpec.setGearbox(carTechSpecDto.getGearbox());
-        carTechSpec.setFuel(carTechSpecDto.getFuel());
-        carTechSpec.setSeats(carTechSpecDto.getSeats());
     }
 
 
@@ -130,5 +93,37 @@ public class AdminCarUpdateService {
 
     public void deleteCarPhoto(Long photoId) {
         adminCarPhotoRepository.deleteById(photoId);
+    }
+
+    private Long getCarTechSpecId(Long id) {
+        return adminCarRepository.findById(id).orElseThrow().getAdminCarTechnicalSpecification().getId();
+    }
+
+    private Long getCarPriceId(Long id) {
+        return adminCarRepository.findById(id).orElseThrow().getCarPrice().getId();
+    }
+
+    private void deleteEquipmentWhenNewListIsShorter(List<AdminCarEquipment> equipments, ArrayList<AdminCarEquipment> newCarEquipment) {
+        if(equipments.size() > newCarEquipment.size()) {
+            for (int i = 0; i < equipments.size(); i++) {
+                try{
+                    newCarEquipment.get(i);
+                } catch (IndexOutOfBoundsException e) {
+                    adminCarEquipmentRepository.deleteById(equipments.get(i).getId());
+                }
+            }
+        }
+    }
+
+    private void deleteDescriptionWhenNewListIsShorter(List<AdminCarDescription> descriptions, ArrayList<AdminCarDescription> newCarDescription) {
+        if(descriptions.size() > newCarDescription.size()) {
+            for (int i = 0; i < descriptions.size(); i++) {
+                try{
+                    newCarDescription.get(i);
+                } catch (IndexOutOfBoundsException e) {
+                    adminCarDescriptionRepository.deleteById(descriptions.get(i).getId());
+                }
+            }
+        }
     }
 }

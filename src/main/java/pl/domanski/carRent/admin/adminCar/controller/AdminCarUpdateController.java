@@ -45,20 +45,10 @@ public class AdminCarUpdateController {
         return adminCarUpdateService.updateCarEquipment(id, equipmentList);
     }
 
-    @DeleteMapping("/carEquipment/{equipmentId}")
-    public void deleteCarEquipment(@PathVariable Long equipmentId) {
-        adminCarUpdateService.deleteCarEquipment(equipmentId);
-    }
-
 
     @PutMapping("/carDescription")
     public List<AdminCarDescription> updateCarDescription(@PathVariable Long id, @RequestBody List<AdminCarDescriptionDto> descriptionList) {
         return adminCarUpdateService.updateCarDescription(id, descriptionList);
-    }
-
-    @DeleteMapping("/carDescription/{descriptionId}")
-    public void deleteCarDescription(@PathVariable Long descriptionId) {
-        adminCarUpdateService.deleteCarDescription(descriptionId);
     }
 
     @PutMapping("/carPrice")
@@ -66,12 +56,12 @@ public class AdminCarUpdateController {
         return adminCarUpdateService.updateCarPrice(id, carPriceDto);
     }
 
-    @PostMapping("carPhoto")
-    public AdminCarPhoto addCarPhoto(@RequestBody AdminCarPhotoDto adminCarPhotoDto, @PathVariable Long carId) {
-        return adminCarUpdateService.addCarPhoto(adminCarPhotoDto, carId);
+    @PostMapping("/carPhoto")
+    public AdminCarPhoto addCarPhoto(@RequestBody AdminCarPhotoDto adminCarPhotoDto, @PathVariable Long id) {
+        return adminCarUpdateService.addCarPhoto(adminCarPhotoDto, id);
     }
 
-    @DeleteMapping("carPhoto/{photoId}")
+    @DeleteMapping("/carPhoto/{photoId}")
     public void addCarPhoto(@PathVariable Long photoId) {
         adminCarUpdateService.deleteCarPhoto(photoId);
     }
