@@ -3,15 +3,18 @@ package pl.domanski.carRent.admin.adminCar.service;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.FileSystemResourceLoader;
 import org.springframework.core.io.Resource;
+import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import pl.domanski.carRent.admin.adminCar.common.SlugifyUtils;
 import pl.domanski.carRent.admin.adminCar.controller.dto.AdminCarPhotoDto;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 
+@Service
 public class AdminCarPhotoService {
     @Value("{app.uploadDir}")
     private String uploadDir = "";
@@ -23,7 +26,8 @@ public class AdminCarPhotoService {
 
             for (MultipartFile file : multipartFiles) {
                 String fileName = file.getName();
-                String newFileName = SlugifyUtils.slugifyFileName(fileName);
+                String slugifyFileName = SlugifyUtils.slugifyFileName(fileName);
+                String newFileName = ExistingFileNameUtils.renameIfExists(Path.of(uploadDir), slugifyFileName);
                 File destinationFile = new File(localDirectory, newFileName);
                 file.transferTo(destinationFile);
                 carPhotos.add(new AdminCarPhotoDto(newFileName));
