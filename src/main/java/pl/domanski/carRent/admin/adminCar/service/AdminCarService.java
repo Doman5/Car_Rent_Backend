@@ -8,11 +8,6 @@ import org.springframework.transaction.annotation.Transactional;
 import pl.domanski.carRent.admin.adminCar.controller.dto.AdminCarBasicInfo;
 import pl.domanski.carRent.admin.adminCar.controller.dto.AdminCarDto;
 import pl.domanski.carRent.admin.adminCar.model.AdminCar;
-import pl.domanski.carRent.admin.adminCar.model.AdminCarDescription;
-import pl.domanski.carRent.admin.adminCar.model.AdminCarEquipment;
-import pl.domanski.carRent.admin.adminCar.model.AdminCarPhoto;
-import pl.domanski.carRent.admin.adminCar.model.AdminCarPrice;
-import pl.domanski.carRent.admin.adminCar.model.AdminCarTechnicalSpecification;
 import pl.domanski.carRent.admin.adminCar.repository.AdminCarDescriptionRepository;
 import pl.domanski.carRent.admin.adminCar.repository.AdminCarEquipmentRepository;
 import pl.domanski.carRent.admin.adminCar.repository.AdminCarPhotoRepository;
@@ -20,8 +15,6 @@ import pl.domanski.carRent.admin.adminCar.repository.AdminCarPriceRepository;
 import pl.domanski.carRent.admin.adminCar.repository.AdminCarRepository;
 import pl.domanski.carRent.admin.adminCar.repository.AdminCarTechnicalSpecificationRepository;
 import pl.domanski.carRent.admin.adminCar.service.mapper.AdminCarMapper;
-
-import java.util.List;
 
 import static pl.domanski.carRent.admin.adminCar.service.mapper.AdminCarMapper.mapToCar;
 import static pl.domanski.carRent.admin.adminCar.service.mapper.AdminCarMapper.mapToCarDescription;
@@ -55,21 +48,42 @@ public class AdminCarService {
 
     @Transactional
     public AdminCar createCar(AdminCarDto adminCarDto) {
+
+        if(carBasicInfoAreNull(adminCarDto)) {
+            throw new RuntimeException("Nie podano podstawowych informacji");
+        }
+
         AdminCar adminCar = adminCarRepository.save(mapToCar(adminCarDto, EMPTY_ID));
 
-        AdminCarTechnicalSpecification adminCarTechnicalSpecification = adminCarTechnicalSpecificationRepository.save(mapToCarTechSpec(adminCarDto.getCarTechnicalSpecificationDto(), EMPTY_ID));
-        List<AdminCarEquipment> adminCarEquipments = adminCarEquipmentRepository.saveAll(adminCarDto.getEquipments().stream().map(eq -> mapToCarEquipment(eq, adminCar.getId())).toList());
-        List<AdminCarDescription> carDescriptions = adminCarDescriptionRepository.saveAll(adminCarDto.getDescriptions().stream().map(des -> mapToCarDescription(des, adminCar.getId())).toList());
-        AdminCarPrice price = adminCarPriceRepository.save(mapToCarPrice(adminCarDto.getCarPrice(), EMPTY_ID));
-        List<AdminCarPhoto> carPhotos = adminCarPhotoRepository.saveAll(adminCarDto.getPhotos().stream().map(photo -> mapToCarPhoto(photo, adminCar.getId())).toList());
+        if(adminCarDto.getCarTechnicalSpecificationDto() != null) {
+            adminCar.setAdminCarTechnicalSpecification(adminCarTechnicalSpecificationRepository
+                    .save(mapToCarTechSpec(adminCarDto.getCarTechnicalSpecificationDto(), EMPTY_ID)));
+        }
 
-        adminCar.setAdminCarTechnicalSpecification(adminCarTechnicalSpecification);
-        adminCar.setEquipments(adminCarEquipments);
-        adminCar.setDescriptions(carDescriptions);
-        adminCar.setCarPrice(price);
-        adminCar.setPhotos(carPhotos);
+        if(adminCarDto.getEquipments() != null) {
+            adminCar.setEquipments(adminCarEquipmentRepository
+                    .saveAll(adminCarDto.getEquipments().stream().map(eq -> mapToCarEquipment(eq, adminCar.getId())).toList()));
+        }
+
+        if(adminCarDto.getDescriptions() != null) {
+            adminCar.setDescriptions(adminCarDescriptionRepository
+                    .saveAll(adminCarDto.getDescriptions().stream().map(des -> mapToCarDescription(des, adminCar.getId())).toList()));
+        }
+
+        if(adminCarDto.getCarPrice() != null) {
+            adminCar.setCarPrice(adminCarPriceRepository.save(mapToCarPrice(adminCarDto.getCarPrice(), EMPTY_ID)));
+        }
+
+        if(adminCarDto.getPhotos() != null) {
+            adminCar.setPhotos(adminCarPhotoRepository
+                    .saveAll(adminCarDto.getPhotos().stream().map(photo -> mapToCarPhoto(photo, adminCar.getId())).toList()));
+        }
 
         return adminCarRepository.save(adminCar);
+    }
+
+    private static boolean carBasicInfoAreNull(AdminCarDto adminCarDto) {
+        return adminCarDto.getBrand() == null || adminCarDto.getModel() == null || adminCarDto.getYear() == 0;
     }
 
     @Transactional
