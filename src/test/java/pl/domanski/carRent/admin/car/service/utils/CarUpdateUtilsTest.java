@@ -21,7 +21,7 @@ import static pl.domanski.carRent.admin.car.service.utils.generateValues.carUpda
 import static pl.domanski.carRent.admin.car.service.utils.generateValues.carUpdateUtilsGenerateValues.createOldDescriptionsList;
 import static pl.domanski.carRent.admin.car.service.utils.generateValues.carUpdateUtilsGenerateValues.createOldEquipmentList;
 
-class carUpdateUtilsTest {
+class CarUpdateUtilsTest {
 
     @Test
     void should_replace_old_Descriptions() {
@@ -29,7 +29,7 @@ class carUpdateUtilsTest {
         List<AdminCarDescription> oldCarDescriptions = createOldDescriptionsList();
         List<AdminCarDescriptionDto> newCarDescriptions = createNewDescriptionsList();
         //when
-        ArrayList<AdminCarDescription> result = carUpdateUtils.setNewCarDescriptionValues(newCarDescriptions, oldCarDescriptions);
+        ArrayList<AdminCarDescription> result = CarUpdateUtils.setNewCarDescriptionValues(newCarDescriptions, oldCarDescriptions);
         //then
         assertEquals(newCarDescriptions.get(0).getDescription(), result.get(0).getDescription());
         assertEquals(newCarDescriptions.get(1).getDescription(), result.get(1).getDescription());
@@ -42,7 +42,7 @@ class carUpdateUtilsTest {
         List<AdminCarDescription> oldCarDescriptions = createOldDescriptionsList();
         List<AdminCarDescriptionDto> newCarDescriptions = createNewShorterDescriptionsList();
         //when
-        ArrayList<AdminCarDescription> result = carUpdateUtils.setNewCarDescriptionValues(newCarDescriptions, oldCarDescriptions);
+        ArrayList<AdminCarDescription> result = CarUpdateUtils.setNewCarDescriptionValues(newCarDescriptions, oldCarDescriptions);
         //then
         assertEquals(newCarDescriptions.get(0).getDescription(), result.get(0).getDescription());
         assertEquals(newCarDescriptions.get(1).getDescription(), result.get(1).getDescription());
@@ -56,7 +56,7 @@ class carUpdateUtilsTest {
         List<AdminCarDescription> oldCarDescriptions = createOldDescriptionsList();
         List<AdminCarDescriptionDto> newCarDescriptions = createNewDescriptionsListWithOneMoreValue();
         //when
-        ArrayList<AdminCarDescription> result = carUpdateUtils.setNewCarDescriptionValues(newCarDescriptions, oldCarDescriptions);
+        ArrayList<AdminCarDescription> result = CarUpdateUtils.setNewCarDescriptionValues(newCarDescriptions, oldCarDescriptions);
         //then
         assertEquals(newCarDescriptions.get(0).getDescription(), result.get(0).getDescription());
         assertEquals(newCarDescriptions.get(1).getDescription(), result.get(1).getDescription());
@@ -71,7 +71,7 @@ class carUpdateUtilsTest {
         List<AdminCarEquipment> oldCarEquipment = createOldEquipmentList();
         List<AdminCarEquipmentDto> newCarEquipment = createNewEquipmentList();
         //when
-        ArrayList<AdminCarEquipment> result = carUpdateUtils.setNewCarEquipmentValues(newCarEquipment, oldCarEquipment);
+        ArrayList<AdminCarEquipment> result = CarUpdateUtils.setNewCarEquipmentValues(newCarEquipment, oldCarEquipment);
         //then
         assertEquals(newCarEquipment.get(0).getName(), result.get(0).getName());
         assertEquals(newCarEquipment.get(1).getName(), result.get(1).getName());
@@ -86,7 +86,7 @@ class carUpdateUtilsTest {
         List<AdminCarEquipment> oldCarEquipment = createOldEquipmentList();
         List<AdminCarEquipmentDto> newCarEquipment = createNewShorterEquipmentList();
         //when
-        ArrayList<AdminCarEquipment> result = carUpdateUtils.setNewCarEquipmentValues(newCarEquipment, oldCarEquipment);
+        ArrayList<AdminCarEquipment> result = CarUpdateUtils.setNewCarEquipmentValues(newCarEquipment, oldCarEquipment);
         //then
         assertEquals(newCarEquipment.get(0).getName(), result.get(0).getName());
         assertEquals(newCarEquipment.get(1).getName(), result.get(1).getName());
@@ -100,7 +100,7 @@ class carUpdateUtilsTest {
         List<AdminCarEquipment> oldCarEquipment = createOldEquipmentList();
         List<AdminCarEquipmentDto> newCarEquipment = createNewEquipmentListWithOneMoreValue();
         //when
-        ArrayList<AdminCarEquipment> result = carUpdateUtils.setNewCarEquipmentValues(newCarEquipment, oldCarEquipment);
+        ArrayList<AdminCarEquipment> result = CarUpdateUtils.setNewCarEquipmentValues(newCarEquipment, oldCarEquipment);
         //then
         assertEquals(newCarEquipment.get(0).getName(), result.get(0).getName());
         assertEquals(newCarEquipment.get(1).getName(), result.get(1).getName());

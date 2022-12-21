@@ -2,6 +2,7 @@ package pl.domanski.carRent.admin.car.service;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
+import pl.domanski.carRent.admin.car.service.utils.ExistingFileNameUtils;
 
 import java.io.IOException;
 import java.nio.file.Files;

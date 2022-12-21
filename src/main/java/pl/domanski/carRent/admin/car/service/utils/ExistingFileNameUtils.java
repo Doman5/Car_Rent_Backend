@@ -1,4 +1,4 @@
-package pl.domanski.carRent.admin.car.service;
+package pl.domanski.carRent.admin.car.service.utils;
 
 import org.apache.commons.io.FilenameUtils;
 
