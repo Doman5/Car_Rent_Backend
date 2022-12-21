@@ -17,12 +17,12 @@ import pl.domanski.carRent.admin.car.repository.AdminCarTechnicalSpecificationRe
 import pl.domanski.carRent.admin.car.service.mapper.AdminCarMapper;
 import pl.domanski.carRent.admin.common.repository.AdminCategoryRepository;
 
-import static pl.domanski.carRent.admin.car.service.mapper.AdminCarMapper.mapToCar;
-import static pl.domanski.carRent.admin.car.service.mapper.AdminCarMapper.mapToCarDescription;
-import static pl.domanski.carRent.admin.car.service.mapper.AdminCarMapper.mapToCarEquipment;
-import static pl.domanski.carRent.admin.car.service.mapper.AdminCarMapper.mapToCarPhoto;
-import static pl.domanski.carRent.admin.car.service.mapper.AdminCarMapper.mapToCarPrice;
-import static pl.domanski.carRent.admin.car.service.mapper.AdminCarMapper.mapToCarTechSpec;
+import static pl.domanski.carRent.admin.car.service.mapper.AdminCarMapper.mapToAdminCar;
+import static pl.domanski.carRent.admin.car.service.mapper.AdminCarMapper.mapToAdminCarDescription;
+import static pl.domanski.carRent.admin.car.service.mapper.AdminCarMapper.mapToAdminCarEquipment;
+import static pl.domanski.carRent.admin.car.service.mapper.AdminCarMapper.mapToAdminCarPhoto;
+import static pl.domanski.carRent.admin.car.service.mapper.AdminCarMapper.mapToAdminCarPrice;
+import static pl.domanski.carRent.admin.car.service.mapper.AdminCarMapper.mapToAdminCarTechSpec;
 
 
 @Service
@@ -41,7 +41,7 @@ public class AdminCarService {
 
     public Page<AdminCarBasicInfo> getCars(Pageable pageable) {
         return adminCarRepository.findAll(pageable)
-                .map(AdminCarMapper::mapToCarBasicInfo);
+                .map(AdminCarMapper::mapToAdminCarBasicInfo);
     }
 
     public AdminCar getCar(Long id) {
@@ -55,30 +55,30 @@ public class AdminCarService {
             throw new RuntimeException("Nie podano podstawowych informacji");
         }
 
-        AdminCar adminCar = adminCarRepository.save(mapToCar(adminCarDto, EMPTY_ID));
+        AdminCar adminCar = adminCarRepository.save(mapToAdminCar(adminCarDto, EMPTY_ID));
 
         if(adminCarDto.getCarTechnicalSpecification() != null) {
             adminCar.setAdminCarTechnicalSpecification(adminCarTechnicalSpecificationRepository
-                    .save(mapToCarTechSpec(adminCarDto.getCarTechnicalSpecification(), EMPTY_ID)));
+                    .save(mapToAdminCarTechSpec(adminCarDto.getCarTechnicalSpecification(), EMPTY_ID)));
         }
 
         if(adminCarDto.getEquipments() != null) {
             adminCar.setEquipments(adminCarEquipmentRepository
-                    .saveAll(adminCarDto.getEquipments().stream().map(eq -> mapToCarEquipment(eq, adminCar.getId())).toList()));
+                    .saveAll(adminCarDto.getEquipments().stream().map(eq -> mapToAdminCarEquipment(eq, adminCar.getId())).toList()));
         }
 
         if(adminCarDto.getDescriptions() != null) {
             adminCar.setDescriptions(adminCarDescriptionRepository
-                    .saveAll(adminCarDto.getDescriptions().stream().map(des -> mapToCarDescription(des, adminCar.getId())).toList()));
+                    .saveAll(adminCarDto.getDescriptions().stream().map(des -> mapToAdminCarDescription(des, adminCar.getId())).toList()));
         }
 
         if(adminCarDto.getCarPrice() != null) {
-            adminCar.setCarPrice(adminCarPriceRepository.save(mapToCarPrice(adminCarDto.getCarPrice(), EMPTY_ID)));
+            adminCar.setCarPrice(adminCarPriceRepository.save(mapToAdminCarPrice(adminCarDto.getCarPrice(), EMPTY_ID)));
         }
 
         if(adminCarDto.getPhotos() != null) {
             adminCar.setPhotos(adminCarPhotoRepository
-                    .saveAll(adminCarDto.getPhotos().stream().map(photo -> mapToCarPhoto(photo, adminCar.getId())).toList()));
+                    .saveAll(adminCarDto.getPhotos().stream().map(photo -> mapToAdminCarPhoto(photo, adminCar.getId())).toList()));
         }
 
         if(adminCarDto.getCategory() != null) {

@@ -27,8 +27,8 @@ import pl.domanski.carRent.admin.common.repository.AdminCategoryRepository;
 import java.util.ArrayList;
 import java.util.List;
 
-import static pl.domanski.carRent.admin.car.service.mapper.AdminCarMapper.mapToCarBasicInfo;
-import static pl.domanski.carRent.admin.car.service.mapper.AdminCarMapper.mapToCarPhoto;
+import static pl.domanski.carRent.admin.car.service.mapper.AdminCarMapper.mapToAdminCarBasicInfo;
+import static pl.domanski.carRent.admin.car.service.mapper.AdminCarMapper.mapToAdminCarPhoto;
 import static pl.domanski.carRent.admin.car.service.utils.carUpdateUtils.setNewCarBasicInfoValues;
 import static pl.domanski.carRent.admin.car.service.utils.carUpdateUtils.setNewCarDescriptionValues;
 import static pl.domanski.carRent.admin.car.service.utils.carUpdateUtils.setNewCarEquipmentValues;
@@ -51,7 +51,7 @@ public class AdminCarUpdateService {
     public AdminCarBasicInfo updateBasicInfo(Long id, AdminCarBasicInfo carBasicInfo) {
         AdminCar adminCar = adminCarRepository.findById(id).orElseThrow();
         setNewCarBasicInfoValues(carBasicInfo, adminCar);
-        return mapToCarBasicInfo(adminCarRepository.save(adminCar));
+        return mapToAdminCarBasicInfo(adminCarRepository.save(adminCar));
     }
 
     @Transactional
@@ -91,7 +91,7 @@ public class AdminCarUpdateService {
 
 
     public AdminCarPhoto addCarPhoto(AdminCarPhotoDto adminCarPhotoDto, Long carId) {
-        return adminCarPhotoRepository.save(mapToCarPhoto(adminCarPhotoDto, carId));
+        return adminCarPhotoRepository.save(mapToAdminCarPhoto(adminCarPhotoDto, carId));
     }
 
     public void deleteCarPhoto(Long photoId) {

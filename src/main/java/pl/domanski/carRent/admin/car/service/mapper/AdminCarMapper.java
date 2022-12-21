@@ -16,7 +16,7 @@ import pl.domanski.carRent.admin.car.model.AdminCarTechnicalSpecification;
 
 public class AdminCarMapper {
 
-    public static AdminCarBasicInfo mapToCarBasicInfo(AdminCar adminCar) {
+    public static AdminCarBasicInfo mapToAdminCarBasicInfo(AdminCar adminCar) {
         return AdminCarBasicInfo.builder()
                 .id(adminCar.getId())
                 .brand(adminCar.getBrand())
@@ -25,14 +25,14 @@ public class AdminCarMapper {
                 .build();
     }
 
-    public static AdminCarDescription mapToCarDescription(AdminCarDescriptionDto descriptionDto, Long carId) {
+    public static AdminCarDescription mapToAdminCarDescription(AdminCarDescriptionDto descriptionDto, Long carId) {
         return AdminCarDescription.builder()
                 .description(descriptionDto.getDescription())
                 .carId(carId)
                 .build();
     }
 
-    public static AdminCar mapToCar(AdminCarDto adminCarDto, Long id) {
+    public static AdminCar mapToAdminCar(AdminCarDto adminCarDto, Long id) {
         return AdminCar.builder()
                 .id(id)
                 .brand(adminCarDto.getBrand())
@@ -41,14 +41,14 @@ public class AdminCarMapper {
                 .build();
     }
 
-    public static AdminCarEquipment mapToCarEquipment(AdminCarEquipmentDto adminCarEquipmentDto, Long carId) {
+    public static AdminCarEquipment mapToAdminCarEquipment(AdminCarEquipmentDto adminCarEquipmentDto, Long carId) {
         return AdminCarEquipment.builder()
                 .name(adminCarEquipmentDto.getName())
                 .carId(carId)
                 .build();
     }
 
-    public static AdminCarTechnicalSpecification mapToCarTechSpec(AdminCarTechnicalSpecificationDto carTechSpecDto, Long techSpecId) {
+    public static AdminCarTechnicalSpecification mapToAdminCarTechSpec(AdminCarTechnicalSpecificationDto carTechSpecDto, Long techSpecId) {
         return AdminCarTechnicalSpecification.builder()
                 .id(techSpecId)
                 .power(carTechSpecDto.getPower())
@@ -61,7 +61,7 @@ public class AdminCarMapper {
                 .build();
     }
 
-    public static AdminCarPrice mapToCarPrice(AdminCarPriceDto carPriceDto, Long id) {
+    public static AdminCarPrice mapToAdminCarPrice(AdminCarPriceDto carPriceDto, Long id) {
         return AdminCarPrice.builder()
                 .id(id)
                 .priceDay(carPriceDto.getPriceDay())
@@ -73,7 +73,7 @@ public class AdminCarMapper {
                 .build();
     }
 
-    public static AdminCarPhoto mapToCarPhoto(AdminCarPhotoDto photoDto, Long carId) {
+    public static AdminCarPhoto mapToAdminCarPhoto(AdminCarPhotoDto photoDto, Long carId) {
         return AdminCarPhoto.builder()
                 .photo(photoDto.getPhoto())
                 .carId(carId)
