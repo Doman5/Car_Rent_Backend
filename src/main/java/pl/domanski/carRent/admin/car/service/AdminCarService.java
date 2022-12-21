@@ -15,6 +15,7 @@ import pl.domanski.carRent.admin.car.repository.AdminCarPriceRepository;
 import pl.domanski.carRent.admin.car.repository.AdminCarRepository;
 import pl.domanski.carRent.admin.car.repository.AdminCarTechnicalSpecificationRepository;
 import pl.domanski.carRent.admin.car.service.mapper.AdminCarMapper;
+import pl.domanski.carRent.admin.car.service.utils.CarSlugUtils;
 import pl.domanski.carRent.admin.common.repository.AdminCategoryRepository;
 
 import static pl.domanski.carRent.admin.car.service.mapper.AdminCarMapper.mapToAdminCar;
@@ -54,39 +55,63 @@ public class AdminCarService {
         if(carBasicInfoAreNull(adminCarDto)) {
             throw new RuntimeException("Nie podano podstawowych informacji");
         }
+        String slug = createSlug(adminCarDto, adminCarRepository);
+        AdminCar adminCar = adminCarRepository.save(mapToAdminCar(adminCarDto, slug, EMPTY_ID));
 
-        AdminCar adminCar = adminCarRepository.save(mapToAdminCar(adminCarDto, EMPTY_ID));
+        ifExistSaveCarTechnicalSpecification(adminCarDto, adminCar);
+        ifExistSaveCarEquipments(adminCarDto, adminCar);
+        ifExistSaveCarDescriptions(adminCarDto, adminCar);
+        ifExistSaveCarPrice(adminCarDto, adminCar);
+        ifExistSaveCarPhotos(adminCarDto, adminCar);
+        ifExistSetCarCategory(adminCarDto, adminCar);
 
-        if(adminCarDto.getCarTechnicalSpecification() != null) {
-            adminCar.setAdminCarTechnicalSpecification(adminCarTechnicalSpecificationRepository
-                    .save(mapToAdminCarTechSpec(adminCarDto.getCarTechnicalSpecification(), EMPTY_ID)));
-        }
+        return adminCarRepository.save(adminCar);
+    }
 
-        if(adminCarDto.getEquipments() != null) {
-            adminCar.setEquipments(adminCarEquipmentRepository
-                    .saveAll(adminCarDto.getEquipments().stream().map(eq -> mapToAdminCarEquipment(eq, adminCar.getId())).toList()));
-        }
-
-        if(adminCarDto.getDescriptions() != null) {
-            adminCar.setDescriptions(adminCarDescriptionRepository
-                    .saveAll(adminCarDto.getDescriptions().stream().map(des -> mapToAdminCarDescription(des, adminCar.getId())).toList()));
-        }
-
-        if(adminCarDto.getCarPrice() != null) {
-            adminCar.setCarPrice(adminCarPriceRepository.save(mapToAdminCarPrice(adminCarDto.getCarPrice(), EMPTY_ID)));
-        }
-
-        if(adminCarDto.getPhotos() != null) {
-            adminCar.setPhotos(adminCarPhotoRepository
-                    .saveAll(adminCarDto.getPhotos().stream().map(photo -> mapToAdminCarPhoto(photo, adminCar.getId())).toList()));
-        }
-
+    private void ifExistSetCarCategory(AdminCarDto adminCarDto, AdminCar adminCar) {
         if(adminCarDto.getCategory() != null) {
             Long categoryId = adminCategoryRepository.findByName(adminCarDto.getCategory().getName()).orElseThrow().getId();
             adminCar.setCategoryId(categoryId);
         }
+    }
 
-        return adminCarRepository.save(adminCar);
+    private void ifExistSaveCarPhotos(AdminCarDto adminCarDto, AdminCar adminCar) {
+        if(adminCarDto.getPhotos() != null) {
+            adminCar.setPhotos(adminCarPhotoRepository
+                    .saveAll(adminCarDto.getPhotos().stream().map(photo -> mapToAdminCarPhoto(photo, adminCar.getId())).toList()));
+        }
+    }
+
+    private void ifExistSaveCarPrice(AdminCarDto adminCarDto, AdminCar adminCar) {
+        if(adminCarDto.getCarPrice() != null) {
+            adminCar.setCarPrice(adminCarPriceRepository.save(mapToAdminCarPrice(adminCarDto.getCarPrice(), EMPTY_ID)));
+        }
+    }
+
+    private void ifExistSaveCarDescriptions(AdminCarDto adminCarDto, AdminCar adminCar) {
+        if(adminCarDto.getDescriptions() != null) {
+            adminCar.setDescriptions(adminCarDescriptionRepository
+                    .saveAll(adminCarDto.getDescriptions().stream().map(des -> mapToAdminCarDescription(des, adminCar.getId())).toList()));
+        }
+    }
+
+    private void ifExistSaveCarEquipments(AdminCarDto adminCarDto, AdminCar adminCar) {
+        if(adminCarDto.getEquipments() != null) {
+            adminCar.setEquipments(adminCarEquipmentRepository
+                    .saveAll(adminCarDto.getEquipments().stream().map(eq -> mapToAdminCarEquipment(eq, adminCar.getId())).toList()));
+        }
+    }
+
+    private void ifExistSaveCarTechnicalSpecification(AdminCarDto adminCarDto, AdminCar adminCar) {
+        if(adminCarDto.getCarTechnicalSpecification() != null) {
+            adminCar.setAdminCarTechnicalSpecification(adminCarTechnicalSpecificationRepository
+                    .save(mapToAdminCarTechSpec(adminCarDto.getCarTechnicalSpecification(), EMPTY_ID)));
+        }
+    }
+
+    private String createSlug(AdminCarDto adminCarDto, AdminCarRepository adminCarRepository) {
+        CarSlugUtils carSlugUtils = new CarSlugUtils(adminCarRepository);
+        return carSlugUtils.createCarSlug(adminCarDto);
     }
 
     private static boolean carBasicInfoAreNull(AdminCarDto adminCarDto) {

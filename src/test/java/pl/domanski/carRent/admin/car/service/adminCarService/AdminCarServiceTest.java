@@ -71,6 +71,7 @@ class AdminCarServiceTest {
         AdminCar result = adminCarService.createCar(adminCarDto);
         //then
         assertThat(result).isNotNull();
+        assertEquals("test-brand-test-model-9999", result.getSlug());
         assertEquals("test brand", result.getBrand());
         assertEquals("test model", result.getModel());
         assertThat(result.getPhotos()).asList();

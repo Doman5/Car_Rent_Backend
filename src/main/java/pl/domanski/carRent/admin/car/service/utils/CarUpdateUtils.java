@@ -14,7 +14,7 @@ import pl.domanski.carRent.admin.car.model.AdminCarTechnicalSpecification;
 import java.util.ArrayList;
 import java.util.List;
 
-public class carUpdateUtils {
+public class CarUpdateUtils {
 
     public static void setNewCarPriceValues(AdminCarPriceDto newValues, AdminCarPrice oldValues) {
         oldValues.setPriceDay(newValues.getPriceDay());
@@ -85,10 +85,11 @@ public class carUpdateUtils {
         return newEquipmentList;
     }
 
-    public static void setNewCarBasicInfoValues(AdminCarBasicInfo newValues, AdminCar oldValues) {
+    public static void setNewCarBasicInfoValues(AdminCarBasicInfo newValues, AdminCar oldValues, String slug) {
         oldValues.setBrand(newValues.getBrand());
         oldValues.setModel(newValues.getModel());
         oldValues.setYear(newValues.getYear());
+        oldValues.setSlug(slug);
     }
 
     public static void setNewCarTechSpecValues(AdminCarTechnicalSpecificationDto newValues, AdminCarTechnicalSpecification oldValues) {

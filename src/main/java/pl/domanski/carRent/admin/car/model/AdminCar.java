@@ -31,6 +31,7 @@ public class AdminCar {
     private String brand;
     private String model;
     private int year;
+    private String slug;
     @OneToOne(cascade = {CascadeType.REMOVE})
     @JoinColumn(name = "car_technical_specification_id")
     private AdminCarTechnicalSpecification adminCarTechnicalSpecification;
