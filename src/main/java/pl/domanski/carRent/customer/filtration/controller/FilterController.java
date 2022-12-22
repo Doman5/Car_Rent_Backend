@@ -1,19 +1,19 @@
-package pl.domanski.carRent.customer.filter.controller;
+package pl.domanski.carRent.customer.filtration.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
-import pl.domanski.carRent.customer.filter.service.CarFilterService;
-import pl.domanski.carRent.customer.filter.service.dto.FiltersDto;
+import pl.domanski.carRent.customer.filtration.service.CarFiltrationService;
+import pl.domanski.carRent.customer.filtration.service.dto.FiltrationDto;
 
 @RestController
 @RequiredArgsConstructor
 public class FilterController {
 
-    private final CarFilterService carFilterService;
+    private final CarFiltrationService carFilterService;
 
     @GetMapping("/filters")
-    public FiltersDto getFilterFields() {
+    public FiltrationDto getFilterFields() {
         return carFilterService.getCarFilters();
     }
 }

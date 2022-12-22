@@ -1,4 +1,4 @@
-package pl.domanski.carRent.customer.filter.service.dto;
+package pl.domanski.carRent.customer.filtration.service.dto;
 
 import lombok.Builder;
 import lombok.Getter;
@@ -8,7 +8,7 @@ import java.util.Map;
 
 @Getter
 @Builder
-public class FiltersDto {
+public class FiltrationDto {
     List<Map<String,Long>> brands;
     List<Map<String,Long>> years;
 }

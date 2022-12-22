@@ -1,9 +1,9 @@
-package pl.domanski.carRent.customer.filter.service;
+package pl.domanski.carRent.customer.filtration.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import pl.domanski.carRent.customer.common.repository.CarRepository;
-import pl.domanski.carRent.customer.filter.service.dto.FiltersDto;
+import pl.domanski.carRent.customer.filtration.service.dto.FiltrationDto;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -12,11 +12,11 @@ import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
-public class CarFilterService {
+public class CarFiltrationService {
 
     private final CarRepository carRepository;
 
-    public FiltersDto getCarFilters() {
+    public FiltrationDto getCarFilters() {
         List<Map<String, Long>> brands = getBrandsWithCarsCount();
         List<Map<String, Long>> years = getYearsWithCarsCount();
         return createFilterDto(brands, years);
@@ -46,8 +46,8 @@ public class CarFilterService {
         return years;
     }
 
-    private static FiltersDto createFilterDto(List<Map<String, Long>> brands, List<Map<String, Long>> years) {
-        return FiltersDto.builder()
+    private static FiltrationDto createFilterDto(List<Map<String, Long>> brands, List<Map<String, Long>> years) {
+        return FiltrationDto.builder()
                 .brands(brands)
                 .years(years)
                 .build();
