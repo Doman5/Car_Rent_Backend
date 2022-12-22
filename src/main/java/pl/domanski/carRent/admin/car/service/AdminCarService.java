@@ -56,7 +56,7 @@ public class AdminCarService {
             throw new RuntimeException("Nie podano podstawowych informacji");
         }
         String slug = createSlug(adminCarDto, adminCarRepository);
-        AdminCar adminCar = adminCarRepository.save(mapToAdminCar(adminCarDto, slug, EMPTY_ID));
+        AdminCar adminCar = adminCarRepository.save(mapToAdminCar(adminCarDto, slug, EMPTY_ID, 1L));
 
         ifExistSaveCarTechnicalSpecification(adminCarDto, adminCar);
         ifExistSaveCarEquipments(adminCarDto, adminCar);

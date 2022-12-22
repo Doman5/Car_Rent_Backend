@@ -3,6 +3,7 @@ package pl.domanski.carRent.admin.car.controller.dto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import pl.domanski.carRent.admin.common.dto.AdminCategoryDto;
 
 import javax.validation.constraints.Min;
@@ -12,6 +13,7 @@ import java.util.List;
 @Getter
 @Builder
 @AllArgsConstructor
+@NoArgsConstructor
 public class AdminCarDto {
     private Long id;
     @NotBlank

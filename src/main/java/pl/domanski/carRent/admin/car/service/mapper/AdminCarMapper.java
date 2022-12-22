@@ -32,13 +32,14 @@ public class AdminCarMapper {
                 .build();
     }
 
-    public static AdminCar mapToAdminCar(AdminCarDto adminCarDto, String slug, Long id) {
+    public static AdminCar mapToAdminCar(AdminCarDto adminCarDto, String slug, Long id, long categoryId) {
         return AdminCar.builder()
                 .id(id)
                 .brand(adminCarDto.getBrand())
                 .model(adminCarDto.getModel())
                 .year(adminCarDto.getYear())
                 .slug(slug)
+                .categoryId(categoryId)
                 .build();
     }
 
