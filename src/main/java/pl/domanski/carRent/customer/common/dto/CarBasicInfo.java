@@ -1,4 +1,4 @@
-package pl.domanski.carRent.customer.car.controller.dto;
+package pl.domanski.carRent.customer.common.dto;
 
 import lombok.Builder;
 import lombok.Getter;
@@ -11,6 +11,7 @@ public class CarBasicInfo {
     private String brand;
     private String model;
     private Integer year;
+    private String slug;
     private BigDecimal priceMonth;
     private String acceleration;
     private String gearbox;

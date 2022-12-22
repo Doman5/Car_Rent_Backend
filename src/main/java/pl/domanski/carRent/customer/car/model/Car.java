@@ -20,6 +20,7 @@ public class Car {
     private String brand;
     private String model;
     private int year;
+    private String slug;
     @OneToOne
     @JoinColumn(name = "car_technical_specification_id")
     private CarTechnicalSpecification carTechnicalSpecification;
