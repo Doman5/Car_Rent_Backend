@@ -34,7 +34,7 @@ public class AdminCategoryController {
     }
 
     @PostMapping
-    public AdminCategory createCategory(@RequestBody @Valid AdminCategoryDto adminCategoryDto) {
+    public AdminCategory createCategory(@Valid @RequestBody AdminCategoryDto adminCategoryDto) {
         return adminCategoryService.createCategory(adminCategoryDto);
     }
 

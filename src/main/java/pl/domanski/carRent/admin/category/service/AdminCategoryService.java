@@ -12,6 +12,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class AdminCategoryService {
 
+    private static final Long EMPTY_ID = null;
     private final AdminCategoryRepository adminCategoryRepository;
 
     public List<AdminCategory> getCategories() {
@@ -23,7 +24,7 @@ public class AdminCategoryService {
     }
 
     public AdminCategory createCategory(AdminCategoryDto adminCategoryDto) {
-        return adminCategoryRepository.save(new AdminCategory(adminCategoryDto.getName()));
+        return adminCategoryRepository.save(mapToCategory(adminCategoryDto, EMPTY_ID));
     }
 
     public AdminCategory updateCategory(Long id, AdminCategoryDto adminCategoryDto) {
@@ -34,5 +35,12 @@ public class AdminCategoryService {
 
     public void deleteCategory(Long id) {
         adminCategoryRepository.deleteById(id);
+    }
+
+    private AdminCategory mapToCategory(AdminCategoryDto adminCategoryDto, Long id) {
+        return AdminCategory.builder()
+                .id(id)
+                .name(adminCategoryDto.getName())
+                .build();
     }
 }

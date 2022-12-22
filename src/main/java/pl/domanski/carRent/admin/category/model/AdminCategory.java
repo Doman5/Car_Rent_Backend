@@ -25,7 +25,4 @@ public class AdminCategory {
     private Long id;
     private String name;
 
-    public AdminCategory(String name) {
-        this.name = name;
-    }
 }
