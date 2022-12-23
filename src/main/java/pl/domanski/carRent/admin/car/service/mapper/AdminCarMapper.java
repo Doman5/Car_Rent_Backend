@@ -72,6 +72,9 @@ public class AdminCarMapper {
                 .priceTwoWeeks(carPriceDto.getPriceTwoWeeks())
                 .priceMonth(carPriceDto.getPriceMonth())
                 .deposit(carPriceDto.getDeposit())
+                .distanceLimit(carPriceDto.getDistanceLimit())
+                .distanceLimitPenalty(carPriceDto.getDistanceLimitPenalty())
+                .transportPricePerKm(carPriceDto.getTransportPricePerKm())
                 .build();
     }
 

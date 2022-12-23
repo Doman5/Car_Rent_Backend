@@ -21,4 +21,10 @@ public class AdminCarPriceDto {
     private BigDecimal priceMonth;
     @Min(1)
     private Integer deposit;
+    @Min(1)
+    private Integer distanceLimit;
+    @Min(1)
+    private BigDecimal distanceLimitPenalty;
+    @Min(1)
+    private BigDecimal transportPricePerKm;
 }

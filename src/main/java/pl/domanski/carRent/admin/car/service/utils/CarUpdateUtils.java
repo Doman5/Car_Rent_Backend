@@ -23,6 +23,9 @@ public class CarUpdateUtils {
         oldValues.setPriceTwoWeeks(newValues.getPriceTwoWeeks());
         oldValues.setPriceMonth(newValues.getPriceMonth());
         oldValues.setDeposit(newValues.getDeposit());
+        oldValues.setDistanceLimit(newValues.getDistanceLimit());
+        oldValues.setDistanceLimitPenalty(newValues.getDistanceLimitPenalty());
+        oldValues.setTransportPricePerKm(newValues.getTransportPricePerKm());
     }
 
     public static ArrayList<AdminCarDescription> setNewCarDescriptionValues(List<AdminCarDescriptionDto> newValues, List<AdminCarDescription> oldValues) {

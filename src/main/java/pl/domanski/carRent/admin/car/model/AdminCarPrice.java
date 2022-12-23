@@ -30,4 +30,7 @@ public class AdminCarPrice {
     private BigDecimal priceTwoWeeks;
     private BigDecimal priceMonth;
     private Integer deposit;
+    private Integer distanceLimit;
+    private BigDecimal distanceLimitPenalty;
+    private BigDecimal transportPricePerKm;
 }
