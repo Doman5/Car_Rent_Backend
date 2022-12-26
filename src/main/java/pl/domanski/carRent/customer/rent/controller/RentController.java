@@ -25,7 +25,7 @@ public class RentController {
         return rentService.showCars(rentDateAndPlace);
     }
 
-    @GetMapping("/cars")
+    @GetMapping("/cars/available")
     public List<CarRentDto> showAvailableCarsToRent(RentDateAndPlace rentDateAndPlace) {
         return rentService.showOnlyAvailableCars(rentDateAndPlace);
     }

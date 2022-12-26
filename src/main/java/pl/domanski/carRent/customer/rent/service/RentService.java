@@ -1,6 +1,7 @@
 package pl.domanski.carRent.customer.rent.service;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 import pl.domanski.carRent.customer.common.model.Car;
 import pl.domanski.carRent.customer.common.repository.CarRepository;
 import pl.domanski.carRent.customer.rent.controller.dto.CarRentDto;
@@ -19,6 +20,7 @@ import static java.time.temporal.ChronoUnit.DAYS;
 import static pl.domanski.carRent.customer.rent.utils.RentPricesCalculator.calculateGrossValue;
 import static pl.domanski.carRent.customer.rent.utils.RentPricesCalculator.calculateTransportPrice;
 
+@Service
 @RequiredArgsConstructor
 public class RentService {
 
