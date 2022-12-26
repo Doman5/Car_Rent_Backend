@@ -89,6 +89,7 @@ public class RentService {
                 .carTechnicalSpecification(car.getCarTechnicalSpecification())
                 .deposit(car.getCarPrice().getDeposit())
                 .distanceLimit(car.getCarPrice().getDistanceLimit())
+                .days(days)
                 .grossValue(grossValue)
                 .rentalPrice(rentalPrice)
                 .returnPrice(returnPrice)

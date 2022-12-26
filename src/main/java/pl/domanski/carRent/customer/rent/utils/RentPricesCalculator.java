@@ -1,7 +1,6 @@
 package pl.domanski.carRent.customer.rent.utils;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Value;
 import pl.domanski.carRent.customer.common.model.Car;
 import pl.domanski.carRent.webClient.localization.DistanceCalculatorService;
 
@@ -9,8 +8,6 @@ import java.math.BigDecimal;
 
 @RequiredArgsConstructor
 public class RentPricesCalculator {
-    @Value("${app.base.localization}")
-    private static String BASE_LOCALIZATION;
 
     public static BigDecimal calculateGrossValue(Car car, long days) {
         BigDecimal price;
@@ -30,10 +27,11 @@ public class RentPricesCalculator {
     }
 
     public static BigDecimal calculateTransportPrice(String destinationPlace, Car car, DistanceCalculatorService distanceCalculatorService) {
+        String baseLocalization = "Sochaczew";
         if (destinationPlace.equals("Sochaczew")) {
             return BigDecimal.ZERO;
         }
-        double distance = distanceCalculatorService.getInstance().calculateDistance(BASE_LOCALIZATION, destinationPlace);
+        double distance = distanceCalculatorService.getInstance().calculateDistance(baseLocalization, destinationPlace);
         BigDecimal transportPricePerKm = car.getCarPrice().getTransportPricePerKm();
 
         return transportPricePerKm.multiply(BigDecimal.valueOf(distance));
