@@ -1,7 +1,7 @@
 package pl.domanski.carRent.customer.common.mapper;
 
 import pl.domanski.carRent.customer.common.dto.CarBasicInfo;
-import pl.domanski.carRent.customer.car.model.Car;
+import pl.domanski.carRent.customer.common.model.Car;
 
 public class CarMapper {
 

@@ -2,7 +2,7 @@ package pl.domanski.carRent.customer.category.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import pl.domanski.carRent.customer.car.model.Car;
+import pl.domanski.carRent.customer.common.model.Car;
 import pl.domanski.carRent.customer.common.mapper.CarMapper;
 import pl.domanski.carRent.customer.category.model.Category;
 import pl.domanski.carRent.customer.category.repository.CategoryRepository;

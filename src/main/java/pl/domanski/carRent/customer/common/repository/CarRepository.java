@@ -3,7 +3,7 @@ package pl.domanski.carRent.customer.common.repository;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import pl.domanski.carRent.customer.car.model.Car;
+import pl.domanski.carRent.customer.common.model.Car;
 
 import java.util.List;
 import java.util.Optional;

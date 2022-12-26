@@ -1,4 +1,4 @@
-package pl.domanski.carRent.customer.car.model;
+package pl.domanski.carRent.customer.common.model;
 
 import lombok.Getter;
 
@@ -20,4 +20,7 @@ public class CarPrice {
     private BigDecimal priceTwoWeeks;
     private BigDecimal priceMonth;
     private Integer deposit;
+    private Integer distanceLimit;
+    private BigDecimal distanceLimitPenalty;
+    private BigDecimal transportPricePerKm;
 }

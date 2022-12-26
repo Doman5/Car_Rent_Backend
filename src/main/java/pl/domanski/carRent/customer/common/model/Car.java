@@ -1,6 +1,9 @@
-package pl.domanski.carRent.customer.car.model;
+package pl.domanski.carRent.customer.common.model;
 
 import lombok.Getter;
+import pl.domanski.carRent.customer.car.model.CarDescription;
+import pl.domanski.carRent.customer.car.model.CarEquipment;
+import pl.domanski.carRent.customer.car.model.CarPhoto;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import pl.domanski.carRent.customer.common.dto.CarBasicInfo;
-import pl.domanski.carRent.customer.car.model.Car;
+import pl.domanski.carRent.customer.common.model.Car;
 import pl.domanski.carRent.customer.car.service.CarService;
 
 import java.util.List;
