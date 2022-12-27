@@ -5,6 +5,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import pl.domanski.carRent.customer.common.model.Car;
 import pl.domanski.carRent.customer.rent.controller.dto.RentDateAndPlace;
 import pl.domanski.carRent.customer.rent.model.Rent;
 import pl.domanski.carRent.customer.rent.repository.RentRepository;
@@ -54,17 +55,23 @@ class CheckCarAvailabilityUtilsTest {
 
     private List<Rent> generateRentsForCarId() {
         return List.of(Rent.builder()
-                        .carId(2L)
+                        .car(Car.builder()
+                                .id(2L)
+                                .build())
                         .rentalDate(LocalDateTime.of(2022,12,2,10,0))
                         .returnDate(LocalDateTime.of(2022, 12, 4, 10, 0))
                         .build(),
                 Rent.builder()
-                        .carId(2L)
+                        .car(Car.builder()
+                                .id(2L)
+                                .build())
                         .rentalDate(LocalDateTime.of(2022,12,8,10,0))
                         .returnDate(LocalDateTime.of(2022, 12, 10, 10, 0))
                         .build(),
                 Rent.builder()
-                        .carId(2L)
+                        .car(Car.builder()
+                                .id(2L)
+                                .build())
                         .rentalDate(LocalDateTime.of(2022,12,7,10,0))
                         .returnDate(LocalDateTime.of(2022, 12, 8, 10, 0))
                         .build()
