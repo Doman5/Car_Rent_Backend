@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import pl.domanski.carRent.customer.rent.controller.dto.CarRentDto;
 import pl.domanski.carRent.customer.rent.controller.dto.RentDateAndPlace;
-import pl.domanski.carRent.customer.rent.model.dto.CarDto;
 import pl.domanski.carRent.customer.rent.model.dto.RentSummary;
 import pl.domanski.carRent.customer.rent.service.RentService;
 
@@ -32,8 +31,8 @@ public class RentController {
         return rentService.showCars(rentDateAndPlace, ONLY_AVAILABLE);
     }
 
-    @PostMapping("/rent")
-    public RentSummary placeRent(CarDto carDto, Long userId, String from, String to) {
-        return rentService.placeRent(carDto, userId, from, to);
+    @PostMapping
+    public RentSummary placeRent(CarRentDto carRent, Long paymentId, Long userId) {
+        return rentService.placeRent(carRent,paymentId, userId);
     }
 }

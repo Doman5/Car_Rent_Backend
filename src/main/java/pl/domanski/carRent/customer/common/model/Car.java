@@ -1,6 +1,9 @@
 package pl.domanski.carRent.customer.common.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import pl.domanski.carRent.customer.car.model.CarDescription;
 import pl.domanski.carRent.customer.car.model.CarEquipment;
 import pl.domanski.carRent.customer.car.model.CarPhoto;
@@ -16,6 +19,9 @@ import java.util.List;
 
 @Entity
 @Getter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Car {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

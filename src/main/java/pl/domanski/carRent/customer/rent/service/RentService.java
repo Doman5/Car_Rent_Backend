@@ -6,8 +6,11 @@ import pl.domanski.carRent.customer.common.model.Car;
 import pl.domanski.carRent.customer.common.repository.CarRepository;
 import pl.domanski.carRent.customer.rent.controller.dto.CarRentDto;
 import pl.domanski.carRent.customer.rent.controller.dto.RentDateAndPlace;
-import pl.domanski.carRent.customer.rent.model.dto.CarDto;
+import pl.domanski.carRent.customer.rent.model.Payment;
+import pl.domanski.carRent.customer.rent.model.Rent;
 import pl.domanski.carRent.customer.rent.model.dto.RentSummary;
+import pl.domanski.carRent.customer.rent.repository.PaymentRepository;
+import pl.domanski.carRent.customer.rent.repository.RentRepository;
 import pl.domanski.carRent.customer.rent.utils.CheckCarAvailabilityUtils;
 import pl.domanski.carRent.webClient.localization.DistanceCalculatorService;
 
@@ -17,6 +20,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static java.time.temporal.ChronoUnit.DAYS;
+import static pl.domanski.carRent.customer.rent.mapper.RentCarMapper.createAvailableCarRentDto;
+import static pl.domanski.carRent.customer.rent.mapper.RentCarMapper.createUnavailableCarRentDto;
+import static pl.domanski.carRent.customer.rent.mapper.RentMapper.createRent;
+import static pl.domanski.carRent.customer.rent.mapper.RentMapper.createRentSummary;
 import static pl.domanski.carRent.customer.rent.utils.RentPricesCalculator.calculateGrossValue;
 import static pl.domanski.carRent.customer.rent.utils.RentPricesCalculator.calculateTransportDistance;
 import static pl.domanski.carRent.customer.rent.utils.RentPricesCalculator.calculateTransportPrice;
@@ -25,13 +32,28 @@ import static pl.domanski.carRent.customer.rent.utils.RentPricesCalculator.calcu
 @RequiredArgsConstructor
 public class RentService {
 
+    private static final double DEFAULT_TAX = 1.23;
     private final DistanceCalculatorService distanceCalculatorService;
     private final CarRepository carRepository;
     private final CheckCarAvailabilityUtils checkCarAvailabilityUtils;
+    private final PaymentRepository paymentRepository;
+    private final RentRepository rentRepository;
 
 
-    public RentSummary placeRent(CarDto carDto, Long userId, String from, String to) {
-        return null;
+    public RentSummary placeRent(CarRentDto carDto, Long paymentId, Long userId) {
+        Car car = carRepository.findById(carDto.getCarId()).orElseThrow();
+        Payment payment = paymentRepository.findById(paymentId).orElseThrow();
+        BigDecimal grossValue = calculateGrossValueWithTax(carDto, DEFAULT_TAX);
+        Rent rent = rentRepository.save(createRent(carDto, userId, car, payment, grossValue));
+        //wyslać maila
+        //
+        //
+        return createRentSummary(car, rent);
+    }
+
+
+    private static BigDecimal calculateGrossValueWithTax(CarRentDto carDto, double tax) {
+        return carDto.getGrossValue().add(carDto.getRentalPrice()).add(carDto.getReturnPrice()).multiply(BigDecimal.valueOf(tax));
     }
 
     public List<CarRentDto> showCars(RentDateAndPlace rentDateAndPlace, boolean onlyAvailable) {
@@ -58,7 +80,7 @@ public class RentService {
                                     rentalDistance,
                                     returnDistance);
                         } else {
-                            return buildUnavailableCarRentDto(car);
+                            return createUnavailableCarRentDto(car);
                         }
                     }).forEach(rentCars::add);
         }
@@ -70,7 +92,7 @@ public class RentService {
         BigDecimal grossValue = calculateGrossValue(car, days);
         BigDecimal rentalPrice = calculateTransportPrice(car, rentalDistance);
         BigDecimal returnPrice = calculateTransportPrice(car, returnDistance);
-        return buildAvailableCarRentDto(car, grossValue, rentalPrice, returnPrice, days, rentDateAndPlace);
+        return createAvailableCarRentDto(car, grossValue, rentalPrice, returnPrice, days, rentDateAndPlace);
     }
 
 
@@ -81,34 +103,6 @@ public class RentService {
             throw new RuntimeException("Data wypożyczenia musi być o 2 godziny później od teraz");
     }
 
-    private CarRentDto buildAvailableCarRentDto(Car car, BigDecimal grossValue, BigDecimal rentalPrice, BigDecimal returnPrice, long days, RentDateAndPlace rentDateAndPlace) {
-        return CarRentDto.builder()
-                .brand(car.getBrand())
-                .model(car.getModel())
-                .year(car.getYear())
-                .carTechnicalSpecification(car.getCarTechnicalSpecification())
-                .deposit(car.getCarPrice().getDeposit())
-                .distanceLimit(car.getCarPrice().getDistanceLimit())
-                .days(days)
-                .grossValue(grossValue)
-                .rentalPrice(rentalPrice)
-                .returnPrice(returnPrice)
-                .rentalDate(rentDateAndPlace.getRentalDate())
-                .returnDate(rentDateAndPlace.getReturnDate())
-                .isAvailable(true)
-                .build();
-    }
 
-    private static CarRentDto buildUnavailableCarRentDto(Car car) {
-        return CarRentDto.builder()
-                .brand(car.getBrand())
-                .model(car.getModel())
-                .year(car.getYear())
-                .carTechnicalSpecification(car.getCarTechnicalSpecification())
-                .deposit(car.getCarPrice().getDeposit())
-                .distanceLimit(car.getCarPrice().getDistanceLimit())
-                .isAvailable(false)
-                .build();
-    }
 
 }

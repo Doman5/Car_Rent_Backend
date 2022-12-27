@@ -10,6 +10,7 @@ import java.time.LocalDateTime;
 @Getter
 @Builder
 public class CarRentDto {
+    private Long carId;
     private String brand;
     private String model;
     private Integer year;
@@ -19,9 +20,11 @@ public class CarRentDto {
     private BigDecimal distanceLimitPenalty;
     private BigDecimal grossValue;
     private BigDecimal rentalPrice;
-    private BigDecimal returnPrice;
     private LocalDateTime rentalDate;
+    private String rentalPlace;
+    private BigDecimal returnPrice;
     private LocalDateTime returnDate;
+    private String returnPlace;
     private Long days;
     private boolean isAvailable;
 }
