@@ -1,4 +1,4 @@
-package pl.domanski.carRent.admin.car.common;
+package pl.domanski.carRent.common;
 
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;

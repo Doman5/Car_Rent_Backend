@@ -5,6 +5,7 @@ import lombok.Getter;
 import pl.domanski.carRent.customer.common.model.CarTechnicalSpecification;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 @Getter
 @Builder
@@ -19,6 +20,8 @@ public class CarRentDto {
     private BigDecimal grossValue;
     private BigDecimal rentalPrice;
     private BigDecimal returnPrice;
+    private LocalDateTime rentalDate;
+    private LocalDateTime returnDate;
     private Long days;
     private boolean isAvailable;
 }

@@ -18,6 +18,7 @@ import java.util.List;
 
 import static java.time.temporal.ChronoUnit.DAYS;
 import static pl.domanski.carRent.customer.rent.utils.RentPricesCalculator.calculateGrossValue;
+import static pl.domanski.carRent.customer.rent.utils.RentPricesCalculator.calculateTransportDistance;
 import static pl.domanski.carRent.customer.rent.utils.RentPricesCalculator.calculateTransportPrice;
 
 @Service
@@ -33,55 +34,54 @@ public class RentService {
         return null;
     }
 
-    public List<CarRentDto> showOnlyAvailableCars(RentDateAndPlace rentDateAndPlace) {
-        LocalDateTime rentalDate = rentDateAndPlace.getRentalDate();
-        LocalDateTime returnDate = rentDateAndPlace.getReturnDate();
-        checkCorrectnessDates(rentalDate, returnDate);
+    public List<CarRentDto> showCars(RentDateAndPlace rentDateAndPlace, boolean onlyAvailable) {
+        checkCorrectnessDates(rentDateAndPlace);
+        double rentalDistance = calculateTransportDistance(rentDateAndPlace.getRentalPlace(), distanceCalculatorService);
+        double returnDistance = calculateTransportDistance(rentDateAndPlace.getReturnPlace(), distanceCalculatorService);
+        ArrayList<CarRentDto> rentCars = new ArrayList<>();
 
-        ArrayList<CarRentDto> carRentDtos = new ArrayList<>();
         List<Car> cars = carRepository.findAll();
-        for (Car car : cars) {
-            if (checkCarAvailabilityUtils.checkCarAvailability(car.getId(), rentDateAndPlace)) {
-                carRentDtos.add(createAvailableCar(rentDateAndPlace, rentalDate, returnDate, car));
-            }
+        if (onlyAvailable) {
+            cars.stream()
+                    .filter(car -> checkCarAvailabilityUtils.checkCarAvailability(car.getId(), rentDateAndPlace))
+                    .map(car -> createAvailableCar(car,
+                            rentDateAndPlace,
+                            rentalDistance,
+                            returnDistance))
+                    .forEach(rentCars::add);
+        } else {
+            cars.stream()
+                    .map(car -> {
+                        if (checkCarAvailabilityUtils.checkCarAvailability(car.getId(), rentDateAndPlace)) {
+                            return createAvailableCar(car,
+                                    rentDateAndPlace,
+                                    rentalDistance,
+                                    returnDistance);
+                        } else {
+                            return buildUnavailableCarRentDto(car);
+                        }
+                    }).forEach(rentCars::add);
         }
-        return carRentDtos;
+        return rentCars;
     }
 
-    public List<CarRentDto> showCars(RentDateAndPlace rentDateAndPlace) {
-        LocalDateTime rentalDate = rentDateAndPlace.getRentalDate();
-        LocalDateTime returnDate = rentDateAndPlace.getReturnDate();
-        checkCorrectnessDates(rentalDate, returnDate);
-
-        ArrayList<CarRentDto> carRentDtos = new ArrayList<>();
-        List<Car> cars = carRepository.findAll();
-        for (Car car : cars) {
-            if (checkCarAvailabilityUtils.checkCarAvailability(car.getId(), rentDateAndPlace)) {
-                carRentDtos.add(createAvailableCar(rentDateAndPlace, rentalDate, returnDate, car));
-            } else {
-                carRentDtos.add(buildUnavailableCarRentDto(car));
-            }
-        }
-        return carRentDtos;
-    }
-
-    private CarRentDto createAvailableCar(RentDateAndPlace rentDateAndPlace, LocalDateTime rentalDate, LocalDateTime returnDate, Car car) {
-        long days = DAYS.between(rentalDate, returnDate);
+    private CarRentDto createAvailableCar(Car car, RentDateAndPlace rentDateAndPlace, double rentalDistance, double returnDistance) {
+        long days = DAYS.between(rentDateAndPlace.getRentalDate(), rentDateAndPlace.getReturnDate());
         BigDecimal grossValue = calculateGrossValue(car, days);
-        BigDecimal rentalPrice = calculateTransportPrice(rentDateAndPlace.getRentalPlace(), car, distanceCalculatorService);
-        BigDecimal returnPrice = calculateTransportPrice(rentDateAndPlace.getReturnPlace(), car, distanceCalculatorService);
-        return buildAvailableCarRentDto(car, grossValue, rentalPrice, returnPrice, days);
+        BigDecimal rentalPrice = calculateTransportPrice(car, rentalDistance);
+        BigDecimal returnPrice = calculateTransportPrice(car, returnDistance);
+        return buildAvailableCarRentDto(car, grossValue, rentalPrice, returnPrice, days, rentDateAndPlace);
     }
 
 
-    private static void checkCorrectnessDates(LocalDateTime rentalDate, LocalDateTime returnDate) {
-        if (rentalDate.isAfter(returnDate))
+    private static void checkCorrectnessDates(RentDateAndPlace rentDateAndPlace) {
+        if (rentDateAndPlace.getRentalDate().isAfter(rentDateAndPlace.getReturnDate()))
             throw new RuntimeException("Data oddania musi być później niż data wypożyczenia");
-        if (rentalDate.isBefore(LocalDateTime.now()))
-            throw new RuntimeException("Data wypożyczenia musi być później niż obecna data i godzina");
+        if (rentDateAndPlace.getRentalDate().isBefore(LocalDateTime.now().plusHours(2)))
+            throw new RuntimeException("Data wypożyczenia musi być o 2 godziny później od teraz");
     }
 
-    private CarRentDto buildAvailableCarRentDto(Car car, BigDecimal grossValue, BigDecimal rentalPrice, BigDecimal returnPrice, long days) {
+    private CarRentDto buildAvailableCarRentDto(Car car, BigDecimal grossValue, BigDecimal rentalPrice, BigDecimal returnPrice, long days, RentDateAndPlace rentDateAndPlace) {
         return CarRentDto.builder()
                 .brand(car.getBrand())
                 .model(car.getModel())
@@ -93,6 +93,8 @@ public class RentService {
                 .grossValue(grossValue)
                 .rentalPrice(rentalPrice)
                 .returnPrice(returnPrice)
+                .rentalDate(rentDateAndPlace.getRentalDate())
+                .returnDate(rentDateAndPlace.getReturnDate())
                 .isAvailable(true)
                 .build();
     }

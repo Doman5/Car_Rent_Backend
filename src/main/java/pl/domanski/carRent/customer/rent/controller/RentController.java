@@ -18,16 +18,18 @@ import java.util.List;
 @RequestMapping("/rent")
 public class RentController {
 
+    private static final boolean ONLY_AVAILABLE = true;
+    private static final boolean ALL_CARS = false;
     private final RentService rentService;
 
     @GetMapping("/cars")
     public List<CarRentDto> showCarsToRent(RentDateAndPlace rentDateAndPlace) {
-        return rentService.showCars(rentDateAndPlace);
+        return rentService.showCars(rentDateAndPlace, ALL_CARS);
     }
 
     @GetMapping("/cars/available")
     public List<CarRentDto> showAvailableCarsToRent(RentDateAndPlace rentDateAndPlace) {
-        return rentService.showOnlyAvailableCars(rentDateAndPlace);
+        return rentService.showCars(rentDateAndPlace, ONLY_AVAILABLE);
     }
 
     @PostMapping("/rent")

@@ -26,14 +26,16 @@ public class RentPricesCalculator {
         return price.multiply(BigDecimal.valueOf(days));
     }
 
-    public static BigDecimal calculateTransportPrice(String destinationPlace, Car car, DistanceCalculatorService distanceCalculatorService) {
+    public static double calculateTransportDistance(String destinationPlace, DistanceCalculatorService distanceCalculatorService) {
         String baseLocalization = "Sochaczew";
         if (destinationPlace.equals("Sochaczew")) {
-            return BigDecimal.ZERO;
+            return 0;
         }
-        double distance = distanceCalculatorService.getInstance().calculateDistance(baseLocalization, destinationPlace);
-        BigDecimal transportPricePerKm = car.getCarPrice().getTransportPricePerKm();
+        return distanceCalculatorService.getInstance().calculateDistance(baseLocalization, destinationPlace);
+    }
 
+    public static BigDecimal calculateTransportPrice(Car car, double distance) {
+        BigDecimal transportPricePerKm = car.getCarPrice().getTransportPricePerKm();
         return transportPricePerKm.multiply(BigDecimal.valueOf(distance));
     }
 }
