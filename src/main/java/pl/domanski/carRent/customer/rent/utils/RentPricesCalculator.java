@@ -2,14 +2,14 @@ package pl.domanski.carRent.customer.rent.utils;
 
 import lombok.RequiredArgsConstructor;
 import pl.domanski.carRent.customer.common.model.Car;
-import pl.domanski.carRent.webClient.localization.DistanceCalculatorService;
+import pl.domanski.carRent.customer.rent.controller.dto.RentDto;
 
 import java.math.BigDecimal;
 
 @RequiredArgsConstructor
 public class RentPricesCalculator {
 
-    public static BigDecimal calculateGrossValue(Car car, long days) {
+    public static BigDecimal calculateGrossValueByDaysCount(Car car, long days) {
         BigDecimal price;
         if(days < 0) throw new RuntimeException("Ilość dni nie może być na minusie");
         if(days <= 3) {
@@ -26,16 +26,12 @@ public class RentPricesCalculator {
         return price.multiply(BigDecimal.valueOf(days));
     }
 
-    public static double calculateTransportDistance(String destinationPlace, DistanceCalculatorService distanceCalculatorService) {
-        String baseLocalization = "Sochaczew";
-        if (destinationPlace.equals("Sochaczew")) {
-            return 0;
-        }
-        return distanceCalculatorService.getInstance().calculateDistance(baseLocalization, destinationPlace);
-    }
-
     public static BigDecimal calculateTransportPrice(Car car, double distance) {
         BigDecimal transportPricePerKm = car.getCarPrice().getTransportPricePerKm();
         return transportPricePerKm.multiply(BigDecimal.valueOf(distance));
+    }
+
+    public static BigDecimal addTaxToFinalPrice(RentDto rentDto, double tax) {
+        return rentDto.getGrossValue().add(rentDto.getRentalPrice()).add(rentDto.getReturnPrice()).multiply(BigDecimal.valueOf(tax)).setScale(2);
     }
 }
