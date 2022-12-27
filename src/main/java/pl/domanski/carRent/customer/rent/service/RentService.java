@@ -2,10 +2,12 @@ package pl.domanski.carRent.customer.rent.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import pl.domanski.carRent.customer.common.model.Car;
 import pl.domanski.carRent.customer.common.repository.CarRepository;
 import pl.domanski.carRent.customer.rent.controller.dto.CarRentDto;
 import pl.domanski.carRent.customer.rent.controller.dto.RentDateAndPlace;
+import pl.domanski.carRent.customer.rent.controller.dto.RentDto;
 import pl.domanski.carRent.customer.rent.model.Payment;
 import pl.domanski.carRent.customer.rent.model.Rent;
 import pl.domanski.carRent.customer.rent.model.dto.RentSummary;
@@ -24,36 +26,32 @@ import static pl.domanski.carRent.customer.rent.mapper.RentCarMapper.createAvail
 import static pl.domanski.carRent.customer.rent.mapper.RentCarMapper.createUnavailableCarRentDto;
 import static pl.domanski.carRent.customer.rent.mapper.RentMapper.createRent;
 import static pl.domanski.carRent.customer.rent.mapper.RentMapper.createRentSummary;
-import static pl.domanski.carRent.customer.rent.utils.RentPricesCalculator.calculateGrossValue;
-import static pl.domanski.carRent.customer.rent.utils.RentPricesCalculator.calculateTransportDistance;
+import static pl.domanski.carRent.customer.rent.utils.RentPricesCalculator.calculateGrossValueByDaysCount;
+import static pl.domanski.carRent.customer.rent.utils.RentPricesCalculator.addTaxToFinalPrice;
 import static pl.domanski.carRent.customer.rent.utils.RentPricesCalculator.calculateTransportPrice;
+import static pl.domanski.carRent.customer.rent.utils.TransportDistanceCalculator.calculateTransportDistance;
 
 @Service
 @RequiredArgsConstructor
 public class RentService {
 
-    private static final double DEFAULT_TAX = 1.23;
+    private static final double DEFAULT_TAX_23 = 1.23;
     private final DistanceCalculatorService distanceCalculatorService;
     private final CarRepository carRepository;
     private final CheckCarAvailabilityUtils checkCarAvailabilityUtils;
     private final PaymentRepository paymentRepository;
     private final RentRepository rentRepository;
 
-
-    public RentSummary placeRent(CarRentDto carDto, Long paymentId, Long userId) {
-        Car car = carRepository.findById(carDto.getCarId()).orElseThrow();
-        Payment payment = paymentRepository.findById(paymentId).orElseThrow();
-        BigDecimal grossValue = calculateGrossValueWithTax(carDto, DEFAULT_TAX);
-        Rent rent = rentRepository.save(createRent(carDto, userId, car, payment, grossValue));
+    @Transactional
+    public RentSummary placeRent(RentDto rentDto, Long userId) {
+        Car car = carRepository.findById(rentDto.getCarId()).orElseThrow();
+        Payment payment = paymentRepository.findById(rentDto.getPaymentId()).orElseThrow();
+        BigDecimal grossValue = addTaxToFinalPrice(rentDto, DEFAULT_TAX_23);
+        Rent rent = rentRepository.save(createRent(rentDto, userId, car, payment, grossValue));
         //wyslać maila
         //
         //
         return createRentSummary(car, rent);
-    }
-
-
-    private static BigDecimal calculateGrossValueWithTax(CarRentDto carDto, double tax) {
-        return carDto.getGrossValue().add(carDto.getRentalPrice()).add(carDto.getReturnPrice()).multiply(BigDecimal.valueOf(tax));
     }
 
     public List<CarRentDto> showCars(RentDateAndPlace rentDateAndPlace, boolean onlyAvailable) {
@@ -89,12 +87,11 @@ public class RentService {
 
     private CarRentDto createAvailableCar(Car car, RentDateAndPlace rentDateAndPlace, double rentalDistance, double returnDistance) {
         long days = DAYS.between(rentDateAndPlace.getRentalDate(), rentDateAndPlace.getReturnDate());
-        BigDecimal grossValue = calculateGrossValue(car, days);
+        BigDecimal grossValue = calculateGrossValueByDaysCount(car, days);
         BigDecimal rentalPrice = calculateTransportPrice(car, rentalDistance);
         BigDecimal returnPrice = calculateTransportPrice(car, returnDistance);
         return createAvailableCarRentDto(car, grossValue, rentalPrice, returnPrice, days, rentDateAndPlace);
     }
-
 
     private static void checkCorrectnessDates(RentDateAndPlace rentDateAndPlace) {
         if (rentDateAndPlace.getRentalDate().isAfter(rentDateAndPlace.getReturnDate()))

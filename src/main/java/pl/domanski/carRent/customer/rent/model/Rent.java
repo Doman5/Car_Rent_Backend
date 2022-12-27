@@ -37,5 +37,4 @@ public class Rent {
     private String returnPlace;
     private LocalDateTime returnDate;
     private BigDecimal grossValue;
-    private Long days;
 }

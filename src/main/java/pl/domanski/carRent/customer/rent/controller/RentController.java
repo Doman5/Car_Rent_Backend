@@ -3,10 +3,12 @@ package pl.domanski.carRent.customer.rent.controller;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import pl.domanski.carRent.customer.rent.controller.dto.CarRentDto;
 import pl.domanski.carRent.customer.rent.controller.dto.RentDateAndPlace;
+import pl.domanski.carRent.customer.rent.controller.dto.RentDto;
 import pl.domanski.carRent.customer.rent.model.dto.RentSummary;
 import pl.domanski.carRent.customer.rent.service.RentService;
 
@@ -32,7 +34,7 @@ public class RentController {
     }
 
     @PostMapping
-    public RentSummary placeRent(CarRentDto carRent, Long paymentId, Long userId) {
-        return rentService.placeRent(carRent,paymentId, userId);
+    public RentSummary placeRent(@RequestBody RentDto rentDto, Long userId) {
+        return rentService.placeRent(rentDto, userId);
     }
 }

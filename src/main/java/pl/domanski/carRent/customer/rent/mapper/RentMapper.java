@@ -1,7 +1,7 @@
 package pl.domanski.carRent.customer.rent.mapper;
 
 import pl.domanski.carRent.customer.common.model.Car;
-import pl.domanski.carRent.customer.rent.controller.dto.CarRentDto;
+import pl.domanski.carRent.customer.rent.controller.dto.RentDto;
 import pl.domanski.carRent.customer.rent.model.Payment;
 import pl.domanski.carRent.customer.rent.model.Rent;
 import pl.domanski.carRent.customer.rent.model.RentStatus;
@@ -25,15 +25,17 @@ public class RentMapper {
                 .build();
     }
 
-    public static Rent createRent(CarRentDto carDto, Long userId, Car car, Payment payment, BigDecimal grossValue) {
+    public static Rent createRent(RentDto carDto, Long userId, Car car, Payment payment, BigDecimal grossValue) {
         return Rent.builder()
                 .car(car)
                 .userId(userId)
                 .payment(payment)
                 .rentalPlace(carDto.getRentalPlace())
+                .returnPlace(carDto.getReturnPlace())
                 .rentalDate(carDto.getRentalDate())
+                .returnDate(carDto.getReturnDate())
                 .grossValue(grossValue)
-                .days(carDto.getDays())
+                .rentStatus(RentStatus.NEW)
                 .build();
     }
 }
