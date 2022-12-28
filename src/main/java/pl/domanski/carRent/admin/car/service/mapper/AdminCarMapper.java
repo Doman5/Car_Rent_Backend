@@ -22,6 +22,7 @@ public class AdminCarMapper {
                 .brand(adminCar.getBrand())
                 .model(adminCar.getModel())
                 .year(adminCar.getYear())
+                .type(adminCar.getBodyType())
                 .build();
     }
 

@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import pl.domanski.carRent.customer.car.model.BodyType;
 import pl.domanski.carRent.customer.car.model.CarDescription;
 import pl.domanski.carRent.customer.car.model.CarEquipment;
 import pl.domanski.carRent.customer.car.model.CarPhoto;
@@ -29,6 +30,7 @@ public class Car {
     private String brand;
     private String model;
     private int year;
+    private BodyType bodyType;
     private String slug;
     @OneToOne
     @JoinColumn(name = "car_technical_specification_id")
