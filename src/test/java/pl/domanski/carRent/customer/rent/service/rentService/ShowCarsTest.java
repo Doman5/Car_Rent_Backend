@@ -8,6 +8,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import pl.domanski.carRent.customer.common.repository.CarRepository;
 import pl.domanski.carRent.customer.rent.controller.dto.CarRentDto;
 import pl.domanski.carRent.customer.rent.controller.dto.RentDateAndPlace;
+import pl.domanski.carRent.customer.rent.model.SortingType;
 import pl.domanski.carRent.customer.rent.service.RentService;
 import pl.domanski.carRent.customer.rent.utils.CheckCarAvailabilityUtils;
 
@@ -18,6 +19,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.hasSize;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.BDDMockito.given;
 import static pl.domanski.carRent.customer.rent.service.rentService.RentServiceCreateData.createCarsList;
@@ -46,7 +48,7 @@ public class ShowCarsTest {
         given(checkCarAvailabilityUtils.checkCarAvailability(4L, rentDateAndPlace)).willReturn(true);
         given(checkCarAvailabilityUtils.checkCarAvailability(5L, rentDateAndPlace)).willReturn(true);
         //when
-        List<CarRentDto> result = rentService.showCars(rentDateAndPlace, false);
+        List<CarRentDto> result = rentService.showCars(rentDateAndPlace, false, null);
         //then
         assertThat(result, hasSize(5));
         assertEquals(3, result.get(3).getDays());
@@ -70,7 +72,7 @@ public class ShowCarsTest {
         given(checkCarAvailabilityUtils.checkCarAvailability(4L, rentDateAndPlace)).willReturn(true);
         given(checkCarAvailabilityUtils.checkCarAvailability(5L, rentDateAndPlace)).willReturn(true);
         //when
-        List<CarRentDto> result = rentService.showCars(rentDateAndPlace, true);
+        List<CarRentDto> result = rentService.showCars(rentDateAndPlace, true, null);
         //then
         assertThat(result, hasSize(3));
         assertEquals(3, result.get(1).getDays());
@@ -80,4 +82,97 @@ public class ShowCarsTest {
         assertTrue(result.get(1).isAvailable());
         assertTrue(result.get(2).isAvailable());
     }
+
+    @Test
+    void should_show_only_available_cars_sorted_asc() {
+        //given
+        RentDateAndPlace rentDateAndPlace = createRentDateAndPlace();
+        given(carRepository.findAll()).willReturn(createCarsList());
+        given(checkCarAvailabilityUtils.checkCarAvailability(1L, rentDateAndPlace)).willReturn(false);
+        given(checkCarAvailabilityUtils.checkCarAvailability(2L, rentDateAndPlace)).willReturn(false);
+        given(checkCarAvailabilityUtils.checkCarAvailability(3L, rentDateAndPlace)).willReturn(true);
+        given(checkCarAvailabilityUtils.checkCarAvailability(4L, rentDateAndPlace)).willReturn(true);
+        given(checkCarAvailabilityUtils.checkCarAvailability(5L, rentDateAndPlace)).willReturn(true);
+        //when
+        List<CarRentDto> result = rentService.showCars(rentDateAndPlace, true, SortingType.ASC);
+        //then
+        assertThat(result, hasSize(3));
+        assertEquals(3, result.get(1).getDays());
+        assertEquals(3, result.get(2).getDays());
+        assertEquals(BigDecimal.valueOf(165), result.get(0).getGrossValue());
+        assertEquals(BigDecimal.valueOf(1500), result.get(1).getGrossValue());
+        assertEquals(BigDecimal.valueOf(15000), result.get(2).getGrossValue());
+        assertTrue(result.get(1).isAvailable());
+        assertTrue(result.get(2).isAvailable());
+    }
+
+    @Test
+    void should_show_only_available_cars_sorted_desc() {
+        //given
+        RentDateAndPlace rentDateAndPlace = createRentDateAndPlace();
+        given(carRepository.findAll()).willReturn(createCarsList());
+        given(checkCarAvailabilityUtils.checkCarAvailability(1L, rentDateAndPlace)).willReturn(false);
+        given(checkCarAvailabilityUtils.checkCarAvailability(2L, rentDateAndPlace)).willReturn(false);
+        given(checkCarAvailabilityUtils.checkCarAvailability(3L, rentDateAndPlace)).willReturn(true);
+        given(checkCarAvailabilityUtils.checkCarAvailability(4L, rentDateAndPlace)).willReturn(true);
+        given(checkCarAvailabilityUtils.checkCarAvailability(5L, rentDateAndPlace)).willReturn(true);
+        //when
+        List<CarRentDto> result = rentService.showCars(rentDateAndPlace, true, SortingType.DESC);
+        //then
+        assertThat(result, hasSize(3));
+        assertEquals(3, result.get(1).getDays());
+        assertEquals(3, result.get(2).getDays());
+        assertEquals(BigDecimal.valueOf(15000), result.get(0).getGrossValue());
+        assertEquals(BigDecimal.valueOf(1500), result.get(1).getGrossValue());
+        assertEquals(BigDecimal.valueOf(165), result.get(2).getGrossValue());
+        assertTrue(result.get(1).isAvailable());
+        assertTrue(result.get(2).isAvailable());
+    }
+
+    @Test
+    void should_show_cars_sorted_desc() {
+        //given
+        RentDateAndPlace rentDateAndPlace = createRentDateAndPlace();
+        given(carRepository.findAll()).willReturn(createCarsList());
+        given(checkCarAvailabilityUtils.checkCarAvailability(1L, rentDateAndPlace)).willReturn(false);
+        given(checkCarAvailabilityUtils.checkCarAvailability(2L, rentDateAndPlace)).willReturn(false);
+        given(checkCarAvailabilityUtils.checkCarAvailability(3L, rentDateAndPlace)).willReturn(true);
+        given(checkCarAvailabilityUtils.checkCarAvailability(4L, rentDateAndPlace)).willReturn(true);
+        given(checkCarAvailabilityUtils.checkCarAvailability(5L, rentDateAndPlace)).willReturn(true);
+        //when
+        List<CarRentDto> result = rentService.showCars(rentDateAndPlace, false, SortingType.DESC);
+        //then
+        assertThat(result, hasSize(5));
+        assertEquals(3, result.get(1).getDays());
+        assertEquals(3, result.get(2).getDays());
+        assertEquals(BigDecimal.valueOf(15000), result.get(0).getGrossValue());
+        assertEquals(BigDecimal.valueOf(1500), result.get(1).getGrossValue());
+        assertEquals(BigDecimal.valueOf(165), result.get(2).getGrossValue());
+        assertTrue(result.get(1).isAvailable());
+        assertTrue(result.get(2).isAvailable());
+    }
+
+    @Test
+    void should_show_cars_sorted_asc() {
+        //given
+        RentDateAndPlace rentDateAndPlace = createRentDateAndPlace();
+        given(carRepository.findAll()).willReturn(createCarsList());
+        given(checkCarAvailabilityUtils.checkCarAvailability(1L, rentDateAndPlace)).willReturn(false);
+        given(checkCarAvailabilityUtils.checkCarAvailability(2L, rentDateAndPlace)).willReturn(false);
+        given(checkCarAvailabilityUtils.checkCarAvailability(3L, rentDateAndPlace)).willReturn(true);
+        given(checkCarAvailabilityUtils.checkCarAvailability(4L, rentDateAndPlace)).willReturn(true);
+        given(checkCarAvailabilityUtils.checkCarAvailability(5L, rentDateAndPlace)).willReturn(true);
+        //when
+        List<CarRentDto> result = rentService.showCars(rentDateAndPlace, false, SortingType.ASC);
+        //then
+        assertThat(result, hasSize(5));
+        assertNull(result.get(1).getDays());
+        assertEquals(3, result.get(2).getDays());
+        assertEquals(BigDecimal.valueOf(165), result.get(2).getGrossValue());
+        assertEquals(BigDecimal.valueOf(1500), result.get(3).getGrossValue());
+        assertEquals(BigDecimal.valueOf(15000), result.get(4).getGrossValue());
+        assertFalse(result.get(1).isAvailable());
+        assertTrue(result.get(2).isAvailable());
+    }
+
 }

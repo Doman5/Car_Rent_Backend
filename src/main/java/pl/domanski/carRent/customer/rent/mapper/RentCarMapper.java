@@ -29,12 +29,13 @@ public class RentCarMapper {
                 .build();
     }
 
-    public  static CarRentDto createUnavailableCarRentDto(Car car) {
+    public  static CarRentDto createUnavailableCarRentDto(Car car, BigDecimal grossValue) {
         return CarRentDto.builder()
                 .brand(car.getBrand())
                 .model(car.getModel())
                 .year(car.getYear())
                 .carTechnicalSpecification(car.getCarTechnicalSpecification())
+                .grossValue(grossValue)
                 .deposit(car.getCarPrice().getDeposit())
                 .distanceLimit(car.getCarPrice().getDistanceLimit())
                 .isAvailable(false)

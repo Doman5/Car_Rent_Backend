@@ -10,6 +10,7 @@ import pl.domanski.carRent.customer.rent.controller.dto.RentDateAndPlace;
 import pl.domanski.carRent.customer.rent.controller.dto.RentDto;
 import pl.domanski.carRent.customer.rent.model.Payment;
 import pl.domanski.carRent.customer.rent.model.Rent;
+import pl.domanski.carRent.customer.rent.model.SortingType;
 import pl.domanski.carRent.customer.rent.model.dto.RentSummary;
 import pl.domanski.carRent.customer.rent.repository.PaymentRepository;
 import pl.domanski.carRent.customer.rent.repository.RentRepository;
@@ -19,6 +20,8 @@ import pl.domanski.carRent.webClient.localization.DistanceCalculatorService;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import static java.time.temporal.ChronoUnit.DAYS;
@@ -54,7 +57,7 @@ public class RentService {
         return createRentSummary(car, rent);
     }
 
-    public List<CarRentDto> showCars(RentDateAndPlace rentDateAndPlace, boolean onlyAvailable) {
+    public List<CarRentDto> showCars(RentDateAndPlace rentDateAndPlace, boolean onlyAvailable, SortingType sortedByPrice) {
         checkCorrectnessDates(rentDateAndPlace);
         double rentalDistance = calculateTransportDistance(rentDateAndPlace.getRentalPlace(), distanceCalculatorService);
         double returnDistance = calculateTransportDistance(rentDateAndPlace.getReturnPlace(), distanceCalculatorService);
@@ -78,11 +81,24 @@ public class RentService {
                                     rentalDistance,
                                     returnDistance);
                         } else {
-                            return createUnavailableCarRentDto(car);
+                            return createUnavailableCar(car,
+                                    rentDateAndPlace);
                         }
                     }).forEach(rentCars::add);
         }
+        if(sortedByPrice == SortingType.ASC) {
+            rentCars.sort(Comparator.comparing(CarRentDto::getGrossValue));
+        } else if(sortedByPrice == SortingType.DESC) {
+            rentCars.sort(Comparator.comparing(CarRentDto::getGrossValue));
+            Collections.reverse(rentCars);
+        }
         return rentCars;
+    }
+
+    private CarRentDto createUnavailableCar(Car car, RentDateAndPlace rentDateAndPlace) {
+        long days = DAYS.between(rentDateAndPlace.getRentalDate(), rentDateAndPlace.getReturnDate());
+        BigDecimal grossValue = calculateGrossValueByDaysCount(car, days);
+        return createUnavailableCarRentDto(car, grossValue);
     }
 
     private CarRentDto createAvailableCar(Car car, RentDateAndPlace rentDateAndPlace, double rentalDistance, double returnDistance) {
