@@ -4,8 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import pl.domanski.carRent.admin.car.model.AdminBodyType;
-import pl.domanski.carRent.admin.car.service.AdminCarUpdateListsService;
+import pl.domanski.carRent.admin.car.service.AdminCarUpdateListService;
 import pl.domanski.carRent.admin.common.dto.AdminCategoryDto;
 
 import java.util.List;
@@ -13,9 +12,9 @@ import java.util.List;
 @RestController
 @RequestMapping("/admin/cars")
 @RequiredArgsConstructor
-public class AdminCarUpdateListsController {
+public class AdminCarUpdateListController {
 
-    private final AdminCarUpdateListsService adminCarUpdateListsService;
+    private final AdminCarUpdateListService adminCarUpdateListsService;
 
     @GetMapping("/categories")
     public List<AdminCategoryDto> getAllCarCategories() {
@@ -23,7 +22,7 @@ public class AdminCarUpdateListsController {
     }
 
     @GetMapping("/body-types")
-    public List<AdminBodyType> getAllBodyTypes() {
+    public List<String> getAllBodyTypes() {
         return adminCarUpdateListsService.getAllBodyTypes();
     }
 }

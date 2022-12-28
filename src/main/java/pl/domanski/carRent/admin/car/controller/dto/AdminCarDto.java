@@ -22,6 +22,7 @@ public class AdminCarDto {
     private String model;
     @Min(1)
     private int year;
+    private String bodyType;
     private AdminCarTechnicalSpecificationDto carTechnicalSpecification;
     private List<AdminCarEquipmentDto> equipments;
     private List<AdminCarDescriptionDto> descriptions;

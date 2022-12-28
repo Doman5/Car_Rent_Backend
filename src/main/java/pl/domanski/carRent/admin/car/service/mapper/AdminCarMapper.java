@@ -7,6 +7,7 @@ import pl.domanski.carRent.admin.car.controller.dto.AdminCarBasicInfo;
 import pl.domanski.carRent.admin.car.controller.dto.AdminCarPhotoDto;
 import pl.domanski.carRent.admin.car.controller.dto.AdminCarPriceDto;
 import pl.domanski.carRent.admin.car.controller.dto.AdminCarTechnicalSpecificationDto;
+import pl.domanski.carRent.admin.car.model.AdminBodyType;
 import pl.domanski.carRent.admin.car.model.AdminCar;
 import pl.domanski.carRent.admin.car.model.AdminCarDescription;
 import pl.domanski.carRent.admin.car.model.AdminCarEquipment;
@@ -22,7 +23,7 @@ public class AdminCarMapper {
                 .brand(adminCar.getBrand())
                 .model(adminCar.getModel())
                 .year(adminCar.getYear())
-                .type(adminCar.getBodyType())
+                .type(adminCar.getBodyType().getName())
                 .build();
     }
 
@@ -39,6 +40,7 @@ public class AdminCarMapper {
                 .brand(adminCarDto.getBrand())
                 .model(adminCarDto.getModel())
                 .year(adminCarDto.getYear())
+                .bodyType(AdminBodyType.get(adminCarDto.getBodyType()).orElseThrow())
                 .slug(slug)
                 .categoryId(categoryId)
                 .build();

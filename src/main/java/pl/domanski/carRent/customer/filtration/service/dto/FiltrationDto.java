@@ -10,4 +10,5 @@ import java.util.Map;
 public class FiltrationDto {
     Map<String,Long> brands;
     Map<Integer,Long> years;
+    Map<String,Long> bodyTypes;
 }

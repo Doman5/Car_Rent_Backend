@@ -2,6 +2,7 @@ package pl.domanski.carRent.customer.filtration.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import pl.domanski.carRent.customer.car.model.BodyType;
 import pl.domanski.carRent.customer.common.repository.CarRepository;
 import pl.domanski.carRent.customer.filtration.service.dto.FiltrationDto;
 
@@ -18,7 +19,8 @@ public class CarFiltrationService {
     public FiltrationDto getCarFilters() {
         Map<String, Long> brands = getBrandsWithCarsCount();
         Map<Integer, Long> years = getYearsWithCarsCount();
-        return createFilterDto(brands, years);
+        Map<String, Long> bodyType = getBodyTypeCarsCount();
+        return createFilterDto(brands, years, bodyType);
     }
 
     private Map<String, Long> getBrandsWithCarsCount() {
@@ -41,10 +43,21 @@ public class CarFiltrationService {
         return yearAndNumberOfCars;
     }
 
-    private static FiltrationDto createFilterDto(Map<String, Long> brands, Map<Integer, Long> years) {
+    private Map<String, Long> getBodyTypeCarsCount() {
+        Map<String, Long> bodyTypeAndNumberOfCars = new HashMap<>();
+        List<BodyType> carsBodyType = carRepository.findAllCarsBodyTypes();
+        for (BodyType type : carsBodyType) {
+            Long numberOfCars = carRepository.countByBodyType(type);
+            bodyTypeAndNumberOfCars.put(type.getName(), numberOfCars);
+        }
+        return bodyTypeAndNumberOfCars;
+    }
+
+    private static FiltrationDto createFilterDto(Map<String, Long> brands, Map<Integer, Long> years, Map<String, Long> bodyType) {
         return FiltrationDto.builder()
                 .brands(brands)
                 .years(years)
+                .bodyTypes(bodyType)
                 .build();
     }
 }

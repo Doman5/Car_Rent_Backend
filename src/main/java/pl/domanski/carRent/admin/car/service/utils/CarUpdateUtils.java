@@ -5,6 +5,7 @@ import pl.domanski.carRent.admin.car.controller.dto.AdminCarDescriptionDto;
 import pl.domanski.carRent.admin.car.controller.dto.AdminCarEquipmentDto;
 import pl.domanski.carRent.admin.car.controller.dto.AdminCarPriceDto;
 import pl.domanski.carRent.admin.car.controller.dto.AdminCarTechnicalSpecificationDto;
+import pl.domanski.carRent.admin.car.model.AdminBodyType;
 import pl.domanski.carRent.admin.car.model.AdminCar;
 import pl.domanski.carRent.admin.car.model.AdminCarDescription;
 import pl.domanski.carRent.admin.car.model.AdminCarEquipment;
@@ -92,6 +93,7 @@ public class CarUpdateUtils {
         oldValues.setBrand(newValues.getBrand());
         oldValues.setModel(newValues.getModel());
         oldValues.setYear(newValues.getYear());
+        oldValues.setBodyType(AdminBodyType.get(newValues.getType()).orElseThrow());
         oldValues.setSlug(slug);
     }
 

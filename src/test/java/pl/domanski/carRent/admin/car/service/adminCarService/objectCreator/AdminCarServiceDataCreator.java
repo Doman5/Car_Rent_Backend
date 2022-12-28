@@ -26,6 +26,7 @@ public class AdminCarServiceDataCreator {
                 .brand("test brand")
                 .model("test model")
                 .year(9999)
+                .bodyType("Sedan")
                 .carTechnicalSpecification(AdminCarTechnicalSpecificationDto.builder()
                         .power(111)
                         .acceleration("test acceleration1")
@@ -116,6 +117,7 @@ public class AdminCarServiceDataCreator {
                 .brand("test brand")
                 .model("test model")
                 .year(9999)
+                .slug("test-brand-test-model-9999")
                 .build();
     }
 
@@ -124,6 +126,7 @@ public class AdminCarServiceDataCreator {
                 .brand("test brand")
                 .model("test model")
                 .year(9999)
+                .bodyType("Suv")
                 .carTechnicalSpecification(AdminCarTechnicalSpecificationDto.builder()
                         .power(111)
                         .acceleration("test acceleration1")

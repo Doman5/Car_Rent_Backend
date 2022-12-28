@@ -10,6 +10,8 @@ import pl.domanski.carRent.customer.car.model.CarEquipment;
 import pl.domanski.carRent.customer.car.model.CarPhoto;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -30,6 +32,7 @@ public class Car {
     private String brand;
     private String model;
     private int year;
+    @Enumerated(EnumType.STRING)
     private BodyType bodyType;
     private String slug;
     @OneToOne

@@ -3,6 +3,7 @@ package pl.domanski.carRent.customer.car.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
+import pl.domanski.carRent.customer.car.model.BodyType;
 import pl.domanski.carRent.customer.common.model.Car;
 import pl.domanski.carRent.customer.common.dto.CarBasicInfo;
 import pl.domanski.carRent.customer.common.mapper.CarMapper;
@@ -25,7 +26,8 @@ public class CarService {
 
     public List<CarBasicInfo> searchCarsByFilters(Map<String, String> params) {
         Specification<Car> spec = createSpecification(params);
-        return carRepository.findAll(spec).stream().map(CarMapper::mapToCarBasicInfo).toList();
+        return carRepository.findAll(spec).stream()
+                .map(CarMapper::mapToCarBasicInfo).toList();
     }
 
     private Specification<Car> createSpecification(Map<String, String> params) {
@@ -41,7 +43,12 @@ public class CarService {
             }
             String year = params.get("year");
             if (year != null && !year.isEmpty()) {
-                predicates.add(builder.greaterThanOrEqualTo(root.get("year"), year));
+                predicates.add(builder.equal(root.get("year"), year));
+            }
+            String bodyTypeString = params.get("bodyType");
+            if (bodyTypeString != null && !bodyTypeString.isEmpty()) {
+                BodyType bodyType = BodyType.get(bodyTypeString).orElseThrow();
+                predicates.add(builder.equal(root.get("bodyType"), bodyType));
             }
             return builder.and(predicates.toArray(new Predicate[predicates.size()]));
         };
