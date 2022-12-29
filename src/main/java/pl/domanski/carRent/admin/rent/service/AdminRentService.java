@@ -43,11 +43,11 @@ public class AdminRentService {
 
     private void patchValues(AdminRent rent, Map<String, String> values) {
         if(values.get("rentStatus") != null) {
-            processOrderStatusChange(rent,values);
+            processRentStatusChange(rent,values);
         }
     }
 
-    private void processOrderStatusChange(AdminRent rent, Map<String, String> values) {
+    private void processRentStatusChange(AdminRent rent, Map<String, String> values) {
         AdminRentStatus oldStatus = rent.getRentStatus();
         AdminRentStatus newStatus = AdminRentStatus.get(values.get("rentStatus")).orElseThrow();
         if(oldStatus == newStatus) {
