@@ -1,6 +1,6 @@
-package pl.domanski.carRent.customer.rent.model;
+package pl.domanski.carRent.admin.rent.model;
 
-public enum RentStatus {
+public enum AdminRentStatus {
     NEW("Nowe"),
     PAID("Opłacone"),
     WAITING("Oczekujące"),
@@ -10,7 +10,7 @@ public enum RentStatus {
 
     private final String value;
 
-    RentStatus(String value) {
+    AdminRentStatus(String value) {
         this.value = value;
     }
 
