@@ -2,6 +2,7 @@ package pl.domanski.carRent.admin.rent.model;
 
 public enum AdminRentStatus {
     NEW("Nowe"),
+    PART_PAID("Częściowo opłacone"),
     PAID("Opłacone"),
     WAITING("Oczekujące"),
     RENTAL_IN_PROGRESS("W trakcie wypożyczenia"),
