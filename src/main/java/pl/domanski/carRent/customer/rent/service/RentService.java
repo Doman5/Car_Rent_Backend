@@ -4,13 +4,13 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.domanski.carRent.customer.common.model.Car;
+import pl.domanski.carRent.customer.common.model.SortingType;
 import pl.domanski.carRent.customer.common.repository.CarRepository;
-import pl.domanski.carRent.customer.rent.controller.dto.CarRentDto;
-import pl.domanski.carRent.customer.rent.controller.dto.RentDateAndPlace;
-import pl.domanski.carRent.customer.rent.controller.dto.RentDto;
 import pl.domanski.carRent.customer.rent.model.Payment;
 import pl.domanski.carRent.customer.rent.model.Rent;
-import pl.domanski.carRent.customer.rent.model.SortingType;
+import pl.domanski.carRent.customer.rent.model.dto.CarToRentDto;
+import pl.domanski.carRent.customer.rent.model.dto.RentDateAndPlace;
+import pl.domanski.carRent.customer.rent.model.dto.RentDto;
 import pl.domanski.carRent.customer.rent.model.dto.RentSummary;
 import pl.domanski.carRent.customer.rent.repository.PaymentRepository;
 import pl.domanski.carRent.customer.rent.repository.RentRepository;
@@ -20,17 +20,19 @@ import pl.domanski.carRent.webClient.localization.DistanceCalculatorService;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 
 import static java.time.temporal.ChronoUnit.DAYS;
-import static pl.domanski.carRent.customer.rent.mapper.RentCarMapper.createAvailableCarRentDto;
-import static pl.domanski.carRent.customer.rent.mapper.RentCarMapper.createUnavailableCarRentDto;
+import static pl.domanski.carRent.customer.common.utils.SortingUtils.sortCars;
+import static pl.domanski.carRent.customer.rent.mapper.CarToRentMapper.createAvailableCarRentDto;
+import static pl.domanski.carRent.customer.rent.mapper.CarToRentMapper.createUnavailableCarRentDto;
 import static pl.domanski.carRent.customer.rent.mapper.RentMapper.createRent;
 import static pl.domanski.carRent.customer.rent.mapper.RentMapper.createRentSummary;
-import static pl.domanski.carRent.customer.rent.utils.RentPricesCalculator.calculateGrossValueByDaysCount;
 import static pl.domanski.carRent.customer.rent.utils.RentPricesCalculator.addTaxToFinalPrice;
+import static pl.domanski.carRent.customer.rent.utils.RentPricesCalculator.calculateGrossValueByDaysCount;
 import static pl.domanski.carRent.customer.rent.utils.RentPricesCalculator.calculateTransportPrice;
 import static pl.domanski.carRent.customer.rent.utils.TransportDistanceCalculator.calculateTransportDistance;
 
@@ -57,11 +59,11 @@ public class RentService {
         return createRentSummary(car, rent);
     }
 
-    public List<CarRentDto> showCars(RentDateAndPlace rentDateAndPlace, boolean onlyAvailable, SortingType sortedByPrice) {
+    public List<CarToRentDto> showCars(RentDateAndPlace rentDateAndPlace, boolean onlyAvailable, String sortedByPrice) {
         checkCorrectnessDates(rentDateAndPlace);
         double rentalDistance = calculateTransportDistance(rentDateAndPlace.getRentalPlace(), distanceCalculatorService);
         double returnDistance = calculateTransportDistance(rentDateAndPlace.getReturnPlace(), distanceCalculatorService);
-        ArrayList<CarRentDto> rentCars = new ArrayList<>();
+        ArrayList<CarToRentDto> rentCars = new ArrayList<>();
 
         List<Car> cars = carRepository.findAll();
         if (onlyAvailable) {
@@ -86,22 +88,20 @@ public class RentService {
                         }
                     }).forEach(rentCars::add);
         }
-        if(sortedByPrice == SortingType.ASC) {
-            rentCars.sort(Comparator.comparing(CarRentDto::getGrossValue));
-        } else if(sortedByPrice == SortingType.DESC) {
-            rentCars.sort(Comparator.comparing(CarRentDto::getGrossValue));
-            Collections.reverse(rentCars);
-        }
+        Optional<SortingType> sortingType = SortingType.get(sortedByPrice);
+        sortCars(rentCars, sortingType, Comparator.comparing(CarToRentDto::getGrossValue));
         return rentCars;
     }
 
-    private CarRentDto createUnavailableCar(Car car, RentDateAndPlace rentDateAndPlace) {
+
+
+    private CarToRentDto createUnavailableCar(Car car, RentDateAndPlace rentDateAndPlace) {
         long days = DAYS.between(rentDateAndPlace.getRentalDate(), rentDateAndPlace.getReturnDate());
         BigDecimal grossValue = calculateGrossValueByDaysCount(car, days);
         return createUnavailableCarRentDto(car, grossValue);
     }
 
-    private CarRentDto createAvailableCar(Car car, RentDateAndPlace rentDateAndPlace, double rentalDistance, double returnDistance) {
+    private CarToRentDto createAvailableCar(Car car, RentDateAndPlace rentDateAndPlace, double rentalDistance, double returnDistance) {
         long days = DAYS.between(rentDateAndPlace.getRentalDate(), rentDateAndPlace.getReturnDate());
         BigDecimal grossValue = calculateGrossValueByDaysCount(car, days);
         BigDecimal rentalPrice = calculateTransportPrice(car, rentalDistance);
@@ -117,5 +117,9 @@ public class RentService {
     }
 
 
-
+    public List<String> showSortingValues() {
+        return Arrays.stream(SortingType.values())
+                .map(SortingType::getName)
+                .toList();
+    }
 }

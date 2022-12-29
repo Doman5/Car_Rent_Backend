@@ -1,11 +1,13 @@
-package pl.domanski.carRent.customer.filtration.service;
+package pl.domanski.carRent.customer.car.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import pl.domanski.carRent.customer.car.model.BodyType;
+import pl.domanski.carRent.customer.common.model.SortingType;
 import pl.domanski.carRent.customer.common.repository.CarRepository;
-import pl.domanski.carRent.customer.filtration.service.dto.FiltrationDto;
+import pl.domanski.carRent.customer.car.model.dto.FiltrationDto;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -59,5 +61,11 @@ public class CarFiltrationService {
                 .years(years)
                 .bodyTypes(bodyType)
                 .build();
+    }
+
+    public List<String> getCarSortingValues() {
+        return Arrays.stream(SortingType.values())
+                .map(SortingType::getName)
+                .toList();
     }
 }

@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RestController;
 import pl.domanski.carRent.customer.common.dto.CarBasicInfo;
 import pl.domanski.carRent.customer.common.model.Car;
 import pl.domanski.carRent.customer.car.service.CarService;
+import pl.domanski.carRent.customer.car.service.CarFiltrationService;
+import pl.domanski.carRent.customer.car.model.dto.FiltrationDto;
 
 import java.util.List;
 import java.util.Map;
@@ -28,5 +30,17 @@ public class CarController {
     @GetMapping("/{slug}")
     public Car getCarBySlug(@PathVariable String slug) {
         return carService.getCar(slug);
+    }
+
+    private final CarFiltrationService carFilterService;
+
+    @GetMapping("/filters")
+    public FiltrationDto getFilterFields() {
+        return carFilterService.getCarFilters();
+    }
+
+    @GetMapping("/sorters")
+    public List<String> getSortingValuesList() {
+        return carFilterService.getCarSortingValues();
     }
 }

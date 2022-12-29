@@ -4,15 +4,20 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import pl.domanski.carRent.customer.car.model.BodyType;
-import pl.domanski.carRent.customer.common.model.Car;
 import pl.domanski.carRent.customer.common.dto.CarBasicInfo;
 import pl.domanski.carRent.customer.common.mapper.CarMapper;
+import pl.domanski.carRent.customer.common.model.Car;
+import pl.domanski.carRent.customer.common.model.SortingType;
 import pl.domanski.carRent.customer.common.repository.CarRepository;
 
 import javax.persistence.criteria.Predicate;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
+
+import static pl.domanski.carRent.customer.common.utils.SortingUtils.sortCars;
 
 @Service
 @RequiredArgsConstructor
@@ -25,10 +30,17 @@ public class CarService {
     }
 
     public List<CarBasicInfo> searchCarsByFilters(Map<String, String> params) {
+
         Specification<Car> spec = createSpecification(params);
-        return carRepository.findAll(spec).stream()
-                .map(CarMapper::mapToCarBasicInfo).toList();
+        List<CarBasicInfo> cars = new ArrayList<>(carRepository.findAll(spec).stream()
+                .map(CarMapper::mapToCarBasicInfo)
+                .toList());
+        Optional<SortingType> sorting = SortingType.get(params.get("sorting"));
+        sortCars(cars, sorting, Comparator.comparing(CarBasicInfo::getPriceMonth));
+        return cars;
     }
+
+
 
     private Specification<Car> createSpecification(Map<String, String> params) {
         return (root, query, builder) -> {
