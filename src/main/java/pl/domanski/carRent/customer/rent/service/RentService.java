@@ -3,6 +3,7 @@ package pl.domanski.carRent.customer.rent.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import pl.domanski.carRent.common.mail.EmailClientService;
 import pl.domanski.carRent.customer.common.model.Car;
 import pl.domanski.carRent.customer.common.model.SortingType;
 import pl.domanski.carRent.customer.common.repository.CarRepository;
@@ -29,6 +30,7 @@ import static java.time.temporal.ChronoUnit.DAYS;
 import static pl.domanski.carRent.customer.common.utils.SortingUtils.sortCars;
 import static pl.domanski.carRent.customer.rent.mapper.CarToRentMapper.createAvailableCarRentDto;
 import static pl.domanski.carRent.customer.rent.mapper.CarToRentMapper.createUnavailableCarRentDto;
+import static pl.domanski.carRent.customer.rent.mapper.RentEmailMessageMapper.createEmailMessage;
 import static pl.domanski.carRent.customer.rent.mapper.RentMapper.createRent;
 import static pl.domanski.carRent.customer.rent.mapper.RentMapper.createRentSummary;
 import static pl.domanski.carRent.customer.rent.utils.RentPricesCalculator.addTaxToFinalPrice;
@@ -46,6 +48,7 @@ public class RentService {
     private final CheckCarAvailabilityUtils checkCarAvailabilityUtils;
     private final PaymentRepository paymentRepository;
     private final RentRepository rentRepository;
+    private final EmailClientService emailClientService;
 
     @Transactional
     public RentSummary placeRent(RentDto rentDto, Long userId) {
@@ -53,10 +56,15 @@ public class RentService {
         Payment payment = paymentRepository.findById(rentDto.getPaymentId()).orElseThrow();
         BigDecimal grossValue = addTaxToFinalPrice(rentDto, DEFAULT_TAX_23);
         Rent rent = rentRepository.save(createRent(rentDto, userId, car, payment, grossValue));
-        //wyslać maila
-        //
-        //
+        sendConfirmEmail(rent);
         return createRentSummary(car, rent);
+    }
+
+    private void sendConfirmEmail(Rent rent) {
+        //pobrać maila użytkownika z user id
+        String userEmail = "dd@dd.pl";
+        //
+        emailClientService.getInstance().send(userEmail, "Twoje zamówienie zostało przyjęte", createEmailMessage(rent));
     }
 
     public List<CarToRentDto> showCars(RentDateAndPlace rentDateAndPlace, boolean onlyAvailable, String sortedByPrice) {

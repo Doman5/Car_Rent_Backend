@@ -47,6 +47,5 @@ public class AdminRentService {
         }
         rent.setRentStatus(newStatus);
         //log status change
-        //send email
     }
 }
