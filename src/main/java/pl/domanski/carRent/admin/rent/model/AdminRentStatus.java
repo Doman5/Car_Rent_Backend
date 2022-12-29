@@ -1,5 +1,11 @@
 package pl.domanski.carRent.admin.rent.model;
 
+import lombok.Getter;
+
+import java.util.Arrays;
+import java.util.Optional;
+
+@Getter
 public enum AdminRentStatus {
     NEW("Nowe"),
     PART_PAID("Częściowo opłacone"),
@@ -9,10 +15,14 @@ public enum AdminRentStatus {
     COMPLETED("Zrealizowane"),
     CANCELED("Anulowane");
 
-    private final String value;
+    private final String name;
 
-    AdminRentStatus(String value) {
-        this.value = value;
+    AdminRentStatus(String name) {
+        this.name = name;
     }
 
+    public static Optional<AdminRentStatus> get(String name) {
+        return Arrays.stream(AdminRentStatus.values()).filter(rs -> rs.name.equals(name))
+                .findFirst();
+    }
 }

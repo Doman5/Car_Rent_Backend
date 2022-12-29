@@ -13,6 +13,7 @@ import pl.domanski.carRent.admin.rent.model.AdminRent;
 import pl.domanski.carRent.admin.rent.model.dto.AdminRentDto;
 import pl.domanski.carRent.admin.rent.service.AdminRentService;
 
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -35,5 +36,10 @@ public class AdminRentController {
     @PatchMapping("/{id}")
     public void patchRent(@PathVariable Long id, @RequestBody Map<String, String> values) {
         adminRentService.patchRent(id, values);
+    }
+
+    @GetMapping("/statuses")
+    public List<String> getRentStatuses() {
+        return adminRentService.getRentStatuses();
     }
 }
