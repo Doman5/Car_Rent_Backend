@@ -13,7 +13,7 @@ public class EmailConfig {
     }
 
     @Bean
-    @ConditionalOnProperty(name="app.email.sender", havingValue = "emailFakeSender")
+    @ConditionalOnProperty(name="app.email.sender", havingValue = "fakeEmailService")
     public EmailSender emailFakeSender() {
         return new FakeEmailService();
     }
