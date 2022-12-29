@@ -2,7 +2,7 @@ package pl.domanski.carRent.customer.rent.utils;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
-import pl.domanski.carRent.customer.rent.controller.dto.RentDateAndPlace;
+import pl.domanski.carRent.customer.rent.model.dto.RentDateAndPlace;
 import pl.domanski.carRent.customer.rent.model.Rent;
 import pl.domanski.carRent.customer.rent.repository.RentRepository;
 

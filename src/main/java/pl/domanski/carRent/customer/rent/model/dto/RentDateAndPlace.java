@@ -1,4 +1,4 @@
-package pl.domanski.carRent.customer.rent.controller.dto;
+package pl.domanski.carRent.customer.rent.model.dto;
 
 import lombok.Builder;
 import lombok.Getter;

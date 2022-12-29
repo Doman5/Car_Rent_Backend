@@ -1,4 +1,4 @@
-package pl.domanski.carRent.customer.filtration.service.dto;
+package pl.domanski.carRent.customer.car.model.dto;
 
 import lombok.Builder;
 import lombok.Getter;

@@ -8,7 +8,7 @@ import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import pl.domanski.carRent.customer.common.model.Car;
 import pl.domanski.carRent.customer.common.repository.CarRepository;
-import pl.domanski.carRent.customer.rent.controller.dto.RentDto;
+import pl.domanski.carRent.customer.rent.model.dto.RentDto;
 import pl.domanski.carRent.customer.rent.model.Payment;
 import pl.domanski.carRent.customer.rent.model.Rent;
 import pl.domanski.carRent.customer.rent.model.RentStatus;

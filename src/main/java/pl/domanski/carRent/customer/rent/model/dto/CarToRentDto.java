@@ -1,4 +1,4 @@
-package pl.domanski.carRent.customer.rent.controller.dto;
+package pl.domanski.carRent.customer.rent.model.dto;
 
 import lombok.Builder;
 import lombok.Getter;
@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 
 @Getter
 @Builder
-public class CarRentDto {
+public class CarToRentDto {
     private Long carId;
     private String brand;
     private String model;

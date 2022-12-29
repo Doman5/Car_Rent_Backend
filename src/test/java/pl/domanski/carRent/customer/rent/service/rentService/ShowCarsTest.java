@@ -6,9 +6,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import pl.domanski.carRent.customer.common.repository.CarRepository;
-import pl.domanski.carRent.customer.rent.controller.dto.CarRentDto;
-import pl.domanski.carRent.customer.rent.controller.dto.RentDateAndPlace;
-import pl.domanski.carRent.customer.rent.model.SortingType;
+import pl.domanski.carRent.customer.rent.model.dto.CarToRentDto;
+import pl.domanski.carRent.customer.rent.model.dto.RentDateAndPlace;
 import pl.domanski.carRent.customer.rent.service.RentService;
 import pl.domanski.carRent.customer.rent.utils.CheckCarAvailabilityUtils;
 
@@ -48,7 +47,7 @@ public class ShowCarsTest {
         given(checkCarAvailabilityUtils.checkCarAvailability(4L, rentDateAndPlace)).willReturn(true);
         given(checkCarAvailabilityUtils.checkCarAvailability(5L, rentDateAndPlace)).willReturn(true);
         //when
-        List<CarRentDto> result = rentService.showCars(rentDateAndPlace, false, null);
+        List<CarToRentDto> result = rentService.showCars(rentDateAndPlace, false, null);
         //then
         assertThat(result, hasSize(5));
         assertEquals(3, result.get(3).getDays());
@@ -72,7 +71,7 @@ public class ShowCarsTest {
         given(checkCarAvailabilityUtils.checkCarAvailability(4L, rentDateAndPlace)).willReturn(true);
         given(checkCarAvailabilityUtils.checkCarAvailability(5L, rentDateAndPlace)).willReturn(true);
         //when
-        List<CarRentDto> result = rentService.showCars(rentDateAndPlace, true, null);
+        List<CarToRentDto> result = rentService.showCars(rentDateAndPlace, true, null);
         //then
         assertThat(result, hasSize(3));
         assertEquals(3, result.get(1).getDays());
@@ -94,7 +93,7 @@ public class ShowCarsTest {
         given(checkCarAvailabilityUtils.checkCarAvailability(4L, rentDateAndPlace)).willReturn(true);
         given(checkCarAvailabilityUtils.checkCarAvailability(5L, rentDateAndPlace)).willReturn(true);
         //when
-        List<CarRentDto> result = rentService.showCars(rentDateAndPlace, true, SortingType.ASC);
+        List<CarToRentDto> result = rentService.showCars(rentDateAndPlace, true, "Ascending");
         //then
         assertThat(result, hasSize(3));
         assertEquals(3, result.get(1).getDays());
@@ -117,7 +116,7 @@ public class ShowCarsTest {
         given(checkCarAvailabilityUtils.checkCarAvailability(4L, rentDateAndPlace)).willReturn(true);
         given(checkCarAvailabilityUtils.checkCarAvailability(5L, rentDateAndPlace)).willReturn(true);
         //when
-        List<CarRentDto> result = rentService.showCars(rentDateAndPlace, true, SortingType.DESC);
+        List<CarToRentDto> result = rentService.showCars(rentDateAndPlace, true, "Descending");
         //then
         assertThat(result, hasSize(3));
         assertEquals(3, result.get(1).getDays());
@@ -140,7 +139,7 @@ public class ShowCarsTest {
         given(checkCarAvailabilityUtils.checkCarAvailability(4L, rentDateAndPlace)).willReturn(true);
         given(checkCarAvailabilityUtils.checkCarAvailability(5L, rentDateAndPlace)).willReturn(true);
         //when
-        List<CarRentDto> result = rentService.showCars(rentDateAndPlace, false, SortingType.DESC);
+        List<CarToRentDto> result = rentService.showCars(rentDateAndPlace, false, "Descending");
         //then
         assertThat(result, hasSize(5));
         assertEquals(3, result.get(1).getDays());
@@ -163,7 +162,7 @@ public class ShowCarsTest {
         given(checkCarAvailabilityUtils.checkCarAvailability(4L, rentDateAndPlace)).willReturn(true);
         given(checkCarAvailabilityUtils.checkCarAvailability(5L, rentDateAndPlace)).willReturn(true);
         //when
-        List<CarRentDto> result = rentService.showCars(rentDateAndPlace, false, SortingType.ASC);
+        List<CarToRentDto> result = rentService.showCars(rentDateAndPlace, false, "Ascending");
         //then
         assertThat(result, hasSize(5));
         assertNull(result.get(1).getDays());

@@ -1,15 +1,15 @@
 package pl.domanski.carRent.customer.rent.mapper;
 
 import pl.domanski.carRent.customer.common.model.Car;
-import pl.domanski.carRent.customer.rent.controller.dto.CarRentDto;
-import pl.domanski.carRent.customer.rent.controller.dto.RentDateAndPlace;
+import pl.domanski.carRent.customer.rent.model.dto.CarToRentDto;
+import pl.domanski.carRent.customer.rent.model.dto.RentDateAndPlace;
 
 import java.math.BigDecimal;
 
-public class RentCarMapper {
+public class CarToRentMapper {
 
-    public static CarRentDto createAvailableCarRentDto(Car car, BigDecimal grossValue, BigDecimal rentalPrice, BigDecimal returnPrice, long days, RentDateAndPlace rentDateAndPlace) {
-        return CarRentDto.builder()
+    public static CarToRentDto createAvailableCarRentDto(Car car, BigDecimal grossValue, BigDecimal rentalPrice, BigDecimal returnPrice, long days, RentDateAndPlace rentDateAndPlace) {
+        return CarToRentDto.builder()
                 .carId(car.getId())
                 .brand(car.getBrand())
                 .model(car.getModel())
@@ -29,8 +29,8 @@ public class RentCarMapper {
                 .build();
     }
 
-    public  static CarRentDto createUnavailableCarRentDto(Car car, BigDecimal grossValue) {
-        return CarRentDto.builder()
+    public  static CarToRentDto createUnavailableCarRentDto(Car car, BigDecimal grossValue) {
+        return CarToRentDto.builder()
                 .brand(car.getBrand())
                 .model(car.getModel())
                 .year(car.getYear())

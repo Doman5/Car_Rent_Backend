@@ -2,7 +2,7 @@ package pl.domanski.carRent.customer.rent.service.rentService;
 
 import pl.domanski.carRent.customer.common.model.Car;
 import pl.domanski.carRent.customer.common.model.CarPrice;
-import pl.domanski.carRent.customer.rent.controller.dto.RentDateAndPlace;
+import pl.domanski.carRent.customer.rent.model.dto.RentDateAndPlace;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;

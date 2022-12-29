@@ -5,8 +5,9 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import pl.domanski.carRent.customer.car.service.CarFiltrationService;
 import pl.domanski.carRent.customer.common.repository.CarRepository;
-import pl.domanski.carRent.customer.filtration.service.dto.FiltrationDto;
+import pl.domanski.carRent.customer.car.model.dto.FiltrationDto;
 
 import java.util.List;
 import java.util.Set;
