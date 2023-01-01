@@ -23,8 +23,11 @@ import pl.domanski.carRent.admin.car.repository.AdminCarPriceRepository;
 import pl.domanski.carRent.admin.car.repository.AdminCarRepository;
 import pl.domanski.carRent.admin.car.repository.AdminCarTechnicalSpecificationRepository;
 import pl.domanski.carRent.admin.car.service.utils.CarSlugUtils;
+import pl.domanski.carRent.admin.category.model.AdminCategory;
 import pl.domanski.carRent.admin.common.dto.AdminCategoryDto;
 import pl.domanski.carRent.admin.common.repository.AdminCategoryRepository;
+import pl.domanski.carRent.customer.common.model.Car;
+import pl.domanski.carRent.customer.common.repository.CarRepository;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,6 +51,7 @@ public class AdminCarUpdateService {
     private final AdminCarPriceRepository adminCarPriceRepository;
     private final AdminCarPhotoRepository adminCarPhotoRepository;
     private final AdminCategoryRepository adminCategoryRepository;
+    private final CarRepository carRepository;
 
     @Transactional
     public AdminCarBasicInfo updateBasicInfo(Long id, AdminCarBasicInfo carBasicInfo) {
@@ -147,5 +151,24 @@ public class AdminCarUpdateService {
                 adminCarBasicInfo.getModel(),
                 adminCarBasicInfo.getYear());
         return carSlugUtils.createCarSlug(adminCarDto);
+    }
+
+    public AdminCarBasicInfo getBasicInfo(Long id) {
+        return mapToAdminCarBasicInfo(adminCarRepository.findById(id).orElseThrow());
+    }
+
+    public AdminCarTechnicalSpecification getCarTechSpec(Long id) {
+        Car car = carRepository.findById(id).orElseThrow();
+        return adminCarTechnicalSpecificationRepository.findById(car.getCarTechnicalSpecification().getId()).orElse(new AdminCarTechnicalSpecification());
+    }
+
+    public AdminCarPrice getCarPrice(Long id) {
+        Car car = carRepository.findById(id).orElseThrow();
+        return adminCarPriceRepository.findById(car.getCarPrice().getId()).orElse(new AdminCarPrice());
+    }
+
+    public AdminCategory getCarCategory(Long id) {
+        Car car = carRepository.findById(id).orElseThrow();
+        return adminCategoryRepository.findById(car.getCategoryId()).orElse(new AdminCategory());
     }
 }

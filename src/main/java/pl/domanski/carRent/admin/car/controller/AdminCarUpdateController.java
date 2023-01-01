@@ -2,6 +2,7 @@ package pl.domanski.carRent.admin.car.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -21,6 +22,7 @@ import pl.domanski.carRent.admin.car.model.AdminCarPhoto;
 import pl.domanski.carRent.admin.car.model.AdminCarPrice;
 import pl.domanski.carRent.admin.car.model.AdminCarTechnicalSpecification;
 import pl.domanski.carRent.admin.car.service.AdminCarUpdateService;
+import pl.domanski.carRent.admin.category.model.AdminCategory;
 import pl.domanski.carRent.admin.common.dto.AdminCategoryDto;
 
 import javax.validation.Valid;
@@ -33,9 +35,19 @@ public class AdminCarUpdateController {
 
     private final AdminCarUpdateService adminCarUpdateService;
 
+    @GetMapping("/carBasicInfo")
+    public AdminCarBasicInfo getBasicInfo(@PathVariable Long id) {
+        return adminCarUpdateService.getBasicInfo(id);
+    }
+
     @PutMapping("/carBasicInfo")
     public AdminCarBasicInfo updateBasicInfo(@PathVariable Long id, @RequestBody @Valid AdminCarBasicInfo carBasicInfo) {
         return adminCarUpdateService.updateBasicInfo(id, carBasicInfo);
+    }
+
+    @GetMapping("/carTechnicalSpecification")
+    public AdminCarTechnicalSpecification getCarTechSpec(@PathVariable Long id) {
+        return adminCarUpdateService.getCarTechSpec(id);
     }
 
     @PutMapping("/carTechnicalSpecification")
@@ -54,6 +66,11 @@ public class AdminCarUpdateController {
         return adminCarUpdateService.updateCarDescription(id, descriptionList);
     }
 
+    @GetMapping("/carPrice")
+    public AdminCarPrice getCarPrice(@PathVariable Long id) {
+        return adminCarUpdateService.getCarPrice(id);
+    }
+
     @PutMapping("/carPrice")
     public AdminCarPrice updateCarPrice(@PathVariable Long id, @RequestBody @Valid AdminCarPriceDto carPriceDto) {
         return adminCarUpdateService.updateCarPrice(id, carPriceDto);
@@ -67,6 +84,11 @@ public class AdminCarUpdateController {
     @DeleteMapping("/carPhoto/{photoId}")
     public void addCarPhoto(@PathVariable Long photoId) {
         adminCarUpdateService.deleteCarPhoto(photoId);
+    }
+
+    @GetMapping("/category")
+    public AdminCategory getCategory(@PathVariable Long id) {
+        return adminCarUpdateService.getCarCategory(id);
     }
 
     @PutMapping("/category")
