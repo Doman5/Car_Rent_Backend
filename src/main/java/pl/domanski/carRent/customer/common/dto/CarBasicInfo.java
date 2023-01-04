@@ -17,4 +17,5 @@ public class CarBasicInfo {
     private String gearbox;
     private Integer power;
     private String seats;
+    private String photo;
 }

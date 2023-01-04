@@ -16,6 +16,7 @@ public class CarMapper {
                 .gearbox(car.getCarTechnicalSpecification().getGearbox())
                 .acceleration(car.getCarTechnicalSpecification().getAcceleration())
                 .seats(car.getCarTechnicalSpecification().getSeats())
+                .photo(!car.getPhotos().isEmpty() ? car.getPhotos().get(0).toString() : "")
                 .build();
     }
 }
