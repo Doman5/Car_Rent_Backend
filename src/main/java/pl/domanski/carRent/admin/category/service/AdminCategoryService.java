@@ -8,6 +8,9 @@ import pl.domanski.carRent.admin.common.repository.AdminCategoryRepository;
 
 import java.util.List;
 
+import static pl.domanski.carRent.admin.category.mapper.AdminCategoryMapper.mapToCategory;
+import static pl.domanski.carRent.admin.category.mapper.AdminCategoryMapper.mapToCategoryDto;
+
 @Service
 @RequiredArgsConstructor
 public class AdminCategoryService {
@@ -19,9 +22,10 @@ public class AdminCategoryService {
         return adminCategoryRepository.findAll();
     }
 
-    public AdminCategory getCategory(Long id) {
-        return adminCategoryRepository.findById(id).orElseThrow();
+    public AdminCategoryDto getCategory(Long id) {
+        return mapToCategoryDto(adminCategoryRepository.findById(id).orElseThrow()) ;
     }
+
 
     public AdminCategory createCategory(AdminCategoryDto adminCategoryDto) {
         return adminCategoryRepository.save(mapToCategory(adminCategoryDto, EMPTY_ID));
@@ -37,10 +41,6 @@ public class AdminCategoryService {
         adminCategoryRepository.deleteById(id);
     }
 
-    private AdminCategory mapToCategory(AdminCategoryDto adminCategoryDto, Long id) {
-        return AdminCategory.builder()
-                .id(id)
-                .name(adminCategoryDto.getName())
-                .build();
-    }
+
+
 }

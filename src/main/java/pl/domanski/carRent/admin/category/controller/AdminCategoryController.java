@@ -29,7 +29,7 @@ public class AdminCategoryController {
     }
 
     @GetMapping("/{id}")
-    public AdminCategory getCategory(@PathVariable Long id) {
+    public AdminCategoryDto getCategory(@PathVariable Long id) {
         return adminCategoryService.getCategory(id);
     }
 
