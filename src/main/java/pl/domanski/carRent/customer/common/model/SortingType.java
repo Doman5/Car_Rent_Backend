@@ -7,8 +7,8 @@ import java.util.Optional;
 
 @Getter
 public enum SortingType {
-    ASC("Ascending"),
-    DESC("Descending");
+    ASC("Rosnaco"),
+    DESC("Malejaco");
 
     private final String name;
 

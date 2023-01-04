@@ -1,20 +1,16 @@
 package pl.domanski.carRent.customer.car.service;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
-import pl.domanski.carRent.customer.car.model.BodyType;
 import pl.domanski.carRent.customer.common.dto.CarBasicInfo;
 import pl.domanski.carRent.customer.common.mapper.CarMapper;
 import pl.domanski.carRent.customer.common.model.Car;
 import pl.domanski.carRent.customer.common.model.SortingType;
 import pl.domanski.carRent.customer.common.repository.CarRepository;
 
-import javax.persistence.criteria.Predicate;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 import static pl.domanski.carRent.customer.common.utils.SortingUtils.sortCars;
@@ -29,41 +25,38 @@ public class CarService {
         return carRepository.findBySlug(slug).orElseThrow();
     }
 
-    public List<CarBasicInfo> searchCarsByFilters(Map<String, String> params) {
-
-        Specification<Car> spec = createSpecification(params);
-        List<CarBasicInfo> cars = new ArrayList<>(carRepository.findAll(spec).stream()
+    public List<CarBasicInfo> getAllCars(String sorting) {
+        List<CarBasicInfo> cars = carRepository.findAll().stream()
                 .map(CarMapper::mapToCarBasicInfo)
-                .toList());
-        Optional<SortingType> sorting = SortingType.get(params.get("sorting"));
-        sortCars(cars, sorting, Comparator.comparing(CarBasicInfo::getPriceMonth));
+                .toList();
+        Optional<SortingType> sortType = SortingType.get(sorting);
+        sortCars(cars, sortType, Comparator.comparing(CarBasicInfo::getPriceMonth));
         return cars;
     }
 
+    public List<CarBasicInfo> getCarsByBrandYearAndType(List<String> brands, List<Integer> years, List<String> types, String sorting) {
+        List<Car> allCars = carRepository.findAll();
 
+        List<Car> filteredCars = new ArrayList<>();
+        for (Car car : allCars) {
+            if (brands != null && brands.contains(car.getBrand())) {
+                filteredCars.add(car);
+                continue;
+            }
+            if (years != null && years.contains(car.getYear()))  {
+                filteredCars.add(car);
+                continue;
+            }
 
-    private Specification<Car> createSpecification(Map<String, String> params) {
-        return (root, query, builder) -> {
-            List<Predicate> predicates = new ArrayList<>();
-            String brand = params.get("brand");
-            if (brand != null && !brand.isEmpty()) {
-                predicates.add(builder.equal(root.get("brand"), brand));
+            if(types != null && types.contains(car.getBodyType().getName())) {
+                filteredCars.add(car);
             }
-            String model = params.get("model");
-            if (model != null && !model.isEmpty()) {
-                predicates.add(builder.equal(root.get("model"), model));
-            }
-            String year = params.get("year");
-            if (year != null && !year.isEmpty()) {
-                predicates.add(builder.equal(root.get("year"), year));
-            }
-            String bodyTypeString = params.get("bodyType");
-            if (bodyTypeString != null && !bodyTypeString.isEmpty()) {
-                BodyType bodyType = BodyType.get(bodyTypeString).orElseThrow();
-                predicates.add(builder.equal(root.get("bodyType"), bodyType));
-            }
-            return builder.and(predicates.toArray(new Predicate[predicates.size()]));
-        };
+        }
+        return sortCars(filteredCars.stream()
+                .map(CarMapper::mapToCarBasicInfo)
+                .toList(),
+                SortingType.get(sorting),
+                Comparator.comparing(CarBasicInfo::getPriceMonth)
+                );
     }
-
 }

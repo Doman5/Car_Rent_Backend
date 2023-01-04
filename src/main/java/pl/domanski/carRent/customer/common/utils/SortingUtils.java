@@ -2,6 +2,7 @@ package pl.domanski.carRent.customer.common.utils;
 
 import pl.domanski.carRent.customer.common.model.SortingType;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -9,14 +10,16 @@ import java.util.Optional;
 
 public class SortingUtils {
 
-    public static <T> void sortCars(List<T> cars, Optional<SortingType> sorting, Comparator comparator) {
+    public static <T> List<T> sortCars(List<T> cars, Optional<SortingType> sorting, Comparator comparator) {
+        List<T> carsToSort = new ArrayList<T>(cars);
         if (sorting.isPresent()) {
             if (sorting.get() == SortingType.ASC) {
-                cars.sort(comparator);
+                carsToSort.sort(comparator);
             } else if (sorting.get() == SortingType.DESC) {
-                cars.sort(comparator);
-                Collections.reverse(cars);
+                carsToSort.sort(comparator);
+                Collections.reverse(carsToSort);
             }
         }
+        return carsToSort;
     }
 }
