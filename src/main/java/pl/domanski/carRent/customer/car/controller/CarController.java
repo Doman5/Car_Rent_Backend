@@ -44,7 +44,7 @@ public class CarController {
         return carFilterService.getCarFilters();
     }
 
-    @GetMapping("/sorters")
+    @GetMapping("/sort")
     public List<String> getSortingValuesList() {
         return carFilterService.getCarSortingValues();
     }

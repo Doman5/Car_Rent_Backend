@@ -11,7 +11,6 @@ import pl.domanski.carRent.customer.common.repository.CarRepository;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Optional;
 
 import static pl.domanski.carRent.customer.common.utils.SortingUtils.sortCars;
 
@@ -29,9 +28,9 @@ public class CarService {
         List<CarBasicInfo> cars = carRepository.findAll().stream()
                 .map(CarMapper::mapToCarBasicInfo)
                 .toList();
-        Optional<SortingType> sortType = SortingType.get(sorting);
-        sortCars(cars, sortType, Comparator.comparing(CarBasicInfo::getPriceMonth));
-        return cars;
+        return sortCars(cars,
+                SortingType.get(sorting),
+                Comparator.comparing(CarBasicInfo::getPriceMonth));
     }
 
     public List<CarBasicInfo> getCarsByBrandYearAndType(List<String> brands, List<Integer> years, List<String> types, String sorting) {
