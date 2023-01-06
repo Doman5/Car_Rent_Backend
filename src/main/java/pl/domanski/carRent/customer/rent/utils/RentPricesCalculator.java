@@ -12,7 +12,7 @@ public class RentPricesCalculator {
     public static BigDecimal calculateGrossValueByDaysCount(Car car, long days) {
         BigDecimal price;
         if(days < 0) throw new RuntimeException("Ilość dni nie może być na minusie");
-        if(days <= 3) {
+        if(days < 3) {
             price = car.getCarPrice().getPriceDay();
         } else if (days < 7) {
             price = car.getCarPrice().getPriceHalfWeek();

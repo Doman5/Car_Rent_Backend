@@ -13,9 +13,4 @@ public class DistanceCalculatorConfig {
         return new HereDistanceCalculator();
     }
 
-    @Bean
-    @ConditionalOnProperty(name="app.localization.distance.calculator", havingValue = "google")
-    public DistanceCalculator googleDistanceCalculator() {
-        return new GoogleDistanceCalculator();
-    }
 }
