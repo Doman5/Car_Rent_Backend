@@ -25,7 +25,7 @@ public class RentController {
     @GetMapping("/cars")
     public List<CarToRentDto> showCarsToRent(RentDateAndPlace rentDateAndPlace,
                                              @RequestParam(required = false) boolean onlyAvailable,
-                                             @RequestParam(required = false) String sortedByPrice) {
+                                             @RequestParam(defaultValue = "Malejaco") String sortedByPrice) {
         return rentService.showCars(rentDateAndPlace, onlyAvailable, sortedByPrice);
     }
 

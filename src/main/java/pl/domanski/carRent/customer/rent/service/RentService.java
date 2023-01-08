@@ -7,6 +7,7 @@ import pl.domanski.carRent.common.mail.EmailClientService;
 import pl.domanski.carRent.customer.common.model.Car;
 import pl.domanski.carRent.customer.common.model.SortingType;
 import pl.domanski.carRent.customer.common.repository.CarRepository;
+import pl.domanski.carRent.customer.common.utils.SortingUtils;
 import pl.domanski.carRent.customer.rent.model.Payment;
 import pl.domanski.carRent.customer.rent.model.Rent;
 import pl.domanski.carRent.customer.rent.model.dto.CarToRentDto;
@@ -27,7 +28,6 @@ import java.util.List;
 import java.util.Optional;
 
 import static java.time.temporal.ChronoUnit.DAYS;
-import static pl.domanski.carRent.customer.common.utils.SortingUtils.sortCars;
 import static pl.domanski.carRent.customer.rent.mapper.CarToRentMapper.createAvailableCarRentDto;
 import static pl.domanski.carRent.customer.rent.mapper.CarToRentMapper.createUnavailableCarRentDto;
 import static pl.domanski.carRent.customer.rent.mapper.RentEmailMessageMapper.createEmailMessage;
@@ -97,8 +97,7 @@ public class RentService {
                     }).forEach(rentCars::add);
         }
         Optional<SortingType> sortingType = SortingType.get(sortedByPrice);
-        sortCars(rentCars, sortingType, Comparator.comparing(CarToRentDto::getGrossValue));
-        return rentCars;
+        return SortingUtils.sortCars(rentCars, sortingType, Comparator.comparing(CarToRentDto::getGrossValue));
     }
 
 
