@@ -48,4 +48,9 @@ public class CarController {
     public List<String> getSortingValuesList() {
         return carFilterService.getCarSortingValues();
     }
+
+    @GetMapping("/{slug}/recommended")
+    public List<CarBasicInfo> getRecommendedCars(@PathVariable String slug) {
+        return carService.getThreeRecommendedCars(slug);
+    }
 }

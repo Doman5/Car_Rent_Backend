@@ -1,6 +1,5 @@
 package pl.domanski.carRent.customer.common.repository;
 
-import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import pl.domanski.carRent.customer.car.model.BodyType;
@@ -12,7 +11,7 @@ import java.util.Optional;
 public interface CarRepository extends JpaRepository<Car,Long> {
     Optional<Car> findBySlug(String slug);
     List<Car> findAllByCategoryId(Long categoryId);
-    List<Car> findAll(Specification<Car> spec);
+    List<Car> findAllTop3ByCategoryId(Long categoryId);
 
     @Query("select distinct c.brand from Car c")
     List<String> findAllBrandNames();
@@ -25,4 +24,6 @@ public interface CarRepository extends JpaRepository<Car,Long> {
     @Query("select distinct c.bodyType from Car c")
     List<BodyType> findAllCarsBodyTypes();
     Long countByBodyType(BodyType bodyType);
+
+
 }

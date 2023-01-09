@@ -58,4 +58,11 @@ public class CarService {
                 Comparator.comparing(CarBasicInfo::getPriceMonth)
                 );
     }
+
+    public List<CarBasicInfo> getThreeRecommendedCars(String slug) {
+        Car car = carRepository.findBySlug(slug).orElseThrow();
+        return carRepository.findAllTop3ByCategoryId(car.getCategoryId()).stream()
+                .map(CarMapper::mapToCarBasicInfo)
+                .toList();
+    }
 }
