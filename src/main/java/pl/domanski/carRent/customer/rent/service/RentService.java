@@ -27,12 +27,12 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 
-import static java.time.temporal.ChronoUnit.DAYS;
 import static pl.domanski.carRent.customer.rent.mapper.CarToRentMapper.createAvailableCarRentDto;
 import static pl.domanski.carRent.customer.rent.mapper.CarToRentMapper.createUnavailableCarRentDto;
 import static pl.domanski.carRent.customer.rent.mapper.RentEmailMessageMapper.createEmailMessage;
 import static pl.domanski.carRent.customer.rent.mapper.RentMapper.createRent;
 import static pl.domanski.carRent.customer.rent.mapper.RentMapper.createRentSummary;
+import static pl.domanski.carRent.customer.rent.utils.DaysCalculateUtils.calculateCountOfDays;
 import static pl.domanski.carRent.customer.rent.utils.RentPricesCalculator.addTaxToFinalPrice;
 import static pl.domanski.carRent.customer.rent.utils.RentPricesCalculator.calculateGrossValueByDaysCount;
 import static pl.domanski.carRent.customer.rent.utils.RentPricesCalculator.calculateTransportPrice;
@@ -103,13 +103,13 @@ public class RentService {
 
 
     private CarToRentDto createUnavailableCar(Car car, RentDateAndPlace rentDateAndPlace) {
-        long days = DAYS.between(rentDateAndPlace.getRentalDate(), rentDateAndPlace.getReturnDate());
+        long days = calculateCountOfDays(rentDateAndPlace);
         BigDecimal grossValue = calculateGrossValueByDaysCount(car, days);
         return createUnavailableCarRentDto(car, grossValue);
     }
 
     private CarToRentDto createAvailableCar(Car car, RentDateAndPlace rentDateAndPlace, double rentalDistance, double returnDistance) {
-        long days = DAYS.between(rentDateAndPlace.getRentalDate(), rentDateAndPlace.getReturnDate());
+        long days = calculateCountOfDays(rentDateAndPlace);
         BigDecimal grossValue = calculateGrossValueByDaysCount(car, days);
         BigDecimal rentalPrice = calculateTransportPrice(car, rentalDistance);
         BigDecimal returnPrice = calculateTransportPrice(car, returnDistance);
@@ -119,7 +119,7 @@ public class RentService {
     private static void checkCorrectnessDates(RentDateAndPlace rentDateAndPlace) {
         if (rentDateAndPlace.getRentalDate().isAfter(rentDateAndPlace.getReturnDate()))
             throw new RuntimeException("Data oddania musi być później niż data wypożyczenia");
-        if (rentDateAndPlace.getRentalDate().isBefore(LocalDateTime.now().plusHours(2)))
+        if (rentDateAndPlace.getRentalDate().isBefore(LocalDateTime.now().plusHours(2).minusMinutes(1)  ))
             throw new RuntimeException("Data wypożyczenia musi być o 2 godziny później od teraz");
     }
 
