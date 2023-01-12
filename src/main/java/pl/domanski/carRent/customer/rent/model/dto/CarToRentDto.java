@@ -14,6 +14,7 @@ public class CarToRentDto {
     private String brand;
     private String model;
     private Integer year;
+    private String photo;
     private CarTechnicalSpecification carTechnicalSpecification;
     private Integer deposit;
     private Integer distanceLimit;
