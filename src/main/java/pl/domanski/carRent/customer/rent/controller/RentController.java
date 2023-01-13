@@ -1,6 +1,7 @@
 package pl.domanski.carRent.customer.rent.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -27,10 +28,12 @@ public class RentController {
                                              @RequestParam(required = false) boolean onlyAvailable,
                                              @RequestParam(defaultValue = "Malejaco") String sortedByPrice) {
         return rentService.showCars(rentDateAndPlace, onlyAvailable, sortedByPrice);
+
     }
 
     @PostMapping
-    public RentSummary placeRent(@RequestBody RentDto rentDto, Long userId) {
+    public RentSummary placeRent(@RequestBody RentDto rentDto,
+                                 @AuthenticationPrincipal Long userId) {
         return rentService.placeRent(rentDto, userId);
     }
 
@@ -38,4 +41,5 @@ public class RentController {
     public List<String> showSortingValues() {
         return rentService.showSortingValues();
     }
+
 }
