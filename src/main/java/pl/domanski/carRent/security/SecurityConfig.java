@@ -8,10 +8,8 @@ import org.springframework.security.config.annotation.authentication.configurati
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
-
-import javax.sql.DataSource;
+import pl.domanski.carRent.security.model.UserRole;
 
 @Configuration
 public class SecurityConfig {
@@ -27,8 +25,8 @@ public class SecurityConfig {
                                            AuthenticationManager authenticationManager,
                                            UserDetailsService userDetailsService) throws Exception {
         http.authorizeHttpRequests(authorize -> authorize
-                .antMatchers("/admin/**").authenticated()
-                .antMatchers("/worker/**").authenticated()
+                .antMatchers("/admin/**").hasRole(UserRole.ROLE_ADMIN.getRole())
+                .antMatchers("/worker/**").hasRole(UserRole.ROLE_WORKER.getRole())
                 .anyRequest().permitAll()
         );
         http.csrf().disable();
@@ -42,9 +40,4 @@ public class SecurityConfig {
         return authenticationConfiguration.getAuthenticationManager();
     }
 
-
-    @Bean
-    public UserDetailsService userDetailsService(DataSource dataSource) {
-        return new JdbcUserDetailsManager(dataSource);
-    }
 }

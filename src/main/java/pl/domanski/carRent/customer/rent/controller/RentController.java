@@ -27,6 +27,7 @@ public class RentController {
                                              @RequestParam(required = false) boolean onlyAvailable,
                                              @RequestParam(defaultValue = "Malejaco") String sortedByPrice) {
         return rentService.showCars(rentDateAndPlace, onlyAvailable, sortedByPrice);
+
     }
 
     @PostMapping
@@ -38,4 +39,5 @@ public class RentController {
     public List<String> showSortingValues() {
         return rentService.showSortingValues();
     }
+
 }
