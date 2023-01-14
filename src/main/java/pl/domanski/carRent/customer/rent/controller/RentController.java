@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import pl.domanski.carRent.customer.rent.model.dto.CarToRentDto;
+import pl.domanski.carRent.customer.rent.model.dto.InitRent;
 import pl.domanski.carRent.customer.rent.model.dto.RentDateAndPlace;
 import pl.domanski.carRent.customer.rent.model.dto.RentDto;
 import pl.domanski.carRent.customer.rent.model.dto.RentSummary;
@@ -37,9 +38,9 @@ public class RentController {
         return rentService.placeRent(rentDto, userId);
     }
 
-    @GetMapping("/sorting")
-    public List<String> showSortingValues() {
-        return rentService.showSortingValues();
+    @GetMapping("/initData")
+    public InitRent showSortingValues() {
+        return rentService.getInitData();
     }
 
 }

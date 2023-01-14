@@ -26,4 +26,5 @@ public class Payment {
     private PaymentType type;
     private boolean defaultPayment;
     private String note;
+    private String description;
 }

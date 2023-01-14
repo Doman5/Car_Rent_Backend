@@ -8,7 +8,7 @@ import java.math.BigDecimal;
 
 public class CarToRentMapper {
 
-    public static CarToRentDto createAvailableCarRentDto(Car car, BigDecimal grossValue, BigDecimal rentalPrice, BigDecimal returnPrice, long days, RentDateAndPlace rentDateAndPlace) {
+    public static CarToRentDto createAvailableCarRentDto(Car car, BigDecimal grossValue, BigDecimal rentalPrice, BigDecimal returnPrice, long days, RentDateAndPlace rentDateAndPlace, BigDecimal finalPrice) {
         return CarToRentDto.builder()
                 .carId(car.getId())
                 .brand(car.getBrand())
@@ -21,6 +21,7 @@ public class CarToRentMapper {
                 .distanceLimitPenalty(car.getCarPrice().getDistanceLimitPenalty())
                 .days(days)
                 .grossValue(grossValue)
+                .finalPrice(finalPrice)
                 .rentalPrice(rentalPrice)
                 .returnPrice(returnPrice)
                 .rentalDate(rentDateAndPlace.getRentalDate())
