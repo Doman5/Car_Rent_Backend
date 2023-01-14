@@ -8,9 +8,12 @@ import pl.domanski.carRent.customer.common.model.Car;
 import pl.domanski.carRent.customer.common.model.SortingType;
 import pl.domanski.carRent.customer.common.repository.CarRepository;
 import pl.domanski.carRent.customer.common.utils.SortingUtils;
+import pl.domanski.carRent.customer.rent.mapper.PaymentMapper;
 import pl.domanski.carRent.customer.rent.model.Payment;
 import pl.domanski.carRent.customer.rent.model.Rent;
 import pl.domanski.carRent.customer.rent.model.dto.CarToRentDto;
+import pl.domanski.carRent.customer.rent.model.dto.InitRent;
+import pl.domanski.carRent.customer.rent.model.dto.PaymentDto;
 import pl.domanski.carRent.customer.rent.model.dto.RentDateAndPlace;
 import pl.domanski.carRent.customer.rent.model.dto.RentDto;
 import pl.domanski.carRent.customer.rent.model.dto.RentSummary;
@@ -54,8 +57,8 @@ public class RentService {
     public RentSummary placeRent(RentDto rentDto, Long userId) {
         Car car = carRepository.findById(rentDto.getCarId()).orElseThrow();
         Payment payment = paymentRepository.findById(rentDto.getPaymentId()).orElseThrow();
-        BigDecimal grossValue = addTaxToFinalPrice(rentDto, DEFAULT_TAX_23);
-        Rent rent = rentRepository.save(createRent(rentDto, userId, car, payment, grossValue));
+        BigDecimal finalPrice = addTaxToFinalPrice(rentDto, DEFAULT_TAX_23);
+        Rent rent = rentRepository.save(createRent(rentDto, userId, car, payment, finalPrice));
         sendConfirmEmail(rent);
         return createRentSummary(car, rent);
     }
@@ -113,7 +116,8 @@ public class RentService {
         BigDecimal grossValue = calculateGrossValueByDaysCount(car, days);
         BigDecimal rentalPrice = calculateTransportPrice(car, rentalDistance);
         BigDecimal returnPrice = calculateTransportPrice(car, returnDistance);
-        return createAvailableCarRentDto(car, grossValue, rentalPrice, returnPrice, days, rentDateAndPlace);
+        BigDecimal finalPrice = grossValue.add(rentalPrice).add(returnPrice);
+        return createAvailableCarRentDto(car, grossValue, rentalPrice, returnPrice, days, rentDateAndPlace, finalPrice);
     }
 
     private static void checkCorrectnessDates(RentDateAndPlace rentDateAndPlace) {
@@ -124,9 +128,11 @@ public class RentService {
     }
 
 
-    public List<String> showSortingValues() {
-        return Arrays.stream(SortingType.values())
+    public InitRent getInitData() {
+        List<String> sortingTypes = Arrays.stream(SortingType.values())
                 .map(SortingType::getName)
                 .toList();
+        List<PaymentDto> paymentsTypes = paymentRepository.findAll().stream().map(PaymentMapper::mapToPaymentDto).toList();
+        return new InitRent(sortingTypes, paymentsTypes);
     }
 }

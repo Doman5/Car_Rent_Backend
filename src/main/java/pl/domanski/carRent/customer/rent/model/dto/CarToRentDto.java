@@ -20,6 +20,7 @@ public class CarToRentDto {
     private Integer distanceLimit;
     private BigDecimal distanceLimitPenalty;
     private BigDecimal grossValue;
+    private BigDecimal finalPrice;
     private BigDecimal rentalPrice;
     private LocalDateTime rentalDate;
     private String rentalPlace;
