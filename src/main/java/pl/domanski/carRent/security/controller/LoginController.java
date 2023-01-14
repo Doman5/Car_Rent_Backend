@@ -85,7 +85,7 @@ public class LoginController {
                 .sign(Algorithm.HMAC256(secret));
 
         Boolean adminAccess = principal.getAuthorities().stream().map(GrantedAuthority::getAuthority)
-                .filter(s -> UserRole.ROLE_ADMIN.name().equals(s))
+                .filter(s -> UserRole.ROLE_ADMIN.getRole().equals(s))
                 .map(s -> true)
                 .findFirst()
                 .orElse(false);
