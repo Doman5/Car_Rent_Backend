@@ -21,6 +21,8 @@ import pl.domanski.carRent.admin.car.controller.dto.AdminCarPhotoDto;
 import pl.domanski.carRent.admin.car.model.AdminCar;
 import pl.domanski.carRent.admin.car.service.AdminCarPhotoService;
 import pl.domanski.carRent.admin.car.service.AdminCarService;
+import pl.domanski.carRent.admin.car.service.AdminCarUpdateInitDataService;
+import pl.domanski.carRent.admin.common.dto.AdminCategoryDto;
 
 import javax.validation.Valid;
 import java.io.IOException;
@@ -35,6 +37,7 @@ public class AdminCarController {
 
     private final AdminCarService adminCarService;
     private final AdminCarPhotoService adminCarPhotoService;
+    private final AdminCarUpdateInitDataService adminCarInitDataService;
 
     @GetMapping
     public Page<AdminCarBasicInfo> getCars(Pageable pageable) {
@@ -69,4 +72,13 @@ public class AdminCarController {
         adminCarService.deleteCar(id);
     }
 
+    @GetMapping("/categories")
+    public List<AdminCategoryDto> getAllCarCategories() {
+        return adminCarInitDataService.getAllCategories();
+    }
+
+    @GetMapping("/body-types")
+    public List<String> getAllBodyTypes() {
+        return adminCarInitDataService.getAllBodyTypes();
+    }
 }

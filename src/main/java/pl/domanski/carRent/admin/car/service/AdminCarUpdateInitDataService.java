@@ -12,7 +12,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class AdminCarUpdateListService {
+public class AdminCarUpdateInitDataService {
 
     private final AdminCategoryRepository adminCategoryRepository;
 
@@ -22,7 +22,9 @@ public class AdminCarUpdateListService {
                 .toList();
     }
 
-
+    public List<String> getAllBodyTypes() {
+        return Arrays.stream(AdminBodyType.values()).map(AdminBodyType::getName).toList();
+    }
 
     private AdminCategoryDto mapToAdminCategoryDto(AdminCategory adminCategory) {
         return AdminCategoryDto.builder()
@@ -30,7 +32,4 @@ public class AdminCarUpdateListService {
                 .build();
     }
 
-    public List<String> getAllBodyTypes() {
-        return Arrays.stream(AdminBodyType.values()).map(AdminBodyType::getName).toList();
-    }
 }
