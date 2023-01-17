@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.domanski.carRent.security.model.RentUserDetails;
 import pl.domanski.carRent.security.model.User;
-import pl.domanski.carRent.security.repository.UserRepository;
+import pl.domanski.carRent.customer.common.repository.UserRepository;
 
 @Service
 @RequiredArgsConstructor

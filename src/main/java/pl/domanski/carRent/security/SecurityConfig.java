@@ -26,6 +26,7 @@ public class SecurityConfig {
         http.authorizeHttpRequests(authorize -> authorize
                 .antMatchers("/admin/**").authenticated()
                 .antMatchers("/worker/**").authenticated()
+                .antMatchers("/profile/**").authenticated()
                 .anyRequest().permitAll()
         );
         http.csrf().disable();

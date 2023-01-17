@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import pl.domanski.carRent.customer.rent.model.dto.RentDateAndPlace;
 import pl.domanski.carRent.customer.rent.model.Rent;
-import pl.domanski.carRent.customer.rent.repository.RentRepository;
+import pl.domanski.carRent.customer.common.repository.RentRepository;
 
 import java.time.LocalDateTime;
 import java.util.List;

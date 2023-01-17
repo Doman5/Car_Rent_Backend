@@ -18,7 +18,7 @@ import pl.domanski.carRent.customer.rent.model.dto.RentDateAndPlace;
 import pl.domanski.carRent.customer.rent.model.dto.RentDto;
 import pl.domanski.carRent.customer.rent.model.dto.RentSummary;
 import pl.domanski.carRent.customer.rent.repository.PaymentRepository;
-import pl.domanski.carRent.customer.rent.repository.RentRepository;
+import pl.domanski.carRent.customer.common.repository.RentRepository;
 import pl.domanski.carRent.customer.rent.utils.CheckCarAvailabilityUtils;
 import pl.domanski.carRent.webClient.localization.DistanceCalculatorService;
 

@@ -14,7 +14,7 @@ import pl.domanski.carRent.customer.rent.model.Rent;
 import pl.domanski.carRent.customer.rent.model.RentStatus;
 import pl.domanski.carRent.customer.rent.model.dto.RentSummary;
 import pl.domanski.carRent.customer.rent.repository.PaymentRepository;
-import pl.domanski.carRent.customer.rent.repository.RentRepository;
+import pl.domanski.carRent.customer.common.repository.RentRepository;
 import pl.domanski.carRent.customer.rent.service.RentService;
 import pl.domanski.carRent.customer.rent.utils.CheckCarAvailabilityUtils;
 

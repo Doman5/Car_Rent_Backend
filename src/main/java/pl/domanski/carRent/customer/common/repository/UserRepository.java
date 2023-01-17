@@ -1,4 +1,4 @@
-package pl.domanski.carRent.security.repository;
+package pl.domanski.carRent.customer.common.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
