@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import pl.domanski.carRent.security.model.RentUserDetails;
 import pl.domanski.carRent.security.model.User;
 import pl.domanski.carRent.security.model.UserRole;
-import pl.domanski.carRent.customer.common.repository.UserRepository;
+import pl.domanski.carRent.common.repository.UserRepository;
 
 import javax.validation.Valid;
 import javax.validation.constraints.Email;
