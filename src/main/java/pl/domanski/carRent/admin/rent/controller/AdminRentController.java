@@ -9,11 +9,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import pl.domanski.carRent.admin.rent.model.AdminRent;
+import pl.domanski.carRent.admin.rent.model.dto.AdminFullRentInfo;
 import pl.domanski.carRent.admin.rent.model.dto.AdminRentDto;
 import pl.domanski.carRent.admin.rent.service.AdminRentService;
 
-import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -29,7 +28,7 @@ public class AdminRentController {
     }
 
     @GetMapping("/{id}")
-    public AdminRent getRent(@PathVariable Long id) {
+    public AdminFullRentInfo getRent(@PathVariable Long id) {
         return adminRentService.getRent(id);
     }
 
@@ -39,7 +38,7 @@ public class AdminRentController {
     }
 
     @GetMapping("/statuses")
-    public List<String> getRentStatuses() {
+    public Map<String, String > getRentStatuses() {
         return adminRentService.getRentStatuses();
     }
 }

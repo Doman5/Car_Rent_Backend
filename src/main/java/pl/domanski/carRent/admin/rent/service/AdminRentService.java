@@ -9,14 +9,21 @@ import pl.domanski.carRent.admin.rent.mapper.AdminRentMapper;
 import pl.domanski.carRent.admin.rent.model.AdminRent;
 import pl.domanski.carRent.admin.rent.model.AdminRentLog;
 import pl.domanski.carRent.admin.rent.model.AdminRentStatus;
+import pl.domanski.carRent.admin.rent.model.dto.AdminFullRentInfo;
 import pl.domanski.carRent.admin.rent.model.dto.AdminRentDto;
+import pl.domanski.carRent.admin.rent.model.dto.AdminRentLogDto;
 import pl.domanski.carRent.admin.rent.repository.AdminRentLogRepository;
 import pl.domanski.carRent.admin.rent.repository.AdminRentRepository;
+import pl.domanski.carRent.common.repository.UserRepository;
+import pl.domanski.carRent.security.model.User;
 
 import java.time.LocalDateTime;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import static pl.domanski.carRent.admin.rent.mapper.AdminRentMapper.mapToAdminFullRentInfo;
 
 @Service
 @RequiredArgsConstructor
@@ -24,16 +31,25 @@ public class AdminRentService {
 
     private final AdminRentRepository adminRentRepository;
     private final AdminRentLogRepository adminRentLogRepository;
+    private final UserRepository userRepository;
 
     public Page<AdminRentDto> getRents(Pageable pageable) {
-        return adminRentRepository.findAll(pageable)
+        return adminRentRepository.findAllByOrderByIdDesc(pageable)
                 .map(AdminRentMapper::mapToAdminRentDto);
     }
 
 
-    public AdminRent getRent(Long id) {
-        return adminRentRepository.findById(id).orElseThrow();
+    @Transactional
+    public AdminFullRentInfo getRent(Long id) {
+        AdminRent rent = adminRentRepository.findById(id).orElseThrow();
+        User user = userRepository.findById(rent.getUserId()).orElseThrow();
+        List<AdminRentLogDto> rentLogs = adminRentLogRepository.findAllByRentIdOrderByIdDesc(rent.getId()).stream()
+                .map(AdminRentMapper::mapToAdminRentLogDto)
+                .toList();
+        return mapToAdminFullRentInfo(rent, user, rentLogs);
     }
+
+
 
     @Transactional
     public void patchRent(Long id, Map<String, String> values) {
@@ -57,12 +73,13 @@ public class AdminRentService {
         adminRentLogRepository.save(AdminRentLog.builder()
                         .rentId(rent.getId())
                         .created(LocalDateTime.now())
-                        .note("Zmiana statusu z " + oldStatus + " na " + newStatus)
+                        .note("Zmiana statusu z " + oldStatus.getName() + " na " + newStatus.getName())
                 .build());
     }
 
-    public List<String> getRentStatuses() {
-        return Arrays.stream(AdminRentStatus.values())
-                .map(AdminRentStatus::getName).toList();
+    public HashMap<String, String> getRentStatuses() {
+        HashMap<String, String> statuses = new HashMap<>();
+        Arrays.stream(AdminRentStatus.values()).forEach(status -> statuses.put(status.name() ,status.getName()));
+        return statuses;
     }
 }
