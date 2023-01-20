@@ -20,6 +20,13 @@ class ExistingFileNameUtilsTest {
     }
 
     @Test
+    void shouldRenameCarFile(@TempDir Path tempDir) throws IOException {
+        Files.createFile(tempDir.resolve("audi-a4-2020-1.png"));
+        String newName = ExistingFileNameUtils.renameIfExists(tempDir, "audi-a4-2020-1.png");
+        assertEquals("audi-a4-2020-2.png", newName);
+    }
+
+    @Test
     void shouldRenameManyExistingFile(@TempDir Path tempDir) throws IOException {
         Files.createFile(tempDir.resolve("test.png"));
         Files.createFile(tempDir.resolve("test-1.png"));
@@ -27,5 +34,15 @@ class ExistingFileNameUtilsTest {
         Files.createFile(tempDir.resolve("test-3.png"));
         String newName = ExistingFileNameUtils.renameIfExists(tempDir, "test.png");
         assertEquals("test-4.png", newName);
+    }
+
+    @Test
+    void shouldRenameManyExistingCarFile(@TempDir Path tempDir) throws IOException {
+        Files.createFile(tempDir.resolve("audi-a4-2020-1.png"));
+        Files.createFile(tempDir.resolve("audi-a4-2020-2.png"));
+        Files.createFile(tempDir.resolve("audi-a4-2020-3.png"));
+        Files.createFile(tempDir.resolve("audi-a4-2020-4.png"));
+        String newName = ExistingFileNameUtils.renameIfExists(tempDir, "audi-a4-2020-1.png");
+        assertEquals("audi-a4-2020-5.png", newName);
     }
 }

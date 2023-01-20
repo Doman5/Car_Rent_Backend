@@ -1,10 +1,8 @@
 package pl.domanski.carRent.admin.car.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,13 +10,11 @@ import org.springframework.web.bind.annotation.RestController;
 import pl.domanski.carRent.admin.car.controller.dto.AdminCarBasicInfo;
 import pl.domanski.carRent.admin.car.controller.dto.AdminCarDescriptionDto;
 import pl.domanski.carRent.admin.car.controller.dto.AdminCarEquipmentDto;
-import pl.domanski.carRent.admin.car.controller.dto.AdminCarPhotoDto;
 import pl.domanski.carRent.admin.car.controller.dto.AdminCarPriceDto;
 import pl.domanski.carRent.admin.car.controller.dto.AdminCarTechnicalSpecificationDto;
 import pl.domanski.carRent.admin.car.model.AdminCar;
 import pl.domanski.carRent.admin.car.model.AdminCarDescription;
 import pl.domanski.carRent.admin.car.model.AdminCarEquipment;
-import pl.domanski.carRent.admin.car.model.AdminCarPhoto;
 import pl.domanski.carRent.admin.car.model.AdminCarPrice;
 import pl.domanski.carRent.admin.car.model.AdminCarTechnicalSpecification;
 import pl.domanski.carRent.admin.car.service.AdminCarUpdateService;
@@ -76,15 +72,6 @@ public class AdminCarUpdateController {
         return adminCarUpdateService.updateCarPrice(id, carPriceDto);
     }
 
-    @PostMapping("/carPhoto")
-    public AdminCarPhoto addCarPhoto(@RequestBody AdminCarPhotoDto adminCarPhotoDto, @PathVariable Long id) {
-        return adminCarUpdateService.addCarPhoto(adminCarPhotoDto, id);
-    }
-
-    @DeleteMapping("/carPhoto/{photoId}")
-    public void addCarPhoto(@PathVariable Long photoId) {
-        adminCarUpdateService.deleteCarPhoto(photoId);
-    }
 
     @GetMapping("/category")
     public AdminCategory getCategory(@PathVariable Long id) {

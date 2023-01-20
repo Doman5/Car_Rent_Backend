@@ -7,13 +7,11 @@ import pl.domanski.carRent.admin.car.controller.dto.AdminCarBasicInfo;
 import pl.domanski.carRent.admin.car.controller.dto.AdminCarDescriptionDto;
 import pl.domanski.carRent.admin.car.controller.dto.AdminCarDto;
 import pl.domanski.carRent.admin.car.controller.dto.AdminCarEquipmentDto;
-import pl.domanski.carRent.admin.car.controller.dto.AdminCarPhotoDto;
 import pl.domanski.carRent.admin.car.controller.dto.AdminCarPriceDto;
 import pl.domanski.carRent.admin.car.controller.dto.AdminCarTechnicalSpecificationDto;
 import pl.domanski.carRent.admin.car.model.AdminCar;
 import pl.domanski.carRent.admin.car.model.AdminCarDescription;
 import pl.domanski.carRent.admin.car.model.AdminCarEquipment;
-import pl.domanski.carRent.admin.car.model.AdminCarPhoto;
 import pl.domanski.carRent.admin.car.model.AdminCarPrice;
 import pl.domanski.carRent.admin.car.model.AdminCarTechnicalSpecification;
 import pl.domanski.carRent.admin.car.repository.AdminCarDescriptionRepository;
@@ -33,7 +31,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static pl.domanski.carRent.admin.car.service.mapper.AdminCarMapper.mapToAdminCarBasicInfo;
-import static pl.domanski.carRent.admin.car.service.mapper.AdminCarMapper.mapToAdminCarPhoto;
 import static pl.domanski.carRent.admin.car.service.utils.CarUpdateUtils.setNewCarBasicInfoValues;
 import static pl.domanski.carRent.admin.car.service.utils.CarUpdateUtils.setNewCarDescriptionValues;
 import static pl.domanski.carRent.admin.car.service.utils.CarUpdateUtils.setNewCarEquipmentValues;
@@ -95,15 +92,6 @@ public class AdminCarUpdateService {
         AdminCarPrice carPrice = adminCarPriceRepository.findById(carPriceId).orElseThrow();
         setNewCarPriceValues(carPriceDto, carPrice);
         return adminCarPriceRepository.save(carPrice);
-    }
-
-
-    public AdminCarPhoto addCarPhoto(AdminCarPhotoDto adminCarPhotoDto, Long carId) {
-        return adminCarPhotoRepository.save(mapToAdminCarPhoto(adminCarPhotoDto, carId));
-    }
-
-    public void deleteCarPhoto(Long photoId) {
-        adminCarPhotoRepository.deleteById(photoId);
     }
 
     private Long getCarTechSpecId(Long id) {

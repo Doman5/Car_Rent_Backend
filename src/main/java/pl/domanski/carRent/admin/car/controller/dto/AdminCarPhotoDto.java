@@ -8,5 +8,6 @@ import lombok.Getter;
 @AllArgsConstructor
 @Builder
 public class AdminCarPhotoDto {
+    private Long id;
     private String photo;
 }
