@@ -16,5 +16,4 @@ public class AdminRentDto {
     private LocalDateTime rentalDate;
     private LocalDateTime returnDate;
     private BigDecimal grossValue;
-
 }
