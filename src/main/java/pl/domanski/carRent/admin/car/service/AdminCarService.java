@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 import pl.domanski.carRent.admin.car.controller.dto.AdminCarBasicInfo;
 import pl.domanski.carRent.admin.car.controller.dto.AdminCarDto;
 import pl.domanski.carRent.admin.car.model.AdminCar;
+import pl.domanski.carRent.admin.car.model.AdminCarPhoto;
 import pl.domanski.carRent.admin.car.repository.AdminCarDescriptionRepository;
 import pl.domanski.carRent.admin.car.repository.AdminCarEquipmentRepository;
 import pl.domanski.carRent.admin.car.repository.AdminCarPhotoRepository;
@@ -18,10 +19,12 @@ import pl.domanski.carRent.admin.car.service.mapper.AdminCarMapper;
 import pl.domanski.carRent.admin.car.service.utils.CarSlugUtils;
 import pl.domanski.carRent.admin.common.repository.AdminCategoryRepository;
 
+import java.io.File;
+import java.util.List;
+
 import static pl.domanski.carRent.admin.car.service.mapper.AdminCarMapper.mapToAdminCar;
 import static pl.domanski.carRent.admin.car.service.mapper.AdminCarMapper.mapToAdminCarDescription;
 import static pl.domanski.carRent.admin.car.service.mapper.AdminCarMapper.mapToAdminCarEquipment;
-import static pl.domanski.carRent.admin.car.service.mapper.AdminCarMapper.mapToAdminCarPhoto;
 import static pl.domanski.carRent.admin.car.service.mapper.AdminCarMapper.mapToAdminCarPrice;
 import static pl.domanski.carRent.admin.car.service.mapper.AdminCarMapper.mapToAdminCarTechSpec;
 
@@ -31,6 +34,7 @@ import static pl.domanski.carRent.admin.car.service.mapper.AdminCarMapper.mapToA
 public class AdminCarService {
 
     private final static Long EMPTY_ID = null;
+    private final String uploadDir = "./data/carPhotos/";
 
     private final AdminCarRepository adminCarRepository;
     private final AdminCarTechnicalSpecificationRepository adminCarTechnicalSpecificationRepository;
@@ -56,7 +60,7 @@ public class AdminCarService {
             throw new RuntimeException("Nie podano podstawowych informacji");
         }
         String slug = createSlug(adminCarDto, adminCarRepository);
-        AdminCar adminCar = adminCarRepository.save(mapToAdminCar(adminCarDto, slug, EMPTY_ID, 1L));
+        AdminCar adminCar = adminCarRepository.save(mapToAdminCar(adminCarDto, slug, 1L));
 
         ifExistSaveCarTechnicalSpecification(adminCarDto, adminCar);
         ifExistSaveCarEquipments(adminCarDto, adminCar);
@@ -77,8 +81,9 @@ public class AdminCarService {
 
     private void ifExistSaveCarPhotos(AdminCarDto adminCarDto, AdminCar adminCar) {
         if(adminCarDto.getPhotos() != null) {
-            adminCar.setPhotos(adminCarPhotoRepository
-                    .saveAll(adminCarDto.getPhotos().stream().map(photo -> mapToAdminCarPhoto(photo, adminCar.getId())).toList()));
+            List<AdminCarPhoto> photoList = adminCarPhotoRepository.findAllPhotosWhatConstrainCarSlug(adminCar.getSlug() + "%");
+            photoList.forEach(photo -> photo.setCarId(adminCar.getId()));
+            adminCarPhotoRepository.saveAll(photoList);
         }
     }
 
@@ -120,6 +125,11 @@ public class AdminCarService {
 
     @Transactional
     public void deleteCar(Long id) {
+        List<AdminCarPhoto> photos = adminCarPhotoRepository.findAllByCarId(id);
+        photos.forEach(photo -> {
+            File file = new File(uploadDir + photo.getPhoto());
+            file.delete();
+        });
         adminCarRepository.deleteById(id);
     }
 

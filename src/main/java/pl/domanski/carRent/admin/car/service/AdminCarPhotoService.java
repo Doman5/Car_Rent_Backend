@@ -1,7 +1,6 @@
 package pl.domanski.carRent.admin.car.service;
 
 import lombok.RequiredArgsConstructor;
-import org.apache.commons.io.FilenameUtils;
 import org.springframework.core.io.FileSystemResourceLoader;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
@@ -11,8 +10,7 @@ import pl.domanski.carRent.admin.car.controller.dto.AdminCarPhotoDto;
 import pl.domanski.carRent.admin.car.model.AdminCarPhoto;
 import pl.domanski.carRent.admin.car.repository.AdminCarPhotoRepository;
 import pl.domanski.carRent.admin.car.repository.AdminCarRepository;
-import pl.domanski.carRent.admin.car.service.utils.ExistingFileNameUtils;
-import pl.domanski.carRent.admin.common.utils.SlugifyUtils;
+import pl.domanski.carRent.admin.car.service.utils.FileNameUtils;
 
 import java.io.File;
 import java.io.IOException;
@@ -27,24 +25,38 @@ import java.util.List;
 @RequiredArgsConstructor
 public class AdminCarPhotoService {
 
-    private String uploadDir = "./data/carPhotos/";
+    private final String uploadDir = "./data/carPhotos/";
     private final AdminCarPhotoRepository adminCarPhotoRepository;
     private final AdminCarRepository adminCarRepository;
+    private final FileNameUtils fileNameUtils;
 
     public AdminCarPhotoDto uploadImages(MultipartFile multipartFiles, Long carId) {
         String carName = adminCarRepository.findById(carId).orElseThrow().getSlug();
-        String extension = FilenameUtils.getExtension(multipartFiles.getOriginalFilename());
-        String newName = carName + "-1" + "." + extension;
-        String slugifyFileName = SlugifyUtils.slugifyFileName(newName);
-        String newFileName = ExistingFileNameUtils.renameIfExists(Path.of(uploadDir), slugifyFileName);
-        Path filePath = Paths.get(uploadDir).resolve(newFileName);
+        String freeFileName = fileNameUtils.prepareFreeFileName(multipartFiles, carName);
+        Path filePath = Paths.get(uploadDir).resolve(freeFileName);
 
         try (InputStream inputStream = multipartFiles.getInputStream()) {
             OutputStream outputStream = Files.newOutputStream(filePath);
             inputStream.transferTo(outputStream);
             AdminCarPhoto savedPhoto = adminCarPhotoRepository.save(AdminCarPhoto.builder()
                     .carId(carId)
-                    .photo(newFileName)
+                    .photo(freeFileName)
+                    .build());
+            return mapToAdminCarPhotoDto(savedPhoto);
+        } catch (IOException e) {
+            throw new RuntimeException("nie mogę zapisać pliku", e);
+        }
+    }
+
+    public AdminCarPhotoDto uploadImagesForNewCar(MultipartFile multipartFiles, String carName) {
+        String freeFileName = fileNameUtils.prepareFreeFileName(multipartFiles, carName);
+        Path filePath = Paths.get(uploadDir).resolve(freeFileName);
+
+        try (InputStream inputStream = multipartFiles.getInputStream()) {
+            OutputStream outputStream = Files.newOutputStream(filePath);
+            inputStream.transferTo(outputStream);
+            AdminCarPhoto savedPhoto = adminCarPhotoRepository.save(AdminCarPhoto.builder()
+                    .photo(freeFileName)
                     .build());
             return mapToAdminCarPhotoDto(savedPhoto);
         } catch (IOException e) {
@@ -74,15 +86,11 @@ public class AdminCarPhotoService {
     @Transactional
     public void deletePhoto(Long photoId) {
         AdminCarPhoto photo = adminCarPhotoRepository.findById(photoId).orElseThrow();
-        String path ="data/carPhotos/" + photo.getPhoto();
+        String path = "data/carPhotos/" + photo.getPhoto();
         System.out.println(path);
-        try{
-            File file = new File(path);
-            if(!file.delete()) {
-                throw new RuntimeException("Nie udało się usunąć pliku");
-            }
-        } catch (Exception e) {
-            e.getMessage();
+        File file = new File(path);
+        if (!file.delete()) {
+            throw new RuntimeException("Nie udało się usunąć pliku");
         }
         adminCarPhotoRepository.deleteById(photoId);
     }

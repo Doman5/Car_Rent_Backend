@@ -16,7 +16,6 @@ import pl.domanski.carRent.admin.car.model.AdminCarPrice;
 import pl.domanski.carRent.admin.car.model.AdminCarTechnicalSpecification;
 import pl.domanski.carRent.admin.car.repository.AdminCarDescriptionRepository;
 import pl.domanski.carRent.admin.car.repository.AdminCarEquipmentRepository;
-import pl.domanski.carRent.admin.car.repository.AdminCarPhotoRepository;
 import pl.domanski.carRent.admin.car.repository.AdminCarPriceRepository;
 import pl.domanski.carRent.admin.car.repository.AdminCarRepository;
 import pl.domanski.carRent.admin.car.repository.AdminCarTechnicalSpecificationRepository;
@@ -46,7 +45,6 @@ public class AdminCarUpdateService {
     private final AdminCarEquipmentRepository adminCarEquipmentRepository;
     private final AdminCarDescriptionRepository adminCarDescriptionRepository;
     private final AdminCarPriceRepository adminCarPriceRepository;
-    private final AdminCarPhotoRepository adminCarPhotoRepository;
     private final AdminCategoryRepository adminCategoryRepository;
     private final CarRepository carRepository;
 

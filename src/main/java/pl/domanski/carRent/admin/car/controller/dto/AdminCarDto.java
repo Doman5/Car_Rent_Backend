@@ -15,7 +15,6 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class AdminCarDto {
-    private Long id;
     @NotBlank
     private String brand;
     @NotBlank

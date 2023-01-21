@@ -15,7 +15,8 @@ public class CarSlugUtils {
 
         String slug = slg.slugify(String.join("-",adminCarDto.getBrand(),
                 adminCarDto.getModel(),
-                String.valueOf(adminCarDto.getYear())));
+                String.valueOf(adminCarDto.getYear()),
+                "1"));
 
         slug = checkSlugIsExisting(slug);
         return slug;

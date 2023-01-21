@@ -35,16 +35,16 @@ class CarSlugUtilsTest {
         String slug2 = carSlugUtils.createCarSlug(adminCarDto2);
         String slug3 = carSlugUtils.createCarSlug(adminCarDto3);
         //then
-        assertEquals("audi-a3-2020", slug1);
-        assertEquals("bmw-seria-3-2016", slug2);
-        assertEquals("nissan-370z-2007", slug3);
+        assertEquals("audi-a3-2020-1", slug1);
+        assertEquals("bmw-seria-3-2016-1", slug2);
+        assertEquals("nissan-370z-2007-1", slug3);
     }
 
     @Test
     void should_create_car_slug_when_car_with_that_slug_exist_in_database() {
         //given
         AdminCarDto adminCarDto = new AdminCarDto("AUDI", "A3", 2020);
-        given(adminCarRepository.findBySlug("audi-a3-2020")).willReturn(Optional.of(AdminCar.builder().build()));
+        given(adminCarRepository.findBySlug("audi-a3-2020-1")).willReturn(Optional.of(AdminCar.builder().build()));
         //when
         String slug = carSlugUtils.createCarSlug(adminCarDto);
         //then

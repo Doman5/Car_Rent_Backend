@@ -2,7 +2,7 @@ package pl.domanski.carRent.admin.car.service;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
-import pl.domanski.carRent.admin.car.service.utils.ExistingFileNameUtils;
+import pl.domanski.carRent.admin.car.service.utils.FileNameUtils;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -15,15 +15,22 @@ class ExistingFileNameUtilsTest {
     @Test
     void shouldRenameFile(@TempDir Path tempDir) throws IOException {
         Files.createFile(tempDir.resolve("test.png"));
-        String newName = ExistingFileNameUtils.renameIfExists(tempDir, "test.png");
+        String newName = FileNameUtils.renameIfExists(tempDir, "test.png");
         assertEquals("test-1.png", newName);
     }
 
     @Test
     void shouldRenameCarFile(@TempDir Path tempDir) throws IOException {
         Files.createFile(tempDir.resolve("audi-a4-2020-1.png"));
-        String newName = ExistingFileNameUtils.renameIfExists(tempDir, "audi-a4-2020-1.png");
+        String newName = FileNameUtils.renameIfExists(tempDir, "audi-a4-2020-1.png");
         assertEquals("audi-a4-2020-2.png", newName);
+    }
+
+    @Test
+    void shouldRenameSecondTheSameCarFile(@TempDir Path tempDir) throws IOException {
+        Files.createFile(tempDir.resolve("audi-a4-2020-2-1.png"));
+        String newName = FileNameUtils.renameIfExists(tempDir, "audi-a4-2020-2-1.png");
+        assertEquals("audi-a4-2020-2-2.png", newName);
     }
 
     @Test
@@ -32,7 +39,7 @@ class ExistingFileNameUtilsTest {
         Files.createFile(tempDir.resolve("test-1.png"));
         Files.createFile(tempDir.resolve("test-2.png"));
         Files.createFile(tempDir.resolve("test-3.png"));
-        String newName = ExistingFileNameUtils.renameIfExists(tempDir, "test.png");
+        String newName = FileNameUtils.renameIfExists(tempDir, "test.png");
         assertEquals("test-4.png", newName);
     }
 
@@ -42,7 +49,9 @@ class ExistingFileNameUtilsTest {
         Files.createFile(tempDir.resolve("audi-a4-2020-2.png"));
         Files.createFile(tempDir.resolve("audi-a4-2020-3.png"));
         Files.createFile(tempDir.resolve("audi-a4-2020-4.png"));
-        String newName = ExistingFileNameUtils.renameIfExists(tempDir, "audi-a4-2020-1.png");
+        String newName = FileNameUtils.renameIfExists(tempDir, "audi-a4-2020-1.png");
         assertEquals("audi-a4-2020-5.png", newName);
     }
+
+
 }

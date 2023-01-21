@@ -1,17 +1,15 @@
 package pl.domanski.carRent.admin.car.service.mapper;
 
+import pl.domanski.carRent.admin.car.controller.dto.AdminCarBasicInfo;
 import pl.domanski.carRent.admin.car.controller.dto.AdminCarDescriptionDto;
 import pl.domanski.carRent.admin.car.controller.dto.AdminCarDto;
 import pl.domanski.carRent.admin.car.controller.dto.AdminCarEquipmentDto;
-import pl.domanski.carRent.admin.car.controller.dto.AdminCarBasicInfo;
-import pl.domanski.carRent.admin.car.controller.dto.AdminCarPhotoDto;
 import pl.domanski.carRent.admin.car.controller.dto.AdminCarPriceDto;
 import pl.domanski.carRent.admin.car.controller.dto.AdminCarTechnicalSpecificationDto;
 import pl.domanski.carRent.admin.car.model.AdminBodyType;
 import pl.domanski.carRent.admin.car.model.AdminCar;
 import pl.domanski.carRent.admin.car.model.AdminCarDescription;
 import pl.domanski.carRent.admin.car.model.AdminCarEquipment;
-import pl.domanski.carRent.admin.car.model.AdminCarPhoto;
 import pl.domanski.carRent.admin.car.model.AdminCarPrice;
 import pl.domanski.carRent.admin.car.model.AdminCarTechnicalSpecification;
 
@@ -34,9 +32,8 @@ public class AdminCarMapper {
                 .build();
     }
 
-    public static AdminCar mapToAdminCar(AdminCarDto adminCarDto, String slug, Long id, long categoryId) {
+    public static AdminCar mapToAdminCar(AdminCarDto adminCarDto, String slug, long categoryId) {
         return AdminCar.builder()
-                .id(id)
                 .brand(adminCarDto.getBrand())
                 .model(adminCarDto.getModel())
                 .year(adminCarDto.getYear())
@@ -80,14 +77,4 @@ public class AdminCarMapper {
                 .transportPricePerKm(carPriceDto.getTransportPricePerKm())
                 .build();
     }
-
-    public static AdminCarPhoto mapToAdminCarPhoto(AdminCarPhotoDto photoDto, Long carId) {
-        return AdminCarPhoto.builder()
-                .photo(photoDto.getPhoto())
-                .carId(carId)
-                .build();
-    }
-
-
-
 }

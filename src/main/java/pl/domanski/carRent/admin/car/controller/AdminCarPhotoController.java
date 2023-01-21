@@ -30,6 +30,11 @@ public class AdminCarPhotoController {
         return adminCarPhotoService.uploadImages(multipartFile, carId);
     }
 
+    @PostMapping("/admin/cars/upload-photo/{carName}")
+    public AdminCarPhotoDto uploadImages(@RequestParam("file") MultipartFile multipartFile, @PathVariable String carName) {
+        return adminCarPhotoService.uploadImagesForNewCar(multipartFile, carName);
+    }
+
     @GetMapping("/data/carPhotos/{filename}")
     public ResponseEntity<Resource> serveFiles(@PathVariable String filename) throws IOException {
         Resource file = adminCarPhotoService.serveFiles(filename);
