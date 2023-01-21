@@ -52,8 +52,8 @@ public class ShowCarsTest {
         assertThat(result, hasSize(5));
         assertEquals(3, result.get(3).getDays());
         assertEquals(3, result.get(4).getDays());
-        assertEquals(BigDecimal.valueOf(165), result.get(3).getGrossValue());
-        assertEquals(BigDecimal.valueOf(15000), result.get(4).getGrossValue());
+        assertEquals(BigDecimal.valueOf(132), result.get(3).getGrossValue());
+        assertEquals(BigDecimal.valueOf(12000), result.get(4).getGrossValue());
         assertFalse(result.get(0).isAvailable());
         assertFalse(result.get(1).isAvailable());
         assertTrue(result.get(3).isAvailable());
@@ -76,8 +76,8 @@ public class ShowCarsTest {
         assertThat(result, hasSize(3));
         assertEquals(3, result.get(1).getDays());
         assertEquals(3, result.get(2).getDays());
-        assertEquals(BigDecimal.valueOf(165), result.get(1).getGrossValue());
-        assertEquals(BigDecimal.valueOf(15000), result.get(2).getGrossValue());
+        assertEquals(BigDecimal.valueOf(132), result.get(1).getGrossValue());
+        assertEquals(BigDecimal.valueOf(12000), result.get(2).getGrossValue());
         assertTrue(result.get(1).isAvailable());
         assertTrue(result.get(2).isAvailable());
     }
@@ -93,14 +93,14 @@ public class ShowCarsTest {
         given(checkCarAvailabilityUtils.checkCarAvailability(4L, rentDateAndPlace)).willReturn(true);
         given(checkCarAvailabilityUtils.checkCarAvailability(5L, rentDateAndPlace)).willReturn(true);
         //when
-        List<CarToRentDto> result = rentService.showCars(rentDateAndPlace, true, "Ascending");
+        List<CarToRentDto> result = rentService.showCars(rentDateAndPlace, true, "Rosnaco");
         //then
         assertThat(result, hasSize(3));
         assertEquals(3, result.get(1).getDays());
         assertEquals(3, result.get(2).getDays());
-        assertEquals(BigDecimal.valueOf(165), result.get(0).getGrossValue());
-        assertEquals(BigDecimal.valueOf(1500), result.get(1).getGrossValue());
-        assertEquals(BigDecimal.valueOf(15000), result.get(2).getGrossValue());
+        assertEquals(BigDecimal.valueOf(132), result.get(0).getGrossValue());
+        assertEquals(BigDecimal.valueOf(1200), result.get(1).getGrossValue());
+        assertEquals(BigDecimal.valueOf(12000), result.get(2).getGrossValue());
         assertTrue(result.get(1).isAvailable());
         assertTrue(result.get(2).isAvailable());
     }
@@ -116,14 +116,14 @@ public class ShowCarsTest {
         given(checkCarAvailabilityUtils.checkCarAvailability(4L, rentDateAndPlace)).willReturn(true);
         given(checkCarAvailabilityUtils.checkCarAvailability(5L, rentDateAndPlace)).willReturn(true);
         //when
-        List<CarToRentDto> result = rentService.showCars(rentDateAndPlace, true, "Descending");
+        List<CarToRentDto> result = rentService.showCars(rentDateAndPlace, true, "Malejaco");
         //then
         assertThat(result, hasSize(3));
         assertEquals(3, result.get(1).getDays());
         assertEquals(3, result.get(2).getDays());
-        assertEquals(BigDecimal.valueOf(15000), result.get(0).getGrossValue());
-        assertEquals(BigDecimal.valueOf(1500), result.get(1).getGrossValue());
-        assertEquals(BigDecimal.valueOf(165), result.get(2).getGrossValue());
+        assertEquals(BigDecimal.valueOf(12000), result.get(0).getGrossValue());
+        assertEquals(BigDecimal.valueOf(1200), result.get(1).getGrossValue());
+        assertEquals(BigDecimal.valueOf(132), result.get(2).getGrossValue());
         assertTrue(result.get(1).isAvailable());
         assertTrue(result.get(2).isAvailable());
     }
@@ -139,14 +139,14 @@ public class ShowCarsTest {
         given(checkCarAvailabilityUtils.checkCarAvailability(4L, rentDateAndPlace)).willReturn(true);
         given(checkCarAvailabilityUtils.checkCarAvailability(5L, rentDateAndPlace)).willReturn(true);
         //when
-        List<CarToRentDto> result = rentService.showCars(rentDateAndPlace, false, "Descending");
+        List<CarToRentDto> result = rentService.showCars(rentDateAndPlace, false, "Malejaco");
         //then
         assertThat(result, hasSize(5));
         assertEquals(3, result.get(1).getDays());
         assertEquals(3, result.get(2).getDays());
-        assertEquals(BigDecimal.valueOf(15000), result.get(0).getGrossValue());
-        assertEquals(BigDecimal.valueOf(1500), result.get(1).getGrossValue());
-        assertEquals(BigDecimal.valueOf(165), result.get(2).getGrossValue());
+        assertEquals(BigDecimal.valueOf(12000), result.get(0).getGrossValue());
+        assertEquals(BigDecimal.valueOf(1200), result.get(1).getGrossValue());
+        assertEquals(BigDecimal.valueOf(132), result.get(2).getGrossValue());
         assertTrue(result.get(1).isAvailable());
         assertTrue(result.get(2).isAvailable());
     }
@@ -162,14 +162,14 @@ public class ShowCarsTest {
         given(checkCarAvailabilityUtils.checkCarAvailability(4L, rentDateAndPlace)).willReturn(true);
         given(checkCarAvailabilityUtils.checkCarAvailability(5L, rentDateAndPlace)).willReturn(true);
         //when
-        List<CarToRentDto> result = rentService.showCars(rentDateAndPlace, false, "Ascending");
+        List<CarToRentDto> result = rentService.showCars(rentDateAndPlace, false, "Rosnaco");
         //then
         assertThat(result, hasSize(5));
         assertNull(result.get(1).getDays());
         assertEquals(3, result.get(2).getDays());
-        assertEquals(BigDecimal.valueOf(165), result.get(2).getGrossValue());
-        assertEquals(BigDecimal.valueOf(1500), result.get(3).getGrossValue());
-        assertEquals(BigDecimal.valueOf(15000), result.get(4).getGrossValue());
+        assertEquals(BigDecimal.valueOf(132), result.get(2).getGrossValue());
+        assertEquals(BigDecimal.valueOf(1200), result.get(3).getGrossValue());
+        assertEquals(BigDecimal.valueOf(12000), result.get(4).getGrossValue());
         assertFalse(result.get(1).isAvailable());
         assertTrue(result.get(2).isAvailable());
     }

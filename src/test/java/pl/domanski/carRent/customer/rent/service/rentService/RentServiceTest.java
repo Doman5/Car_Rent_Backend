@@ -6,15 +6,17 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
+import pl.domanski.carRent.common.mail.EmailClientService;
+import pl.domanski.carRent.common.mail.FakeEmailService;
 import pl.domanski.carRent.customer.common.model.Car;
 import pl.domanski.carRent.customer.common.repository.CarRepository;
-import pl.domanski.carRent.customer.rent.model.dto.RentDto;
+import pl.domanski.carRent.customer.common.repository.RentRepository;
 import pl.domanski.carRent.customer.rent.model.Payment;
 import pl.domanski.carRent.customer.rent.model.Rent;
 import pl.domanski.carRent.customer.rent.model.RentStatus;
+import pl.domanski.carRent.customer.rent.model.dto.RentDto;
 import pl.domanski.carRent.customer.rent.model.dto.RentSummary;
 import pl.domanski.carRent.customer.rent.repository.PaymentRepository;
-import pl.domanski.carRent.customer.common.repository.RentRepository;
 import pl.domanski.carRent.customer.rent.service.RentService;
 import pl.domanski.carRent.customer.rent.utils.CheckCarAvailabilityUtils;
 
@@ -43,6 +45,9 @@ class RentServiceTest {
     @Mock
     RentRepository rentRepository;
 
+    @Mock
+    EmailClientService emailClientService;
+
     @InjectMocks
     RentService rentService;
 
@@ -53,6 +58,7 @@ class RentServiceTest {
         given(carRepository.findById(any())).willReturn(Optional.of(Car.builder().id(2L).build()));
         given(paymentRepository.findById(any())).willReturn(Optional.of(Payment.builder().id(1L).build()));
         given(rentRepository.save(Mockito.any(Rent.class))).willAnswer(invocationOnMock -> invocationOnMock.getArgument(0));
+        given(emailClientService.getInstance()).willReturn(new FakeEmailService());
         //when
         RentSummary rentSummary = rentService.placeRent(rentDto, 1L);
         //then

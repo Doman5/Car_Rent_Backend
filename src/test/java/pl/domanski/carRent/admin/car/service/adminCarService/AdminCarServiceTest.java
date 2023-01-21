@@ -74,7 +74,6 @@ class AdminCarServiceTest {
         assertEquals("test-brand-test-model-9999", result.getSlug());
         assertEquals("test brand", result.getBrand());
         assertEquals("test model", result.getModel());
-        assertThat(result.getPhotos()).asList();
         assertThat(result.getDescriptions()).asList();
         assertThat(result.getEquipments()).asList();
         assertEquals(BigDecimal.valueOf(10), result.getCarPrice().getPriceDay());
