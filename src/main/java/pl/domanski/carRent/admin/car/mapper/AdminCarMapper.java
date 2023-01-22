@@ -1,11 +1,11 @@
-package pl.domanski.carRent.admin.car.service.mapper;
+package pl.domanski.carRent.admin.car.mapper;
 
-import pl.domanski.carRent.admin.car.controller.dto.AdminCarBasicInfo;
-import pl.domanski.carRent.admin.car.controller.dto.AdminCarDescriptionDto;
-import pl.domanski.carRent.admin.car.controller.dto.AdminCarDto;
-import pl.domanski.carRent.admin.car.controller.dto.AdminCarEquipmentDto;
-import pl.domanski.carRent.admin.car.controller.dto.AdminCarPriceDto;
-import pl.domanski.carRent.admin.car.controller.dto.AdminCarTechnicalSpecificationDto;
+import pl.domanski.carRent.admin.car.model.dto.AdminCarBasicInfo;
+import pl.domanski.carRent.admin.car.model.dto.AdminCarDescriptionDto;
+import pl.domanski.carRent.admin.car.model.dto.AdminCarDto;
+import pl.domanski.carRent.admin.car.model.dto.AdminCarEquipmentDto;
+import pl.domanski.carRent.admin.car.model.dto.AdminCarPriceDto;
+import pl.domanski.carRent.admin.car.model.dto.AdminCarTechnicalSpecificationDto;
 import pl.domanski.carRent.admin.car.model.AdminBodyType;
 import pl.domanski.carRent.admin.car.model.AdminCar;
 import pl.domanski.carRent.admin.car.model.AdminCarDescription;
@@ -75,6 +75,18 @@ public class AdminCarMapper {
                 .distanceLimit(carPriceDto.getDistanceLimit())
                 .distanceLimitPenalty(carPriceDto.getDistanceLimitPenalty())
                 .transportPricePerKm(carPriceDto.getTransportPricePerKm())
+                .build();
+    }
+
+    public static AdminCarDescriptionDto mapToCarDescriptionDto(AdminCarDescription description) {
+        return AdminCarDescriptionDto.builder()
+                .description(description.getDescription())
+                .build();
+    }
+
+    public static AdminCarEquipmentDto mapToCarEquipmentDto(AdminCarEquipment equipment) {
+        return AdminCarEquipmentDto.builder()
+                .name(equipment.getName())
                 .build();
     }
 }

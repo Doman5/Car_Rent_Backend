@@ -7,11 +7,11 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import pl.domanski.carRent.admin.car.controller.dto.AdminCarBasicInfo;
-import pl.domanski.carRent.admin.car.controller.dto.AdminCarDescriptionDto;
-import pl.domanski.carRent.admin.car.controller.dto.AdminCarEquipmentDto;
-import pl.domanski.carRent.admin.car.controller.dto.AdminCarPriceDto;
-import pl.domanski.carRent.admin.car.controller.dto.AdminCarTechnicalSpecificationDto;
+import pl.domanski.carRent.admin.car.model.dto.AdminCarBasicInfo;
+import pl.domanski.carRent.admin.car.model.dto.AdminCarDescriptionDto;
+import pl.domanski.carRent.admin.car.model.dto.AdminCarEquipmentDto;
+import pl.domanski.carRent.admin.car.model.dto.AdminCarPriceDto;
+import pl.domanski.carRent.admin.car.model.dto.AdminCarTechnicalSpecificationDto;
 import pl.domanski.carRent.admin.car.model.AdminCar;
 import pl.domanski.carRent.admin.car.model.AdminCarDescription;
 import pl.domanski.carRent.admin.car.model.AdminCarEquipment;
@@ -51,14 +51,23 @@ public class AdminCarUpdateController {
         return adminCarUpdateService.updateCarTechSpec(id, carTechSpec);
     }
 
+    @GetMapping("/carEquipment")
+    public List<AdminCarEquipmentDto> getCarEquipment(@PathVariable Long id) {
+        return adminCarUpdateService.getCarEquipment(id);
+    }
+
     @PutMapping("/carEquipment")
     public List<AdminCarEquipment> updateCarEquipment(@PathVariable Long id, @RequestBody @Valid List<AdminCarEquipmentDto> equipmentList) {
         return adminCarUpdateService.updateCarEquipment(id, equipmentList);
     }
 
+    @GetMapping("/carDescription")
+    public List<AdminCarDescriptionDto> getCarDescriptions(@PathVariable Long id) {
+        return adminCarUpdateService.getCarDescriptions(id);
+    }
 
     @PutMapping("/carDescription")
-    public List<AdminCarDescription> updateCarDescription(@PathVariable Long id, @RequestBody @Valid List<AdminCarDescriptionDto> descriptionList) {
+    public List<AdminCarDescription> updateCarDescription(@PathVariable Long id, @RequestBody List<AdminCarDescriptionDto> descriptionList) {
         return adminCarUpdateService.updateCarDescription(id, descriptionList);
     }
 

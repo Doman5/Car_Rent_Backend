@@ -3,12 +3,12 @@ package pl.domanski.carRent.admin.car.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import pl.domanski.carRent.admin.car.controller.dto.AdminCarBasicInfo;
-import pl.domanski.carRent.admin.car.controller.dto.AdminCarDescriptionDto;
-import pl.domanski.carRent.admin.car.controller.dto.AdminCarDto;
-import pl.domanski.carRent.admin.car.controller.dto.AdminCarEquipmentDto;
-import pl.domanski.carRent.admin.car.controller.dto.AdminCarPriceDto;
-import pl.domanski.carRent.admin.car.controller.dto.AdminCarTechnicalSpecificationDto;
+import pl.domanski.carRent.admin.car.model.dto.AdminCarBasicInfo;
+import pl.domanski.carRent.admin.car.model.dto.AdminCarDescriptionDto;
+import pl.domanski.carRent.admin.car.model.dto.AdminCarDto;
+import pl.domanski.carRent.admin.car.model.dto.AdminCarEquipmentDto;
+import pl.domanski.carRent.admin.car.model.dto.AdminCarPriceDto;
+import pl.domanski.carRent.admin.car.model.dto.AdminCarTechnicalSpecificationDto;
 import pl.domanski.carRent.admin.car.model.AdminCar;
 import pl.domanski.carRent.admin.car.model.AdminCarDescription;
 import pl.domanski.carRent.admin.car.model.AdminCarEquipment;
@@ -19,7 +19,8 @@ import pl.domanski.carRent.admin.car.repository.AdminCarEquipmentRepository;
 import pl.domanski.carRent.admin.car.repository.AdminCarPriceRepository;
 import pl.domanski.carRent.admin.car.repository.AdminCarRepository;
 import pl.domanski.carRent.admin.car.repository.AdminCarTechnicalSpecificationRepository;
-import pl.domanski.carRent.admin.car.service.utils.CarSlugUtils;
+import pl.domanski.carRent.admin.car.mapper.AdminCarMapper;
+import pl.domanski.carRent.admin.car.utils.CarSlugUtils;
 import pl.domanski.carRent.admin.category.model.AdminCategory;
 import pl.domanski.carRent.admin.common.dto.AdminCategoryDto;
 import pl.domanski.carRent.admin.common.repository.AdminCategoryRepository;
@@ -29,12 +30,12 @@ import pl.domanski.carRent.customer.common.repository.CarRepository;
 import java.util.ArrayList;
 import java.util.List;
 
-import static pl.domanski.carRent.admin.car.service.mapper.AdminCarMapper.mapToAdminCarBasicInfo;
-import static pl.domanski.carRent.admin.car.service.utils.CarUpdateUtils.setNewCarBasicInfoValues;
-import static pl.domanski.carRent.admin.car.service.utils.CarUpdateUtils.setNewCarDescriptionValues;
-import static pl.domanski.carRent.admin.car.service.utils.CarUpdateUtils.setNewCarEquipmentValues;
-import static pl.domanski.carRent.admin.car.service.utils.CarUpdateUtils.setNewCarPriceValues;
-import static pl.domanski.carRent.admin.car.service.utils.CarUpdateUtils.setNewCarTechSpecValues;
+import static pl.domanski.carRent.admin.car.mapper.AdminCarMapper.mapToAdminCarBasicInfo;
+import static pl.domanski.carRent.admin.car.utils.CarUpdateUtils.setNewCarBasicInfoValues;
+import static pl.domanski.carRent.admin.car.utils.CarUpdateUtils.setNewCarDescriptionValues;
+import static pl.domanski.carRent.admin.car.utils.CarUpdateUtils.setNewCarEquipmentValues;
+import static pl.domanski.carRent.admin.car.utils.CarUpdateUtils.setNewCarPriceValues;
+import static pl.domanski.carRent.admin.car.utils.CarUpdateUtils.setNewCarTechSpecValues;
 
 @Service
 @RequiredArgsConstructor
@@ -75,7 +76,6 @@ public class AdminCarUpdateService {
     }
 
 
-
     @Transactional
     public List<AdminCarDescription> updateCarDescription(Long id, List<AdminCarDescriptionDto> descriptionDtoList) {
         List<AdminCarDescription> descriptions = adminCarDescriptionRepository.findAllByCarId(id);
@@ -101,9 +101,9 @@ public class AdminCarUpdateService {
     }
 
     private void deleteEquipmentWhenNewListIsShorter(List<AdminCarEquipment> equipments, ArrayList<AdminCarEquipment> newCarEquipment) {
-        if(equipments.size() > newCarEquipment.size()) {
+        if (equipments.size() > newCarEquipment.size()) {
             for (int i = 0; i < equipments.size(); i++) {
-                try{
+                try {
                     newCarEquipment.get(i);
                 } catch (IndexOutOfBoundsException e) {
                     adminCarEquipmentRepository.deleteById(equipments.get(i).getId());
@@ -113,9 +113,9 @@ public class AdminCarUpdateService {
     }
 
     private void deleteDescriptionWhenNewListIsShorter(List<AdminCarDescription> descriptions, ArrayList<AdminCarDescription> newCarDescription) {
-        if(descriptions.size() > newCarDescription.size()) {
+        if (descriptions.size() > newCarDescription.size()) {
             for (int i = 0; i < descriptions.size(); i++) {
-                try{
+                try {
                     newCarDescription.get(i);
                 } catch (IndexOutOfBoundsException e) {
                     adminCarDescriptionRepository.deleteById(descriptions.get(i).getId());
@@ -157,4 +157,21 @@ public class AdminCarUpdateService {
         Car car = carRepository.findById(id).orElseThrow();
         return adminCategoryRepository.findById(car.getCategoryId()).orElse(new AdminCategory());
     }
+
+    public List<AdminCarDescriptionDto> getCarDescriptions(Long id) {
+        AdminCar adminCar = adminCarRepository.findById(id).orElseThrow();
+        return adminCar.getDescriptions().stream()
+                .map(AdminCarMapper::mapToCarDescriptionDto)
+                .toList();
+    }
+
+
+    public List<AdminCarEquipmentDto> getCarEquipment(Long id) {
+        AdminCar adminCar = adminCarRepository.findById(id).orElseThrow();
+        return adminCar.getEquipments().stream()
+                .map(AdminCarMapper::mapToCarEquipmentDto)
+                .toList();
+    }
+
+
 }
