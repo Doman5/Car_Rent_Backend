@@ -1,7 +1,7 @@
 package pl.domanski.carRent.admin.car.service.utils.generateValues;
 
-import pl.domanski.carRent.admin.car.controller.dto.AdminCarDescriptionDto;
-import pl.domanski.carRent.admin.car.controller.dto.AdminCarEquipmentDto;
+import pl.domanski.carRent.admin.car.model.dto.AdminCarDescriptionDto;
+import pl.domanski.carRent.admin.car.model.dto.AdminCarEquipmentDto;
 import pl.domanski.carRent.admin.car.model.AdminCarDescription;
 import pl.domanski.carRent.admin.car.model.AdminCarEquipment;
 

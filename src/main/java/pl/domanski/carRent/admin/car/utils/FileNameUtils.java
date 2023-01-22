@@ -1,4 +1,4 @@
-package pl.domanski.carRent.admin.car.service.utils;
+package pl.domanski.carRent.admin.car.utils;
 
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.io.FilenameUtils;

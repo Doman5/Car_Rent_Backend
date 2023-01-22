@@ -1,10 +1,11 @@
 package pl.domanski.carRent.admin.car.service.utils;
 
 import org.junit.jupiter.api.Test;
-import pl.domanski.carRent.admin.car.controller.dto.AdminCarDescriptionDto;
-import pl.domanski.carRent.admin.car.controller.dto.AdminCarEquipmentDto;
+import pl.domanski.carRent.admin.car.model.dto.AdminCarDescriptionDto;
+import pl.domanski.carRent.admin.car.model.dto.AdminCarEquipmentDto;
 import pl.domanski.carRent.admin.car.model.AdminCarDescription;
 import pl.domanski.carRent.admin.car.model.AdminCarEquipment;
+import pl.domanski.carRent.admin.car.utils.CarUpdateUtils;
 
 import java.util.ArrayList;
 import java.util.List;

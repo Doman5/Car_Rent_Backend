@@ -6,11 +6,11 @@ import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
-import pl.domanski.carRent.admin.car.controller.dto.AdminCarPhotoDto;
+import pl.domanski.carRent.admin.car.model.dto.AdminCarPhotoDto;
 import pl.domanski.carRent.admin.car.model.AdminCarPhoto;
 import pl.domanski.carRent.admin.car.repository.AdminCarPhotoRepository;
 import pl.domanski.carRent.admin.car.repository.AdminCarRepository;
-import pl.domanski.carRent.admin.car.service.utils.FileNameUtils;
+import pl.domanski.carRent.admin.car.utils.FileNameUtils;
 
 import java.io.File;
 import java.io.IOException;

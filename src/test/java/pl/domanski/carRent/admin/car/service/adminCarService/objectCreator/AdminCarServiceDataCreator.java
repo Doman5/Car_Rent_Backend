@@ -1,11 +1,11 @@
 package pl.domanski.carRent.admin.car.service.adminCarService.objectCreator;
 
-import pl.domanski.carRent.admin.car.controller.dto.AdminCarDescriptionDto;
-import pl.domanski.carRent.admin.car.controller.dto.AdminCarDto;
-import pl.domanski.carRent.admin.car.controller.dto.AdminCarEquipmentDto;
-import pl.domanski.carRent.admin.car.controller.dto.AdminCarPhotoDto;
-import pl.domanski.carRent.admin.car.controller.dto.AdminCarPriceDto;
-import pl.domanski.carRent.admin.car.controller.dto.AdminCarTechnicalSpecificationDto;
+import pl.domanski.carRent.admin.car.model.dto.AdminCarDescriptionDto;
+import pl.domanski.carRent.admin.car.model.dto.AdminCarDto;
+import pl.domanski.carRent.admin.car.model.dto.AdminCarEquipmentDto;
+import pl.domanski.carRent.admin.car.model.dto.AdminCarPhotoDto;
+import pl.domanski.carRent.admin.car.model.dto.AdminCarPriceDto;
+import pl.domanski.carRent.admin.car.model.dto.AdminCarTechnicalSpecificationDto;
 import pl.domanski.carRent.admin.car.model.AdminCar;
 import pl.domanski.carRent.admin.car.model.AdminCarDescription;
 import pl.domanski.carRent.admin.car.model.AdminCarEquipment;
