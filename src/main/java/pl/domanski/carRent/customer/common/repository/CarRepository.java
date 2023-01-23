@@ -11,7 +11,6 @@ import java.util.Optional;
 public interface CarRepository extends JpaRepository<Car,Long> {
     Optional<Car> findBySlug(String slug);
     List<Car> findAllByCategoryId(Long categoryId);
-    List<Car> findAllTop3ByCategoryId(Long categoryId);
 
     @Query("select distinct c.brand from Car c")
     List<String> findAllBrandNames();

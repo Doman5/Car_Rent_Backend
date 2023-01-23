@@ -9,8 +9,10 @@ import pl.domanski.carRent.customer.common.model.SortingType;
 import pl.domanski.carRent.customer.common.repository.CarRepository;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static pl.domanski.carRent.customer.common.utils.SortingUtils.sortCars;
 
@@ -60,8 +62,13 @@ public class CarService {
     }
 
     public List<CarBasicInfo> getThreeRecommendedCars(String slug) {
-        Car car = carRepository.findBySlug(slug).orElseThrow();
-        return carRepository.findAllTop3ByCategoryId(car.getCategoryId()).stream()
+        Car originalCar = carRepository.findBySlug(slug).orElseThrow();
+        List<Car> carsWithTheSameCategory = carRepository.findAllByCategoryId(originalCar.getCategoryId()).stream()
+                .filter(car -> !car.getSlug().equals(slug))
+                .collect(Collectors.toList());
+        Collections.shuffle(carsWithTheSameCategory);
+        return carsWithTheSameCategory.stream()
+                .limit(3)
                 .map(CarMapper::mapToCarBasicInfo)
                 .toList();
     }
