@@ -17,5 +17,7 @@ public class UserRentDto {
     private LocalDateTime rentalDate;
     private String returnPlace;
     private LocalDateTime returnDate;
-    private BigDecimal grossValue;
+    private BigDecimal priceWithoutDeposit;
+    private BigDecimal deposit;
+    private BigDecimal finalPrice;
 }

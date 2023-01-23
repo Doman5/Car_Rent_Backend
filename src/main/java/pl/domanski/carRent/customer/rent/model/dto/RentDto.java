@@ -16,7 +16,8 @@ public class RentDto {
     @NotNull
     private Long carId;
     @Min(1)
-    private BigDecimal grossValue;
+    private BigDecimal priceWithoutDeposit;
+    private BigDecimal deposit;
     @Min(0)
     private BigDecimal rentalPrice;
     @Min(0)

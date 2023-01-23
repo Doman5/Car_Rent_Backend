@@ -36,6 +36,7 @@ import static pl.domanski.carRent.customer.rent.mapper.RentEmailMessageMapper.cr
 import static pl.domanski.carRent.customer.rent.mapper.RentMapper.createRent;
 import static pl.domanski.carRent.customer.rent.mapper.RentMapper.createRentSummary;
 import static pl.domanski.carRent.customer.rent.utils.DaysCalculateUtils.calculateCountOfDays;
+import static pl.domanski.carRent.customer.rent.utils.RentPricesCalculator.addDepositToFinalPrice;
 import static pl.domanski.carRent.customer.rent.utils.RentPricesCalculator.addTaxToFinalPrice;
 import static pl.domanski.carRent.customer.rent.utils.RentPricesCalculator.calculateGrossValueByDaysCount;
 import static pl.domanski.carRent.customer.rent.utils.RentPricesCalculator.calculateTransportPrice;
@@ -57,11 +58,13 @@ public class RentService {
     public RentSummary placeRent(RentDto rentDto, Long userId) {
         Car car = carRepository.findById(rentDto.getCarId()).orElseThrow();
         Payment payment = paymentRepository.findById(rentDto.getPaymentId()).orElseThrow();
-        BigDecimal finalPrice = addTaxToFinalPrice(rentDto, DEFAULT_TAX_23);
-        Rent rent = rentRepository.save(createRent(rentDto, userId, car, payment, finalPrice));
+        BigDecimal priceWithTax = addTaxToFinalPrice(rentDto, DEFAULT_TAX_23);
+        BigDecimal finalPrice = addDepositToFinalPrice(priceWithTax, rentDto.getDeposit());
+        Rent rent = rentRepository.save(createRent(rentDto, userId, car, payment, finalPrice, priceWithTax, rentDto.getDeposit()));
         sendConfirmEmail(rent);
         return createRentSummary(car, rent);
     }
+
 
     private void sendConfirmEmail(Rent rent) {
         //pobrać maila użytkownika z user id

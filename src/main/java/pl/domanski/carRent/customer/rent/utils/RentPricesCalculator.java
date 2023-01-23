@@ -32,6 +32,11 @@ public class RentPricesCalculator {
     }
 
     public static BigDecimal addTaxToFinalPrice(RentDto rentDto, double tax) {
-        return rentDto.getGrossValue().add(rentDto.getRentalPrice()).add(rentDto.getReturnPrice()).multiply(BigDecimal.valueOf(tax)).setScale(2);
+        return rentDto.getPriceWithoutDeposit().add(rentDto.getRentalPrice()).add(rentDto.getReturnPrice()).multiply(BigDecimal.valueOf(tax)).setScale(2);
     }
+
+    public static BigDecimal addDepositToFinalPrice(BigDecimal priceWithTax, BigDecimal deposit) {
+        return priceWithTax.add(deposit);
+    }
+
 }

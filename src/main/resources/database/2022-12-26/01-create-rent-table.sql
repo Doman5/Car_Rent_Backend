@@ -9,7 +9,7 @@
         rental_place varchar(128) not null,
         return_date datetime not null,
         return_place varchar(128) not null,
-        gross_value float(7,2) not null,
+        price_without_deposit float(8,2) not null,
         days int not null,
         constraint fk_rent_car_id foreign key (car_id) references car(id)
     )

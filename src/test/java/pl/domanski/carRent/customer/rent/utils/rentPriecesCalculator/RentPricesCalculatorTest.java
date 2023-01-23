@@ -60,7 +60,7 @@ class RentPricesCalculatorTest {
 
     private static RentDto createRentDtoWithRentPrices() {
         return RentDto.builder()
-                .grossValue(BigDecimal.valueOf(2021))
+                .priceWithoutDeposit(BigDecimal.valueOf(2021))
                 .rentalPrice(BigDecimal.valueOf(311))
                 .returnPrice(BigDecimal.ZERO)
                 .build();

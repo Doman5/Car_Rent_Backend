@@ -36,5 +36,7 @@ public class Rent {
     private LocalDateTime rentalDate;
     private String returnPlace;
     private LocalDateTime returnDate;
-    private BigDecimal grossValue;
+    private BigDecimal priceWithoutDeposit;
+    private BigDecimal deposit;
+    private BigDecimal finalPrice;
 }

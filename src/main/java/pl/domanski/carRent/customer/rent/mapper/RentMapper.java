@@ -15,17 +15,18 @@ public class RentMapper {
         return RentSummary.builder()
                 .id(rent.getId())
                 .carName(car.getSlug())
-                .finalPrice(rent.getGrossValue())
+                .priceWithoutDeposit(rent.getPriceWithoutDeposit())
+                .deposit(rent.getDeposit())
+                .finalPrice(rent.getFinalPrice())
                 .rentalPlace(rent.getRentalPlace())
                 .rentalDate(rent.getRentalDate())
                 .returnPlace(rent.getReturnPlace())
                 .returnDate(rent.getReturnDate())
-                .payment(rent.getPayment())
-                .rentStatus(RentStatus.NEW)
+                .paymentName(rent.getPayment().getName())
                 .build();
     }
 
-    public static Rent createRent(RentDto carDto, Long userId, Car car, Payment payment, BigDecimal grossValue) {
+    public static Rent createRent(RentDto carDto, Long userId, Car car, Payment payment, BigDecimal finalPrice, BigDecimal priceWithTax, BigDecimal deposit) {
         return Rent.builder()
                 .car(car)
                 .userId(userId)
@@ -34,7 +35,9 @@ public class RentMapper {
                 .returnPlace(carDto.getReturnPlace())
                 .rentalDate(carDto.getRentalDate())
                 .returnDate(carDto.getReturnDate())
-                .grossValue(grossValue)
+                .priceWithoutDeposit(priceWithTax)
+                .deposit(deposit)
+                .finalPrice(finalPrice)
                 .rentStatus(RentStatus.NEW)
                 .build();
     }

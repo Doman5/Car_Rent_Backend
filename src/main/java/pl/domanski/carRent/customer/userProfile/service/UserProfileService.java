@@ -6,7 +6,6 @@ import pl.domanski.carRent.customer.common.model.Car;
 import pl.domanski.carRent.customer.common.repository.RentRepository;
 import pl.domanski.carRent.common.repository.UserRepository;
 import pl.domanski.carRent.customer.rent.model.Rent;
-import pl.domanski.carRent.customer.rent.model.RentStatus;
 import pl.domanski.carRent.customer.userProfile.controller.dto.CarNameDto;
 import pl.domanski.carRent.customer.userProfile.controller.dto.UserInfoDto;
 import pl.domanski.carRent.customer.userProfile.controller.dto.UserRentDto;
@@ -23,7 +22,6 @@ public class UserProfileService {
 
     public List<UserRentDto> getUserRents(Long userId) {
         return rentRepository.findAllByUserIdOrderByIdDesc(userId).stream()
-                .filter(rent -> !rent.getRentStatus().name().equals(RentStatus.NEW.name()))
                 .map(this::mapToUserRentDto)
                 .toList();
 
@@ -67,7 +65,9 @@ public class UserProfileService {
                 .rentalPlace(rent.getRentalPlace())
                 .returnDate(rent.getReturnDate())
                 .returnPlace(rent.getReturnPlace())
-                .grossValue(rent.getGrossValue())
+                .priceWithoutDeposit(rent.getPriceWithoutDeposit())
+                .deposit(rent.getDeposit())
+                .finalPrice(rent.getFinalPrice())
                 .paymentType(rent.getPayment().getName())
                 .build();
     }
