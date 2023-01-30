@@ -6,7 +6,7 @@ import lombok.Getter;
 public class UserInfoEditDto {
     private String username;
     private String firstName;
-    private String secondName;
+    private String lastName;
     private String phone;
     private String password;
 }

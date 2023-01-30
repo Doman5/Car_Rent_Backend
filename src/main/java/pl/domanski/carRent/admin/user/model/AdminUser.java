@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import pl.domanski.carRent.security.model.UserRole;
 
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
@@ -17,6 +18,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Table;
+import java.io.Serializable;
 import java.util.List;
 
 @Entity
@@ -26,7 +28,7 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class AdminUser {
+public class AdminUser implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -34,11 +36,11 @@ public class AdminUser {
     private String password;
     private boolean enabled;
     private String firstName;
-    private String secondName;
+    private String lastName;
     private String phone;
     @ElementCollection
     @CollectionTable(name="authorities", joinColumns = @JoinColumn(name = "username", referencedColumnName = "username"))
     @Column(name = "authority")
     @Enumerated(EnumType.STRING)
-    private List<AdminUserRole> roles;
+    private List<UserRole> authorities;
 }

@@ -1,6 +1,8 @@
 package pl.domanski.carRent.admin.user.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -11,7 +13,6 @@ import pl.domanski.carRent.admin.user.model.dto.AdminUserBasicInfo;
 import pl.domanski.carRent.admin.user.model.dto.AdminUserDto;
 import pl.domanski.carRent.admin.user.service.AdminUserService;
 
-import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -22,8 +23,8 @@ public class AdminUserController {
     private final AdminUserService adminUserService;
 
     @GetMapping()
-    public List<AdminUserBasicInfo> getAllUsers() {
-        return adminUserService.getAllUsers();
+    public Page<AdminUserBasicInfo> getAllUsers(Pageable pageable) {
+        return adminUserService.getAllUsers(pageable);
     }
 
     @GetMapping("/{username}")

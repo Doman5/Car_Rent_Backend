@@ -1,16 +1,17 @@
 package pl.domanski.carRent.admin.user.service;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import pl.domanski.carRent.admin.user.mapper.AdminUserMapper;
 import pl.domanski.carRent.admin.user.model.AdminUser;
-import pl.domanski.carRent.admin.user.model.AdminUserRole;
 import pl.domanski.carRent.admin.user.model.dto.AdminUserBasicInfo;
 import pl.domanski.carRent.admin.user.model.dto.AdminUserDto;
 import pl.domanski.carRent.admin.user.repository.AdminUserRepository;
+import pl.domanski.carRent.security.model.UserRole;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
 import static pl.domanski.carRent.admin.user.mapper.AdminUserMapper.mapToAdminUserDto;
@@ -21,10 +22,10 @@ public class AdminUserService {
 
     private final AdminUserRepository adminUserRepository;
 
-    public List<AdminUserBasicInfo> getAllUsers() {
-        return adminUserRepository.findAll().stream()
-                .map(AdminUserMapper::mapToAdminUserBasicInfo)
-                .toList();
+    public Page<AdminUserBasicInfo> getAllUsers(Pageable pageable) {
+        Page<AdminUser> all = adminUserRepository.findAll(pageable);
+        Page<AdminUserBasicInfo> page = all.map(AdminUserMapper::mapToAdminUserBasicInfo);
+        return page;
     }
 
     public AdminUserDto getUser(String username) {
@@ -38,18 +39,18 @@ public class AdminUserService {
     }
 
     private AdminUser patchUserRoles(AdminUser adminUser, Map<String, Boolean> values) {
-        ArrayList<AdminUserRole> newRoles = new ArrayList<>();
+        ArrayList<UserRole> newRoles = new ArrayList<>();
 
         if (values.get("admin") != null && values.get("admin")) {
-            newRoles.add(AdminUserRole.ROLE_ADMIN);
+            newRoles.add(UserRole.ROLE_ADMIN);
         }
         if (values.get("customer") != null && values.get("customer")) {
-            newRoles.add(AdminUserRole.ROLE_CUSTOMER);
+            newRoles.add(UserRole.ROLE_CUSTOMER);
         }
         if (values.get("worker") != null &&values.get("worker")) {
-            newRoles.add(AdminUserRole.ROLE_WORKER);
+            newRoles.add(UserRole.ROLE_WORKER);
         }
-        adminUser.setRoles(newRoles);
+        adminUser.setAuthorities(newRoles);
         return adminUserRepository.save(adminUser);
     }
 }

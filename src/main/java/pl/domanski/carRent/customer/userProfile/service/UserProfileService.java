@@ -43,14 +43,14 @@ public class UserProfileService {
         return UserInfoDto.builder()
                 .username(user.getUsername())
                 .firstName(user.getFirstName())
-                .secondName(user.getSecondName())
+                .lastName(user.getLastName())
                 .phone(user.getPhone())
                 .build();
     }
 
     private User changeUserInfoValues(User user, UserInfoDto newUserInfoValues) {
         user.setFirstName(newUserInfoValues.getFirstName());
-        user.setSecondName(newUserInfoValues.getSecondName());
+        user.setLastName(newUserInfoValues.getLastName());
         user.setUsername(newUserInfoValues.getUsername());
         user.setPhone(newUserInfoValues.getPhone());
         return user;

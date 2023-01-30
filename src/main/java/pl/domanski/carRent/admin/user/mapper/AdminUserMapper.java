@@ -3,6 +3,7 @@ package pl.domanski.carRent.admin.user.mapper;
 import pl.domanski.carRent.admin.user.model.AdminUser;
 import pl.domanski.carRent.admin.user.model.dto.AdminUserBasicInfo;
 import pl.domanski.carRent.admin.user.model.dto.AdminUserDto;
+import pl.domanski.carRent.security.model.UserRole;
 
 public class AdminUserMapper {
 
@@ -10,8 +11,8 @@ public class AdminUserMapper {
         return AdminUserBasicInfo.builder()
                 .username(adminUser.getUsername())
                 .firstName(adminUser.getFirstName())
-                .secondName(adminUser.getSecondName())
-                .roles(adminUser.getRoles())
+                .lastName(adminUser.getLastName())
+                .roles(adminUser.getAuthorities().stream().map(UserRole::getRole).toList())
                 .build();
     }
 
@@ -19,10 +20,9 @@ public class AdminUserMapper {
         return AdminUserDto.builder()
                 .username(adminUser.getUsername())
                 .firstName(adminUser.getFirstName())
-                .secondName(adminUser.getSecondName())
+                .lastName(adminUser.getLastName())
                 .phone(adminUser.getPhone())
-                .enabled(adminUser.isEnabled())
-                .roles(adminUser.getRoles())
+                .roles(adminUser.getAuthorities().stream().map(UserRole::getRole).toList())
                 .build();
     }
 }

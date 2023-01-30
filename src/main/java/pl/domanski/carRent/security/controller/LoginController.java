@@ -63,7 +63,7 @@ public class LoginController {
                         .password("{bcrypt}" + new BCryptPasswordEncoder().encode(registerCredentials.password))
                         .enabled(true)
                         .firstName(registerCredentials.firstName)
-                        .secondName(registerCredentials.secondName)
+                        .lastName(registerCredentials.lastName)
                         .phone(registerCredentials.phone)
                         .authorities(List.of(UserRole.ROLE_CUSTOMER))
                 .build());
@@ -123,7 +123,7 @@ public class LoginController {
         @NotBlank
         private String firstName;
         @NotBlank
-        private String secondName;
+        private String lastName;
         @Length(min = 9, max = 9)
         private String phone;
     }

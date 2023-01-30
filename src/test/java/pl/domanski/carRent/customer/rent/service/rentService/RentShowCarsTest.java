@@ -25,7 +25,7 @@ import static pl.domanski.carRent.customer.rent.service.rentService.RentServiceC
 import static pl.domanski.carRent.customer.rent.service.rentService.RentServiceCreateData.createRentDateAndPlace;
 
 @ExtendWith(MockitoExtension.class)
-public class ShowCarsTest {
+public class RentShowCarsTest {
 
     @Mock
     CheckCarAvailabilityUtils checkCarAvailabilityUtils;
