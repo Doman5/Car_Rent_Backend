@@ -19,6 +19,6 @@ public class AdminFullRentInfo {
     private String rentalPlace;
     private LocalDateTime returnDate;
     private String returnPlace;
-    private BigDecimal grossValue;
+    private BigDecimal finalPrice;
     private List<AdminRentLogDto> rentLogs;
 }

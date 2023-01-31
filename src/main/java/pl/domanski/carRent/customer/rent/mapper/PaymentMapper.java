@@ -1,6 +1,6 @@
 package pl.domanski.carRent.customer.rent.mapper;
 
-import pl.domanski.carRent.customer.rent.model.Payment;
+import pl.domanski.carRent.customer.common.model.Payment;
 import pl.domanski.carRent.customer.rent.model.dto.PaymentDto;
 
 public class PaymentMapper {

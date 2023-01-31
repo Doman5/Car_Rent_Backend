@@ -7,9 +7,9 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import pl.domanski.carRent.admin.user.model.AdminUser;
-import pl.domanski.carRent.admin.user.model.AdminUserRole;
 import pl.domanski.carRent.admin.user.model.dto.AdminUserDto;
 import pl.domanski.carRent.admin.user.repository.AdminUserRepository;
+import pl.domanski.carRent.security.model.UserRole;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,9 +36,9 @@ class AdminUserServiceTest {
         //when
         AdminUserDto user = adminUserService.patchUser("test@test.com", Map.of("admin", true));
         //then
-        assertThat(user.getRoles().contains(AdminUserRole.ROLE_ADMIN)).isTrue();
-        assertThat(user.getRoles().contains(AdminUserRole.ROLE_CUSTOMER)).isFalse();
-        assertThat(user.getRoles().contains(AdminUserRole.ROLE_WORKER)).isFalse();
+        assertThat(user.getRoles().contains(UserRole.ROLE_ADMIN.getRole())).isTrue();
+        assertThat(user.getRoles().contains(UserRole.ROLE_CUSTOMER.getRole())).isFalse();
+        assertThat(user.getRoles().contains(UserRole.ROLE_WORKER.getRole())).isFalse();
     }
 
     @Test
@@ -49,9 +49,9 @@ class AdminUserServiceTest {
         //when
         AdminUserDto user = adminUserService.patchUser("test@test.com", Map.of("customer", true, "worker", true));
         //then
-        assertThat(user.getRoles().contains(AdminUserRole.ROLE_ADMIN)).isFalse();
-        assertThat(user.getRoles().contains(AdminUserRole.ROLE_CUSTOMER)).isTrue();
-        assertThat(user.getRoles().contains(AdminUserRole.ROLE_WORKER)).isTrue();
+        assertThat(user.getRoles().contains(UserRole.ROLE_ADMIN.getRole())).isFalse();
+        assertThat(user.getRoles().contains(UserRole.ROLE_CUSTOMER.getRole())).isTrue();
+        assertThat(user.getRoles().contains(UserRole.ROLE_WORKER.getRole())).isTrue();
     }
 
     @Test
@@ -62,9 +62,9 @@ class AdminUserServiceTest {
         //when
         AdminUserDto user = adminUserService.patchUser("test@test.com", Map.of("admin", false,"customer", true, "worker", true));
         //then
-        assertThat(user.getRoles().contains(AdminUserRole.ROLE_ADMIN)).isFalse();
-        assertThat(user.getRoles().contains(AdminUserRole.ROLE_CUSTOMER)).isTrue();
-        assertThat(user.getRoles().contains(AdminUserRole.ROLE_WORKER)).isTrue();
+        assertThat(user.getRoles().contains(UserRole.ROLE_ADMIN.getRole())).isFalse();
+        assertThat(user.getRoles().contains(UserRole.ROLE_CUSTOMER.getRole())).isTrue();
+        assertThat(user.getRoles().contains(UserRole.ROLE_WORKER.getRole())).isTrue();
     }
 
     @Test
@@ -75,16 +75,16 @@ class AdminUserServiceTest {
         //when
         AdminUserDto user = adminUserService.patchUser("test@test.com", Map.of("admin", false,"customer", true, "worker", false));
         //then
-        assertThat(user.getRoles().contains(AdminUserRole.ROLE_ADMIN)).isFalse();
-        assertThat(user.getRoles().contains(AdminUserRole.ROLE_CUSTOMER)).isTrue();
-        assertThat(user.getRoles().contains(AdminUserRole.ROLE_WORKER)).isFalse();
+        assertThat(user.getRoles().contains(UserRole.ROLE_ADMIN.getRole())).isFalse();
+        assertThat(user.getRoles().contains(UserRole.ROLE_CUSTOMER.getRole())).isTrue();
+        assertThat(user.getRoles().contains(UserRole.ROLE_WORKER.getRole())).isFalse();
     }
 
     private Optional<AdminUser> creteTestUserWithAllRoles() {
         return Optional.of(AdminUser.builder()
                 .id(1L)
                 .username("test@test.com")
-                .roles(List.of(AdminUserRole.ROLE_ADMIN, AdminUserRole.ROLE_CUSTOMER, AdminUserRole.ROLE_WORKER))
+                .authorities(List.of(UserRole.ROLE_ADMIN, UserRole.ROLE_CUSTOMER, UserRole.ROLE_WORKER))
                 .build());
     }
 
@@ -92,7 +92,7 @@ class AdminUserServiceTest {
         return Optional.of(AdminUser.builder()
                         .id(1L)
                         .username("test@test.com")
-                        .roles(new ArrayList<>())
+                        .authorities(new ArrayList<>())
                 .build());
     }
 }

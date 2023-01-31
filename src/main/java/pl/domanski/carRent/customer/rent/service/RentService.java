@@ -9,7 +9,7 @@ import pl.domanski.carRent.customer.common.model.SortingType;
 import pl.domanski.carRent.customer.common.repository.CarRepository;
 import pl.domanski.carRent.customer.common.utils.SortingUtils;
 import pl.domanski.carRent.customer.rent.mapper.PaymentMapper;
-import pl.domanski.carRent.customer.rent.model.Payment;
+import pl.domanski.carRent.customer.common.model.Payment;
 import pl.domanski.carRent.customer.rent.model.Rent;
 import pl.domanski.carRent.customer.rent.model.dto.CarToRentDto;
 import pl.domanski.carRent.customer.rent.model.dto.InitRent;

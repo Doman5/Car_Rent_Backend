@@ -2,9 +2,9 @@ package pl.domanski.carRent.customer.rent.mapper;
 
 import pl.domanski.carRent.customer.common.model.Car;
 import pl.domanski.carRent.customer.rent.model.dto.RentDto;
-import pl.domanski.carRent.customer.rent.model.Payment;
+import pl.domanski.carRent.customer.common.model.Payment;
 import pl.domanski.carRent.customer.rent.model.Rent;
-import pl.domanski.carRent.customer.rent.model.RentStatus;
+import pl.domanski.carRent.customer.common.model.RentStatus;
 import pl.domanski.carRent.customer.rent.model.dto.RentSummary;
 
 import java.math.BigDecimal;

@@ -38,7 +38,7 @@ public class AdminRentController {
     }
 
     @GetMapping("/statuses")
-    public Map<String, String > getRentStatuses() {
+    public Map<String, String> getRentStatuses() {
         return adminRentService.getRentStatuses();
     }
 }

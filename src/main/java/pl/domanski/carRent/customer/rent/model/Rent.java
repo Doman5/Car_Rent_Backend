@@ -5,6 +5,8 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import pl.domanski.carRent.customer.common.model.Car;
+import pl.domanski.carRent.customer.common.model.Payment;
+import pl.domanski.carRent.customer.common.model.RentStatus;
 
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
