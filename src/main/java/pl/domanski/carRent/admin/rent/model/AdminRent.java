@@ -34,5 +34,5 @@ public class AdminRent {
     private LocalDateTime rentalDate;
     private String returnPlace;
     private LocalDateTime returnDate;
-    private BigDecimal grossValue;
+    private BigDecimal finalPrice;
 }

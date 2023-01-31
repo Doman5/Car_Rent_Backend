@@ -15,5 +15,5 @@ public class AdminRentDto {
     private String rentStatus;
     private LocalDateTime rentalDate;
     private LocalDateTime returnDate;
-    private BigDecimal grossValue;
+    private BigDecimal finalPrice;
 }

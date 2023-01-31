@@ -60,7 +60,7 @@ public class UserProfileService {
         return UserRentDto.builder()
                 .id(rent.getId())
                 .car(mapToCarNameDto(rent.getCar()))
-                .rentStatus(rent.getRentStatus().name())
+                .rentStatus(rent.getRentStatus().getValue())
                 .rentalDate(rent.getRentalDate())
                 .rentalPlace(rent.getRentalPlace())
                 .returnDate(rent.getReturnDate())

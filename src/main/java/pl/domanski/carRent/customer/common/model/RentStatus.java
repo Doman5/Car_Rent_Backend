@@ -1,5 +1,8 @@
-package pl.domanski.carRent.customer.rent.model;
+package pl.domanski.carRent.customer.common.model;
 
+import lombok.Getter;
+
+@Getter
 public enum RentStatus {
     NEW("Nowe"),
     PART_PAID("Częściowo opłacone"),

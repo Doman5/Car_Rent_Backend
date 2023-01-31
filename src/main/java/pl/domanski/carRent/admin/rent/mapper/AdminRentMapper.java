@@ -19,7 +19,7 @@ public class AdminRentMapper {
                 .rentStatus(adminRent.getRentStatus().name())
                 .rentalDate(adminRent.getRentalDate())
                 .returnDate(adminRent.getReturnDate())
-                .grossValue(adminRent.getGrossValue())
+                .finalPrice(adminRent.getFinalPrice())
                 .build();
     }
 
@@ -34,7 +34,7 @@ public class AdminRentMapper {
                 .rentalPlace(adminRent.getRentalPlace())
                 .returnDate(adminRent.getReturnDate())
                 .returnPlace(adminRent.getReturnPlace())
-                .grossValue(adminRent.getGrossValue())
+                .finalPrice(adminRent.getFinalPrice())
                 .rentLogs(rentLog)
                 .build();
     }
