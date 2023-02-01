@@ -52,6 +52,7 @@
   
  ## How to start aplication
  
+ you muss have created database named rentcars working on port 3306 
  ```
  mvn package
  java -jar carRent-0.0.1-SNAPSHOT.jar
