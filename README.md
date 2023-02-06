@@ -60,10 +60,19 @@
  after this can you view documentation on http://localhost:8080/swagger-ui/index.html
  
  ## Screen shots
- ![alt text](https://zapodaj.net/b1cdae1060d9a.png.html)
- ![alt text](https://zapodaj.net/2d34be372801e.jpg.html)
+ ![alt text](https://iv.pl/image/GZGqf4b)
+ ![alt text](https://iv.pl/image/GZGpuv7)
  ![alt text](https://zapodaj.net/17e2afd882bb0.jpg.html)
  ![alt text](https://zapodaj.net/83f0af62bb272.jpg.html)
  ![alt text](https://zapodaj.net/f103369b8b327.jpg.html)
   
+  https://iv.pl/image/GZGqf4b
+https://iv.pl/image/GZGpuv7
+https://iv.pl/image/GZGq5I5
+https://iv.pl/image/GZGpx9D
+https://iv.pl/image/GZGpsnp
+https://iv.pl/image/GZGpTTe
+https://iv.pl/image/GZGpIDI
+https://iv.pl/image/GZGpZq2
+https://iv.pl/image/GZGpdXY
    
