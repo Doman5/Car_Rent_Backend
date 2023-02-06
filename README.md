@@ -60,19 +60,13 @@
  after this can you view documentation on http://localhost:8080/swagger-ui/index.html
  
  ## Screen shots
- ![alt text]([https://user-images.githubusercontent.com/103491031/217057625-027b2289-4de7-499c-92de-992d7fe13a8b.png])
- ![alt text](https://iv.pl/image/GZGpuv7)
- ![alt text](https://zapodaj.net/17e2afd882bb0.jpg.html)
- ![alt text](https://zapodaj.net/83f0af62bb272.jpg.html)
- ![alt text](https://zapodaj.net/f103369b8b327.jpg.html)
-  
-  https://iv.pl/image/GZGqf4b
-https://iv.pl/image/GZGpuv7
-https://iv.pl/image/GZGq5I5
-https://iv.pl/image/GZGpx9D
-https://iv.pl/image/GZGpsnp
-https://iv.pl/image/GZGpTTe
-https://iv.pl/image/GZGpIDI
-https://iv.pl/image/GZGpZq2
-https://iv.pl/image/GZGpdXY
-   
+ ![alt text](https://user-images.githubusercontent.com/103491031/217057625-027b2289-4de7-499c-92de-992d7fe13a8b.png)
+ ![alt text](https://user-images.githubusercontent.com/103491031/217057975-07dcc334-bb66-404b-8c75-085011c3928d.jpg)
+ ![alt text]((https://user-images.githubusercontent.com/103491031/217058064-0737f409-0eac-4cde-b3e2-c67307d09051.jpg))
+ ![alt text](https://user-images.githubusercontent.com/103491031/217058183-4fe01446-9f36-4eb5-b856-f7a67a4a5091.jpg)
+ ![alt text](https://user-images.githubusercontent.com/103491031/217058204-22814f30-f851-4cb3-940d-0cd49e328f99.jpg)
+  ![alt text](https://user-images.githubusercontent.com/103491031/217058208-63411369-a2b5-48b1-a2b2-0732c4dc8ba8.jpg)
+   ![alt text](ttps://user-images.githubusercontent.com/103491031/217058210-588f4a34-1f44-4c1b-9a04-09bfeba55e1a.jpg)
+    ![alt text](https://user-images.githubusercontent.com/103491031/217058217-8731aaf2-b2b2-45a8-9a0f-80d399e8c939.jpg)
+    
+
