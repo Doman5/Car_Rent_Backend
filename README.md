@@ -58,5 +58,12 @@
  java -jar carRent-0.0.1-SNAPSHOT.jar
  ```
  after this can you view documentation on http://localhost:8080/swagger-ui/index.html
+ 
+ ## Screen shots
+ ![alt text](https://zapodaj.net/b1cdae1060d9a.png.html)
+ ![alt text](https://zapodaj.net/2d34be372801e.jpg.html)
+ ![alt text](https://zapodaj.net/17e2afd882bb0.jpg.html)
+ ![alt text](https://zapodaj.net/83f0af62bb272.jpg.html)
+ ![alt text](https://zapodaj.net/f103369b8b327.jpg.html)
   
    
