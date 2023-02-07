@@ -3,7 +3,6 @@ package pl.domanski.carrent.webclient.localization;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import pl.domanski.carrent.webClient.localization.DistanceCalculator;
 
 import java.util.Map;
 
