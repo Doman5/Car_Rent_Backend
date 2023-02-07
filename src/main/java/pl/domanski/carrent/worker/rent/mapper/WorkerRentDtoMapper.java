@@ -17,7 +17,6 @@ public class WorkerRentDtoMapper {
                 .slug(rent.getCar().getSlug())
                 .userId(rent.getUserId())
                 .rentStatus(rent.getRentStatus().getValue())
-                // uzupełnić dane użytkownika
                 .rentalPlace(rent.getRentalPlace())
                 .rentalDate(rent.getRentalDate())
                 .returnPlace(rent.getReturnPlace())
