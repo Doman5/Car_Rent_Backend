@@ -1,4 +1,4 @@
-package pl.domanski.carrent.webClient.localization;
+package pl.domanski.carrent.webclient.localization;
 
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;

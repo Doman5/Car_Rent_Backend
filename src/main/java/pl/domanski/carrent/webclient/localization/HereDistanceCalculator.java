@@ -1,4 +1,4 @@
-package pl.domanski.carrent.webClient.localization;
+package pl.domanski.carrent.webclient.localization;
 
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Value;
