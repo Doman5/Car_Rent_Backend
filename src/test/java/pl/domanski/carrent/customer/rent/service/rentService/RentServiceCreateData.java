@@ -1,8 +1,8 @@
-package pl.domanski.carRent.customer.rent.service.rentService;
+package pl.domanski.carrent.customer.rent.service.rentService;
 
-import pl.domanski.carRent.customer.common.model.Car;
-import pl.domanski.carRent.customer.common.model.CarPrice;
-import pl.domanski.carRent.customer.rent.model.dto.RentDateAndPlace;
+import pl.domanski.carrent.common.model.Car;
+import pl.domanski.carrent.common.model.CarPrice;
+import pl.domanski.carrent.rent.model.dto.RentDateAndPlace;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;

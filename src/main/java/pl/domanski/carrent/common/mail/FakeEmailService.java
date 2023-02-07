@@ -1,4 +1,4 @@
-package pl.domanski.carRent.common.mail;
+package pl.domanski.carrent.common.mail;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

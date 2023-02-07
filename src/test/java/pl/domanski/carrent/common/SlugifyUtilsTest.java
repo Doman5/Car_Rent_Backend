@@ -1,8 +1,8 @@
-package pl.domanski.carRent.common;
+package pl.domanski.carrent.common;
 
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
-import pl.domanski.carRent.admin.common.utils.SlugifyUtils;
+import pl.domanski.carrent.admin.common.utils.SlugifyUtils;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

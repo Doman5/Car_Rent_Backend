@@ -1,4 +1,4 @@
-package pl.domanski.carRent.security;
+package pl.domanski.carrent.security;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
@@ -7,7 +7,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
-import pl.domanski.carRent.security.model.RentUserDetails;
+import pl.domanski.carrent.security.model.RentUserDetails;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;

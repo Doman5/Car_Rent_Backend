@@ -1,32 +1,32 @@
-package pl.domanski.carRent.admin.car.service;
+package pl.domanski.carrent.admin.car.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import pl.domanski.carRent.admin.car.model.dto.AdminCarBasicInfo;
-import pl.domanski.carRent.admin.car.model.dto.AdminCarDto;
-import pl.domanski.carRent.admin.car.model.AdminCar;
-import pl.domanski.carRent.admin.car.model.AdminCarPhoto;
-import pl.domanski.carRent.admin.car.repository.AdminCarDescriptionRepository;
-import pl.domanski.carRent.admin.car.repository.AdminCarEquipmentRepository;
-import pl.domanski.carRent.admin.car.repository.AdminCarPhotoRepository;
-import pl.domanski.carRent.admin.car.repository.AdminCarPriceRepository;
-import pl.domanski.carRent.admin.car.repository.AdminCarRepository;
-import pl.domanski.carRent.admin.car.repository.AdminCarTechnicalSpecificationRepository;
-import pl.domanski.carRent.admin.car.mapper.AdminCarMapper;
-import pl.domanski.carRent.admin.car.utils.CarSlugUtils;
-import pl.domanski.carRent.admin.common.repository.AdminCategoryRepository;
+import pl.domanski.carrent.admin.car.model.dto.AdminCarBasicInfo;
+import pl.domanski.carrent.admin.car.model.dto.AdminCarDto;
+import pl.domanski.carrent.admin.car.model.AdminCar;
+import pl.domanski.carrent.admin.car.model.AdminCarPhoto;
+import pl.domanski.carrent.admin.car.repository.AdminCarDescriptionRepository;
+import pl.domanski.carrent.admin.car.repository.AdminCarEquipmentRepository;
+import pl.domanski.carrent.admin.car.repository.AdminCarPhotoRepository;
+import pl.domanski.carrent.admin.car.repository.AdminCarPriceRepository;
+import pl.domanski.carrent.admin.car.repository.AdminCarRepository;
+import pl.domanski.carrent.admin.car.repository.AdminCarTechnicalSpecificationRepository;
+import pl.domanski.carrent.admin.car.mapper.AdminCarMapper;
+import pl.domanski.carrent.admin.car.utils.CarSlugUtils;
+import pl.domanski.carrent.admin.common.repository.AdminCategoryRepository;
 
 import java.io.File;
 import java.util.List;
 
-import static pl.domanski.carRent.admin.car.mapper.AdminCarMapper.mapToAdminCar;
-import static pl.domanski.carRent.admin.car.mapper.AdminCarMapper.mapToAdminCarDescription;
-import static pl.domanski.carRent.admin.car.mapper.AdminCarMapper.mapToAdminCarEquipment;
-import static pl.domanski.carRent.admin.car.mapper.AdminCarMapper.mapToAdminCarPrice;
-import static pl.domanski.carRent.admin.car.mapper.AdminCarMapper.mapToAdminCarTechSpec;
+import static pl.domanski.carrent.admin.car.mapper.AdminCarMapper.mapToAdminCar;
+import static pl.domanski.carrent.admin.car.mapper.AdminCarMapper.mapToAdminCarDescription;
+import static pl.domanski.carrent.admin.car.mapper.AdminCarMapper.mapToAdminCarEquipment;
+import static pl.domanski.carrent.admin.car.mapper.AdminCarMapper.mapToAdminCarPrice;
+import static pl.domanski.carrent.admin.car.mapper.AdminCarMapper.mapToAdminCarTechSpec;
 
 
 @Service

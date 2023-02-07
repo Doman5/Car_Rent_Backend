@@ -1,4 +1,4 @@
-package pl.domanski.carRent.admin.category.controller;
+package pl.domanski.carrent.admin.category.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -9,9 +9,9 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import pl.domanski.carRent.admin.category.model.AdminCategory;
-import pl.domanski.carRent.admin.category.service.AdminCategoryService;
-import pl.domanski.carRent.admin.common.dto.AdminCategoryDto;
+import pl.domanski.carrent.admin.category.model.AdminCategory;
+import pl.domanski.carrent.admin.category.service.AdminCategoryService;
+import pl.domanski.carrent.admin.common.dto.AdminCategoryDto;
 
 import javax.validation.Valid;
 import java.util.List;

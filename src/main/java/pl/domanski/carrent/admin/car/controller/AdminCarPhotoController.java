@@ -1,4 +1,4 @@
-package pl.domanski.carRent.admin.car.controller;
+package pl.domanski.carrent.admin.car.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.io.Resource;
@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
-import pl.domanski.carRent.admin.car.model.dto.AdminCarPhotoDto;
-import pl.domanski.carRent.admin.car.service.AdminCarPhotoService;
+import pl.domanski.carrent.admin.car.model.dto.AdminCarPhotoDto;
+import pl.domanski.carrent.admin.car.service.AdminCarPhotoService;
 
 import java.io.IOException;
 import java.nio.file.Files;

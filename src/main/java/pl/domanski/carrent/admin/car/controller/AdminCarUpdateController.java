@@ -1,4 +1,4 @@
-package pl.domanski.carRent.admin.car.controller;
+package pl.domanski.carrent.admin.car.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -7,19 +7,19 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import pl.domanski.carRent.admin.car.model.dto.AdminCarBasicInfo;
-import pl.domanski.carRent.admin.car.model.dto.AdminCarDescriptionDto;
-import pl.domanski.carRent.admin.car.model.dto.AdminCarEquipmentDto;
-import pl.domanski.carRent.admin.car.model.dto.AdminCarPriceDto;
-import pl.domanski.carRent.admin.car.model.dto.AdminCarTechnicalSpecificationDto;
-import pl.domanski.carRent.admin.car.model.AdminCar;
-import pl.domanski.carRent.admin.car.model.AdminCarDescription;
-import pl.domanski.carRent.admin.car.model.AdminCarEquipment;
-import pl.domanski.carRent.admin.car.model.AdminCarPrice;
-import pl.domanski.carRent.admin.car.model.AdminCarTechnicalSpecification;
-import pl.domanski.carRent.admin.car.service.AdminCarUpdateService;
-import pl.domanski.carRent.admin.category.model.AdminCategory;
-import pl.domanski.carRent.admin.common.dto.AdminCategoryDto;
+import pl.domanski.carrent.admin.car.model.dto.AdminCarBasicInfo;
+import pl.domanski.carrent.admin.car.model.dto.AdminCarDescriptionDto;
+import pl.domanski.carrent.admin.car.model.dto.AdminCarEquipmentDto;
+import pl.domanski.carrent.admin.car.model.dto.AdminCarPriceDto;
+import pl.domanski.carrent.admin.car.model.dto.AdminCarTechnicalSpecificationDto;
+import pl.domanski.carrent.admin.car.model.AdminCar;
+import pl.domanski.carrent.admin.car.model.AdminCarDescription;
+import pl.domanski.carrent.admin.car.model.AdminCarEquipment;
+import pl.domanski.carrent.admin.car.model.AdminCarPrice;
+import pl.domanski.carrent.admin.car.model.AdminCarTechnicalSpecification;
+import pl.domanski.carrent.admin.car.service.AdminCarUpdateService;
+import pl.domanski.carrent.admin.category.model.AdminCategory;
+import pl.domanski.carrent.admin.common.dto.AdminCategoryDto;
 
 import javax.validation.Valid;
 import java.util.List;

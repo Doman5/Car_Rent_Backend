@@ -1,21 +1,21 @@
-package pl.domanski.carRent.admin.rent.service;
+package pl.domanski.carrent.admin.rent.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import pl.domanski.carRent.admin.rent.mapper.AdminRentMapper;
-import pl.domanski.carRent.admin.rent.model.AdminRent;
-import pl.domanski.carRent.admin.rent.model.AdminRentLog;
-import pl.domanski.carRent.admin.rent.model.AdminRentStatus;
-import pl.domanski.carRent.admin.rent.model.dto.AdminFullRentInfo;
-import pl.domanski.carRent.admin.rent.model.dto.AdminRentDto;
-import pl.domanski.carRent.admin.rent.model.dto.AdminRentLogDto;
-import pl.domanski.carRent.admin.rent.repository.AdminRentLogRepository;
-import pl.domanski.carRent.admin.rent.repository.AdminRentRepository;
-import pl.domanski.carRent.common.repository.UserRepository;
-import pl.domanski.carRent.security.model.User;
+import pl.domanski.carrent.admin.rent.mapper.AdminRentMapper;
+import pl.domanski.carrent.admin.rent.model.AdminRent;
+import pl.domanski.carrent.admin.rent.model.AdminRentLog;
+import pl.domanski.carrent.admin.rent.model.AdminRentStatus;
+import pl.domanski.carrent.admin.rent.model.dto.AdminFullRentInfo;
+import pl.domanski.carrent.admin.rent.model.dto.AdminRentDto;
+import pl.domanski.carrent.admin.rent.model.dto.AdminRentLogDto;
+import pl.domanski.carrent.admin.rent.repository.AdminRentLogRepository;
+import pl.domanski.carrent.admin.rent.repository.AdminRentRepository;
+import pl.domanski.carrent.common.repository.UserRepository;
+import pl.domanski.carrent.security.model.User;
 
 import java.time.LocalDateTime;
 import java.util.Arrays;
@@ -23,7 +23,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static pl.domanski.carRent.admin.rent.mapper.AdminRentMapper.mapToAdminFullRentInfo;
+import static pl.domanski.carrent.admin.rent.mapper.AdminRentMapper.mapToAdminFullRentInfo;
 
 @Service
 @RequiredArgsConstructor

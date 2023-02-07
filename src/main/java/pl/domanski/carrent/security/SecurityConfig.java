@@ -1,4 +1,4 @@
-package pl.domanski.carRent.security;
+package pl.domanski.carrent.security;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;

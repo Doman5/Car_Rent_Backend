@@ -1,11 +1,11 @@
-package pl.domanski.carRent.admin.car.service;
+package pl.domanski.carrent.admin.car.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import pl.domanski.carRent.admin.car.model.AdminBodyType;
-import pl.domanski.carRent.admin.category.model.AdminCategory;
-import pl.domanski.carRent.admin.common.dto.AdminCategoryDto;
-import pl.domanski.carRent.admin.common.repository.AdminCategoryRepository;
+import pl.domanski.carrent.admin.car.model.AdminBodyType;
+import pl.domanski.carrent.admin.category.model.AdminCategory;
+import pl.domanski.carrent.admin.common.dto.AdminCategoryDto;
+import pl.domanski.carrent.admin.common.repository.AdminCategoryRepository;
 
 import java.util.Arrays;
 import java.util.List;

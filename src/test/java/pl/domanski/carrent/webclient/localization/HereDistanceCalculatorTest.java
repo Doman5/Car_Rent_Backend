@@ -1,4 +1,4 @@
-package pl.domanski.carRent.webClient.localization;
+package pl.domanski.carrent.webClient.localization;
 
 import org.junit.jupiter.api.Test;
 

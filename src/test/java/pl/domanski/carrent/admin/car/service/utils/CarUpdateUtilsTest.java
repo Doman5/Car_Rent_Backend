@@ -1,11 +1,11 @@
-package pl.domanski.carRent.admin.car.service.utils;
+package pl.domanski.carrent.admin.car.service.utils;
 
 import org.junit.jupiter.api.Test;
-import pl.domanski.carRent.admin.car.model.dto.AdminCarDescriptionDto;
-import pl.domanski.carRent.admin.car.model.dto.AdminCarEquipmentDto;
-import pl.domanski.carRent.admin.car.model.AdminCarDescription;
-import pl.domanski.carRent.admin.car.model.AdminCarEquipment;
-import pl.domanski.carRent.admin.car.utils.CarUpdateUtils;
+import pl.domanski.carrent.admin.car.model.dto.AdminCarDescriptionDto;
+import pl.domanski.carrent.admin.car.model.dto.AdminCarEquipmentDto;
+import pl.domanski.carrent.admin.car.model.AdminCarDescription;
+import pl.domanski.carrent.admin.car.model.AdminCarEquipment;
+import pl.domanski.carrent.admin.car.utils.CarUpdateUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,14 +13,14 @@ import java.util.List;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.hasSize;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static pl.domanski.carRent.admin.car.service.utils.generateValues.carUpdateUtilsGenerateValues.createNewDescriptionsList;
-import static pl.domanski.carRent.admin.car.service.utils.generateValues.carUpdateUtilsGenerateValues.createNewDescriptionsListWithOneMoreValue;
-import static pl.domanski.carRent.admin.car.service.utils.generateValues.carUpdateUtilsGenerateValues.createNewEquipmentList;
-import static pl.domanski.carRent.admin.car.service.utils.generateValues.carUpdateUtilsGenerateValues.createNewEquipmentListWithOneMoreValue;
-import static pl.domanski.carRent.admin.car.service.utils.generateValues.carUpdateUtilsGenerateValues.createNewShorterDescriptionsList;
-import static pl.domanski.carRent.admin.car.service.utils.generateValues.carUpdateUtilsGenerateValues.createNewShorterEquipmentList;
-import static pl.domanski.carRent.admin.car.service.utils.generateValues.carUpdateUtilsGenerateValues.createOldDescriptionsList;
-import static pl.domanski.carRent.admin.car.service.utils.generateValues.carUpdateUtilsGenerateValues.createOldEquipmentList;
+import static pl.domanski.carrent.admin.car.service.utils.generateValues.carUpdateUtilsGenerateValues.createNewDescriptionsList;
+import static pl.domanski.carrent.admin.car.service.utils.generateValues.carUpdateUtilsGenerateValues.createNewDescriptionsListWithOneMoreValue;
+import static pl.domanski.carrent.admin.car.service.utils.generateValues.carUpdateUtilsGenerateValues.createNewEquipmentList;
+import static pl.domanski.carrent.admin.car.service.utils.generateValues.carUpdateUtilsGenerateValues.createNewEquipmentListWithOneMoreValue;
+import static pl.domanski.carrent.admin.car.service.utils.generateValues.carUpdateUtilsGenerateValues.createNewShorterDescriptionsList;
+import static pl.domanski.carrent.admin.car.service.utils.generateValues.carUpdateUtilsGenerateValues.createNewShorterEquipmentList;
+import static pl.domanski.carrent.admin.car.service.utils.generateValues.carUpdateUtilsGenerateValues.createOldDescriptionsList;
+import static pl.domanski.carrent.admin.car.service.utils.generateValues.carUpdateUtilsGenerateValues.createOldEquipmentList;
 
 class CarUpdateUtilsTest {
 

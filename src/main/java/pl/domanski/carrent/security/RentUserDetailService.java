@@ -1,4 +1,4 @@
-package pl.domanski.carRent.security;
+package pl.domanski.carrent.security;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
@@ -7,9 +7,9 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import pl.domanski.carRent.security.model.RentUserDetails;
-import pl.domanski.carRent.security.model.User;
-import pl.domanski.carRent.common.repository.UserRepository;
+import pl.domanski.carrent.security.model.RentUserDetails;
+import pl.domanski.carrent.security.model.User;
+import pl.domanski.carrent.common.repository.UserRepository;
 
 @Service
 @RequiredArgsConstructor

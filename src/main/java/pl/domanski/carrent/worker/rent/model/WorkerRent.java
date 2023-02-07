@@ -1,8 +1,8 @@
-package pl.domanski.carRent.worker.rent.model;
+package pl.domanski.carrent.worker.rent.model;
 
 import lombok.Getter;
 import lombok.Setter;
-import pl.domanski.carRent.worker.common.model.WorkerCar;
+import pl.domanski.carrent.worker.common.model.WorkerCar;
 
 import javax.persistence.Entity;
 import javax.persistence.EnumType;

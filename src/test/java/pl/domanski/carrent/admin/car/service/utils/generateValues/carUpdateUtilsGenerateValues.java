@@ -1,9 +1,9 @@
-package pl.domanski.carRent.admin.car.service.utils.generateValues;
+package pl.domanski.carrent.admin.car.service.utils.generateValues;
 
-import pl.domanski.carRent.admin.car.model.dto.AdminCarDescriptionDto;
-import pl.domanski.carRent.admin.car.model.dto.AdminCarEquipmentDto;
-import pl.domanski.carRent.admin.car.model.AdminCarDescription;
-import pl.domanski.carRent.admin.car.model.AdminCarEquipment;
+import pl.domanski.carrent.admin.car.model.dto.AdminCarDescriptionDto;
+import pl.domanski.carrent.admin.car.model.dto.AdminCarEquipmentDto;
+import pl.domanski.carrent.admin.car.model.AdminCarDescription;
+import pl.domanski.carrent.admin.car.model.AdminCarEquipment;
 
 import java.util.ArrayList;
 import java.util.List;

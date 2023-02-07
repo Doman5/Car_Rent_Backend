@@ -1,20 +1,20 @@
-package pl.domanski.carRent.worker.rent.service;
+package pl.domanski.carrent.worker.rent.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import pl.domanski.carRent.worker.rent.mapper.WorkerRentDtoMapper;
-import pl.domanski.carRent.worker.rent.model.WorkerRent;
-import pl.domanski.carRent.worker.rent.model.WorkerRentStatus;
-import pl.domanski.carRent.worker.rent.model.dto.WorkerRentBasicInfo;
-import pl.domanski.carRent.worker.rent.model.dto.WorkerRentDto;
-import pl.domanski.carRent.worker.rent.repository.WorkerRentLogRepository;
-import pl.domanski.carRent.worker.rent.repository.WorkerRentRepository;
+import pl.domanski.carrent.worker.rent.mapper.WorkerRentDtoMapper;
+import pl.domanski.carrent.worker.rent.model.WorkerRent;
+import pl.domanski.carrent.worker.rent.model.WorkerRentStatus;
+import pl.domanski.carrent.worker.rent.model.dto.WorkerRentBasicInfo;
+import pl.domanski.carrent.worker.rent.model.dto.WorkerRentDto;
+import pl.domanski.carrent.worker.rent.repository.WorkerRentLogRepository;
+import pl.domanski.carrent.worker.rent.repository.WorkerRentRepository;
 
 import java.util.List;
 import java.util.Map;
 
-import static pl.domanski.carRent.worker.rent.mapper.WorkerRentDtoMapper.createStatusChangeLog;
-import static pl.domanski.carRent.worker.rent.mapper.WorkerRentDtoMapper.mapToWorkerRentDto;
+import static pl.domanski.carrent.worker.rent.mapper.WorkerRentDtoMapper.createStatusChangeLog;
+import static pl.domanski.carrent.worker.rent.mapper.WorkerRentDtoMapper.mapToWorkerRentDto;
 
 @Service
 @RequiredArgsConstructor

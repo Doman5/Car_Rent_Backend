@@ -1,8 +1,8 @@
-package pl.domanski.carRent.admin.rent.repository;
+package pl.domanski.carrent.admin.rent.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import pl.domanski.carRent.admin.rent.model.AdminRentLog;
+import pl.domanski.carrent.admin.rent.model.AdminRentLog;
 
 import java.util.List;
 

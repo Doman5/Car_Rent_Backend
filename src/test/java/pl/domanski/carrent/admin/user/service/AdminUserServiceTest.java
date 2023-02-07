@@ -1,4 +1,4 @@
-package pl.domanski.carRent.admin.user.service;
+package pl.domanski.carrent.admin.user.service;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -6,10 +6,10 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
-import pl.domanski.carRent.admin.user.model.AdminUser;
-import pl.domanski.carRent.admin.user.model.dto.AdminUserDto;
-import pl.domanski.carRent.admin.user.repository.AdminUserRepository;
-import pl.domanski.carRent.security.model.UserRole;
+import pl.domanski.carrent.admin.user.model.AdminUser;
+import pl.domanski.carrent.admin.user.model.dto.AdminUserDto;
+import pl.domanski.carrent.admin.user.repository.AdminUserRepository;
+import pl.domanski.carrent.security.model.UserRole;
 
 import java.util.ArrayList;
 import java.util.List;

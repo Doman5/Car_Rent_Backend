@@ -1,4 +1,4 @@
-package pl.domanski.carRent.security.controller;
+package pl.domanski.carrent.security.controller;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
@@ -14,10 +14,10 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-import pl.domanski.carRent.security.model.RentUserDetails;
-import pl.domanski.carRent.security.model.User;
-import pl.domanski.carRent.security.model.UserRole;
-import pl.domanski.carRent.common.repository.UserRepository;
+import pl.domanski.carrent.security.model.RentUserDetails;
+import pl.domanski.carrent.security.model.User;
+import pl.domanski.carrent.security.model.UserRole;
+import pl.domanski.carrent.common.repository.UserRepository;
 
 import javax.validation.Valid;
 import javax.validation.constraints.Email;

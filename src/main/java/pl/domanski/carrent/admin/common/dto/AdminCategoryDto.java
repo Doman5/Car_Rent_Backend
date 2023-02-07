@@ -1,4 +1,4 @@
-package pl.domanski.carRent.admin.common.dto;
+package pl.domanski.carrent.admin.common.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

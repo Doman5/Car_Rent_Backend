@@ -1,4 +1,4 @@
-package pl.domanski.carRent.common.mail;
+package pl.domanski.carrent.common.mail;
 
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;

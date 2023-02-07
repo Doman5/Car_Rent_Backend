@@ -1,10 +1,10 @@
-package pl.domanski.carRent.customer.rent.utils.rentPriecesCalculator;
+package pl.domanski.carrent.customer.rent.utils.rentPriecesCalculator;
 
 import org.junit.jupiter.api.Test;
-import pl.domanski.carRent.customer.common.model.Car;
-import pl.domanski.carRent.customer.common.model.CarPrice;
-import pl.domanski.carRent.customer.rent.model.dto.RentDto;
-import pl.domanski.carRent.customer.rent.utils.RentPricesCalculator;
+import pl.domanski.carrent.common.model.Car;
+import pl.domanski.carrent.common.model.CarPrice;
+import pl.domanski.carrent.rent.model.dto.RentDto;
+import pl.domanski.carrent.rent.utils.RentPricesCalculator;
 
 import java.math.BigDecimal;
 

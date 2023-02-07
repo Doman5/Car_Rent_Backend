@@ -1,9 +1,9 @@
-package pl.domanski.carRent.admin.user.mapper;
+package pl.domanski.carrent.admin.user.mapper;
 
-import pl.domanski.carRent.admin.user.model.AdminUser;
-import pl.domanski.carRent.admin.user.model.dto.AdminUserBasicInfo;
-import pl.domanski.carRent.admin.user.model.dto.AdminUserDto;
-import pl.domanski.carRent.security.model.UserRole;
+import pl.domanski.carrent.admin.user.model.AdminUser;
+import pl.domanski.carrent.admin.user.model.dto.AdminUserBasicInfo;
+import pl.domanski.carrent.admin.user.model.dto.AdminUserDto;
+import pl.domanski.carrent.security.model.UserRole;
 
 public class AdminUserMapper {
 

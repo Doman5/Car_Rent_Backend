@@ -1,13 +1,13 @@
-package pl.domanski.carRent.customer.filtration.service;
+package pl.domanski.carrent.customer.filtration.service;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import pl.domanski.carRent.customer.car.service.CarFiltrationService;
-import pl.domanski.carRent.customer.common.repository.CarRepository;
-import pl.domanski.carRent.customer.car.model.dto.FiltrationDto;
+import pl.domanski.carrent.car.service.CarFiltrationService;
+import pl.domanski.carrent.common.repository.CarRepository;
+import pl.domanski.carrent.car.model.dto.FiltrationDto;
 
 import java.util.List;
 import java.util.Set;

@@ -1,4 +1,4 @@
-package pl.domanski.carRent.admin.common.utils;
+package pl.domanski.carrent.admin.common.utils;
 
 
 import com.github.slugify.Slugify;

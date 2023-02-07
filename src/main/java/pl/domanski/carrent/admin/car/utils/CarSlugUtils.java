@@ -1,9 +1,9 @@
-package pl.domanski.carRent.admin.car.utils;
+package pl.domanski.carrent.admin.car.utils;
 
 import com.github.slugify.Slugify;
 import lombok.AllArgsConstructor;
-import pl.domanski.carRent.admin.car.model.dto.AdminCarDto;
-import pl.domanski.carRent.admin.car.repository.AdminCarRepository;
+import pl.domanski.carrent.admin.car.model.dto.AdminCarDto;
+import pl.domanski.carrent.admin.car.repository.AdminCarRepository;
 
 @AllArgsConstructor
 public class CarSlugUtils {

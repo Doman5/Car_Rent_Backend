@@ -1,4 +1,4 @@
-package pl.domanski.carRent.security.model;
+package pl.domanski.carrent.security.model;
 
 import lombok.Getter;
 import lombok.Setter;

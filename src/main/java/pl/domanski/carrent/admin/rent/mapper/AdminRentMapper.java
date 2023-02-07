@@ -1,11 +1,11 @@
-package pl.domanski.carRent.admin.rent.mapper;
+package pl.domanski.carrent.admin.rent.mapper;
 
-import pl.domanski.carRent.admin.rent.model.AdminRent;
-import pl.domanski.carRent.admin.rent.model.AdminRentLog;
-import pl.domanski.carRent.admin.rent.model.dto.AdminFullRentInfo;
-import pl.domanski.carRent.admin.rent.model.dto.AdminRentDto;
-import pl.domanski.carRent.admin.rent.model.dto.AdminRentLogDto;
-import pl.domanski.carRent.security.model.User;
+import pl.domanski.carrent.admin.rent.model.AdminRent;
+import pl.domanski.carrent.admin.rent.model.AdminRentLog;
+import pl.domanski.carrent.admin.rent.model.dto.AdminFullRentInfo;
+import pl.domanski.carrent.admin.rent.model.dto.AdminRentDto;
+import pl.domanski.carrent.admin.rent.model.dto.AdminRentLogDto;
+import pl.domanski.carrent.security.model.User;
 
 import java.util.List;
 

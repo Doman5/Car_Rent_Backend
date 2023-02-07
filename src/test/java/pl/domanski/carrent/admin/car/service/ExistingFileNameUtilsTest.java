@@ -1,8 +1,8 @@
-package pl.domanski.carRent.admin.car.service;
+package pl.domanski.carrent.admin.car.service;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
-import pl.domanski.carRent.admin.car.utils.FileNameUtils;
+import pl.domanski.carrent.admin.car.utils.FileNameUtils;
 
 import java.io.IOException;
 import java.nio.file.Files;

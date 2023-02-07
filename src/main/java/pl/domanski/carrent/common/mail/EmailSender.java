@@ -1,4 +1,4 @@
-package pl.domanski.carRent.common.mail;
+package pl.domanski.carrent.common.mail;
 
 public interface EmailSender {
 

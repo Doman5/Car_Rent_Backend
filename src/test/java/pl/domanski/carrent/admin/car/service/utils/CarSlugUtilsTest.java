@@ -1,14 +1,14 @@
-package pl.domanski.carRent.admin.car.service.utils;
+package pl.domanski.carrent.admin.car.service.utils;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import pl.domanski.carRent.admin.car.model.dto.AdminCarDto;
-import pl.domanski.carRent.admin.car.model.AdminCar;
-import pl.domanski.carRent.admin.car.repository.AdminCarRepository;
-import pl.domanski.carRent.admin.car.utils.CarSlugUtils;
+import pl.domanski.carrent.admin.car.model.dto.AdminCarDto;
+import pl.domanski.carrent.admin.car.model.AdminCar;
+import pl.domanski.carrent.admin.car.repository.AdminCarRepository;
+import pl.domanski.carrent.admin.car.utils.CarSlugUtils;
 
 import java.util.Optional;
 

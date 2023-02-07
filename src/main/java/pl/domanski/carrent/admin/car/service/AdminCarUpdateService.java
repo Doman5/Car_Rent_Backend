@@ -1,41 +1,41 @@
-package pl.domanski.carRent.admin.car.service;
+package pl.domanski.carrent.admin.car.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import pl.domanski.carRent.admin.car.model.dto.AdminCarBasicInfo;
-import pl.domanski.carRent.admin.car.model.dto.AdminCarDescriptionDto;
-import pl.domanski.carRent.admin.car.model.dto.AdminCarDto;
-import pl.domanski.carRent.admin.car.model.dto.AdminCarEquipmentDto;
-import pl.domanski.carRent.admin.car.model.dto.AdminCarPriceDto;
-import pl.domanski.carRent.admin.car.model.dto.AdminCarTechnicalSpecificationDto;
-import pl.domanski.carRent.admin.car.model.AdminCar;
-import pl.domanski.carRent.admin.car.model.AdminCarDescription;
-import pl.domanski.carRent.admin.car.model.AdminCarEquipment;
-import pl.domanski.carRent.admin.car.model.AdminCarPrice;
-import pl.domanski.carRent.admin.car.model.AdminCarTechnicalSpecification;
-import pl.domanski.carRent.admin.car.repository.AdminCarDescriptionRepository;
-import pl.domanski.carRent.admin.car.repository.AdminCarEquipmentRepository;
-import pl.domanski.carRent.admin.car.repository.AdminCarPriceRepository;
-import pl.domanski.carRent.admin.car.repository.AdminCarRepository;
-import pl.domanski.carRent.admin.car.repository.AdminCarTechnicalSpecificationRepository;
-import pl.domanski.carRent.admin.car.mapper.AdminCarMapper;
-import pl.domanski.carRent.admin.car.utils.CarSlugUtils;
-import pl.domanski.carRent.admin.category.model.AdminCategory;
-import pl.domanski.carRent.admin.common.dto.AdminCategoryDto;
-import pl.domanski.carRent.admin.common.repository.AdminCategoryRepository;
-import pl.domanski.carRent.customer.common.model.Car;
-import pl.domanski.carRent.customer.common.repository.CarRepository;
+import pl.domanski.carrent.admin.car.model.dto.AdminCarBasicInfo;
+import pl.domanski.carrent.admin.car.model.dto.AdminCarDescriptionDto;
+import pl.domanski.carrent.admin.car.model.dto.AdminCarDto;
+import pl.domanski.carrent.admin.car.model.dto.AdminCarEquipmentDto;
+import pl.domanski.carrent.admin.car.model.dto.AdminCarPriceDto;
+import pl.domanski.carrent.admin.car.model.dto.AdminCarTechnicalSpecificationDto;
+import pl.domanski.carrent.admin.car.model.AdminCar;
+import pl.domanski.carrent.admin.car.model.AdminCarDescription;
+import pl.domanski.carrent.admin.car.model.AdminCarEquipment;
+import pl.domanski.carrent.admin.car.model.AdminCarPrice;
+import pl.domanski.carrent.admin.car.model.AdminCarTechnicalSpecification;
+import pl.domanski.carrent.admin.car.repository.AdminCarDescriptionRepository;
+import pl.domanski.carrent.admin.car.repository.AdminCarEquipmentRepository;
+import pl.domanski.carrent.admin.car.repository.AdminCarPriceRepository;
+import pl.domanski.carrent.admin.car.repository.AdminCarRepository;
+import pl.domanski.carrent.admin.car.repository.AdminCarTechnicalSpecificationRepository;
+import pl.domanski.carrent.admin.car.mapper.AdminCarMapper;
+import pl.domanski.carrent.admin.car.utils.CarSlugUtils;
+import pl.domanski.carrent.admin.category.model.AdminCategory;
+import pl.domanski.carrent.admin.common.dto.AdminCategoryDto;
+import pl.domanski.carrent.admin.common.repository.AdminCategoryRepository;
+import pl.domanski.carrent.common.model.Car;
+import pl.domanski.carrent.common.repository.CarRepository;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static pl.domanski.carRent.admin.car.mapper.AdminCarMapper.mapToAdminCarBasicInfo;
-import static pl.domanski.carRent.admin.car.utils.CarUpdateUtils.setNewCarBasicInfoValues;
-import static pl.domanski.carRent.admin.car.utils.CarUpdateUtils.setNewCarDescriptionValues;
-import static pl.domanski.carRent.admin.car.utils.CarUpdateUtils.setNewCarEquipmentValues;
-import static pl.domanski.carRent.admin.car.utils.CarUpdateUtils.setNewCarPriceValues;
-import static pl.domanski.carRent.admin.car.utils.CarUpdateUtils.setNewCarTechSpecValues;
+import static pl.domanski.carrent.admin.car.mapper.AdminCarMapper.mapToAdminCarBasicInfo;
+import static pl.domanski.carrent.admin.car.utils.CarUpdateUtils.setNewCarBasicInfoValues;
+import static pl.domanski.carrent.admin.car.utils.CarUpdateUtils.setNewCarDescriptionValues;
+import static pl.domanski.carrent.admin.car.utils.CarUpdateUtils.setNewCarEquipmentValues;
+import static pl.domanski.carrent.admin.car.utils.CarUpdateUtils.setNewCarPriceValues;
+import static pl.domanski.carrent.admin.car.utils.CarUpdateUtils.setNewCarTechSpecValues;
 
 @Service
 @RequiredArgsConstructor

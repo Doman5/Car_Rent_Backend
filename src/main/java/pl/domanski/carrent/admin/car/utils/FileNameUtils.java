@@ -1,11 +1,11 @@
-package pl.domanski.carRent.admin.car.utils;
+package pl.domanski.carrent.admin.car.utils;
 
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.io.FilenameUtils;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
-import pl.domanski.carRent.admin.car.repository.AdminCarRepository;
-import pl.domanski.carRent.admin.common.utils.SlugifyUtils;
+import pl.domanski.carrent.admin.car.repository.AdminCarRepository;
+import pl.domanski.carrent.admin.common.utils.SlugifyUtils;
 
 import java.nio.file.Files;
 import java.nio.file.Path;

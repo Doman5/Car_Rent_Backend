@@ -1,14 +1,15 @@
-package pl.domanski.carRent.customer.rent.utils;
+package pl.domanski.carrent.customer.rent.utils;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import pl.domanski.carRent.customer.common.model.Car;
-import pl.domanski.carRent.customer.rent.model.dto.RentDateAndPlace;
-import pl.domanski.carRent.customer.rent.model.Rent;
-import pl.domanski.carRent.customer.common.repository.RentRepository;
+import pl.domanski.carrent.common.model.Car;
+import pl.domanski.carrent.rent.model.dto.RentDateAndPlace;
+import pl.domanski.carrent.rent.model.Rent;
+import pl.domanski.carrent.common.repository.RentRepository;
+import pl.domanski.carrent.rent.utils.CheckCarAvailabilityUtils;
 
 import java.time.LocalDateTime;
 import java.util.List;

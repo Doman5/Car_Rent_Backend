@@ -1,4 +1,4 @@
-package pl.domanski.carRent.admin.car.model;
+package pl.domanski.carrent.admin.car.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

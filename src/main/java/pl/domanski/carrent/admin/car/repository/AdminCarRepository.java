@@ -1,8 +1,8 @@
-package pl.domanski.carRent.admin.car.repository;
+package pl.domanski.carrent.admin.car.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import pl.domanski.carRent.admin.car.model.AdminCar;
+import pl.domanski.carrent.admin.car.model.AdminCar;
 
 import java.util.Optional;
 

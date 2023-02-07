@@ -1,19 +1,19 @@
-package pl.domanski.carRent.admin.car.service.adminCarService.objectCreator;
+package pl.domanski.carrent.admin.car.service.adminCarService.objectCreator;
 
-import pl.domanski.carRent.admin.car.model.dto.AdminCarDescriptionDto;
-import pl.domanski.carRent.admin.car.model.dto.AdminCarDto;
-import pl.domanski.carRent.admin.car.model.dto.AdminCarEquipmentDto;
-import pl.domanski.carRent.admin.car.model.dto.AdminCarPhotoDto;
-import pl.domanski.carRent.admin.car.model.dto.AdminCarPriceDto;
-import pl.domanski.carRent.admin.car.model.dto.AdminCarTechnicalSpecificationDto;
-import pl.domanski.carRent.admin.car.model.AdminCar;
-import pl.domanski.carRent.admin.car.model.AdminCarDescription;
-import pl.domanski.carRent.admin.car.model.AdminCarEquipment;
-import pl.domanski.carRent.admin.car.model.AdminCarPhoto;
-import pl.domanski.carRent.admin.car.model.AdminCarPrice;
-import pl.domanski.carRent.admin.car.model.AdminCarTechnicalSpecification;
-import pl.domanski.carRent.admin.category.model.AdminCategory;
-import pl.domanski.carRent.admin.common.dto.AdminCategoryDto;
+import pl.domanski.carrent.admin.car.model.dto.AdminCarDescriptionDto;
+import pl.domanski.carrent.admin.car.model.dto.AdminCarDto;
+import pl.domanski.carrent.admin.car.model.dto.AdminCarEquipmentDto;
+import pl.domanski.carrent.admin.car.model.dto.AdminCarPhotoDto;
+import pl.domanski.carrent.admin.car.model.dto.AdminCarPriceDto;
+import pl.domanski.carrent.admin.car.model.dto.AdminCarTechnicalSpecificationDto;
+import pl.domanski.carrent.admin.car.model.AdminCar;
+import pl.domanski.carrent.admin.car.model.AdminCarDescription;
+import pl.domanski.carrent.admin.car.model.AdminCarEquipment;
+import pl.domanski.carrent.admin.car.model.AdminCarPhoto;
+import pl.domanski.carrent.admin.car.model.AdminCarPrice;
+import pl.domanski.carrent.admin.car.model.AdminCarTechnicalSpecification;
+import pl.domanski.carrent.admin.category.model.AdminCategory;
+import pl.domanski.carrent.admin.common.dto.AdminCategoryDto;
 
 import java.math.BigDecimal;
 import java.util.List;

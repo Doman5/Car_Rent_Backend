@@ -1,11 +1,11 @@
-package pl.domanski.carRent.admin.user.model;
+package pl.domanski.carrent.admin.user.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import pl.domanski.carRent.security.model.UserRole;
+import pl.domanski.carrent.security.model.UserRole;
 
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;

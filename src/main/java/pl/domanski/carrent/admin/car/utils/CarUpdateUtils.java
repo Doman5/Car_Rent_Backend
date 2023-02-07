@@ -1,16 +1,16 @@
-package pl.domanski.carRent.admin.car.utils;
+package pl.domanski.carrent.admin.car.utils;
 
-import pl.domanski.carRent.admin.car.model.dto.AdminCarBasicInfo;
-import pl.domanski.carRent.admin.car.model.dto.AdminCarDescriptionDto;
-import pl.domanski.carRent.admin.car.model.dto.AdminCarEquipmentDto;
-import pl.domanski.carRent.admin.car.model.dto.AdminCarPriceDto;
-import pl.domanski.carRent.admin.car.model.dto.AdminCarTechnicalSpecificationDto;
-import pl.domanski.carRent.admin.car.model.AdminBodyType;
-import pl.domanski.carRent.admin.car.model.AdminCar;
-import pl.domanski.carRent.admin.car.model.AdminCarDescription;
-import pl.domanski.carRent.admin.car.model.AdminCarEquipment;
-import pl.domanski.carRent.admin.car.model.AdminCarPrice;
-import pl.domanski.carRent.admin.car.model.AdminCarTechnicalSpecification;
+import pl.domanski.carrent.admin.car.model.dto.AdminCarBasicInfo;
+import pl.domanski.carrent.admin.car.model.dto.AdminCarDescriptionDto;
+import pl.domanski.carrent.admin.car.model.dto.AdminCarEquipmentDto;
+import pl.domanski.carrent.admin.car.model.dto.AdminCarPriceDto;
+import pl.domanski.carrent.admin.car.model.dto.AdminCarTechnicalSpecificationDto;
+import pl.domanski.carrent.admin.car.model.AdminBodyType;
+import pl.domanski.carrent.admin.car.model.AdminCar;
+import pl.domanski.carrent.admin.car.model.AdminCarDescription;
+import pl.domanski.carrent.admin.car.model.AdminCarEquipment;
+import pl.domanski.carrent.admin.car.model.AdminCarPrice;
+import pl.domanski.carrent.admin.car.model.AdminCarTechnicalSpecification;
 
 import java.util.ArrayList;
 import java.util.List;

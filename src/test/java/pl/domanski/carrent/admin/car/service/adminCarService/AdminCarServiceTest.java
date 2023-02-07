@@ -1,20 +1,20 @@
-package pl.domanski.carRent.admin.car.service.adminCarService;
+package pl.domanski.carrent.admin.car.service.adminCarService;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import pl.domanski.carRent.admin.car.model.dto.AdminCarDto;
-import pl.domanski.carRent.admin.car.model.AdminCar;
-import pl.domanski.carRent.admin.car.repository.AdminCarDescriptionRepository;
-import pl.domanski.carRent.admin.car.repository.AdminCarEquipmentRepository;
-import pl.domanski.carRent.admin.car.repository.AdminCarPhotoRepository;
-import pl.domanski.carRent.admin.car.repository.AdminCarPriceRepository;
-import pl.domanski.carRent.admin.car.repository.AdminCarRepository;
-import pl.domanski.carRent.admin.car.repository.AdminCarTechnicalSpecificationRepository;
-import pl.domanski.carRent.admin.car.service.AdminCarService;
-import pl.domanski.carRent.admin.common.repository.AdminCategoryRepository;
+import pl.domanski.carrent.admin.car.model.dto.AdminCarDto;
+import pl.domanski.carrent.admin.car.model.AdminCar;
+import pl.domanski.carrent.admin.car.repository.AdminCarDescriptionRepository;
+import pl.domanski.carrent.admin.car.repository.AdminCarEquipmentRepository;
+import pl.domanski.carrent.admin.car.repository.AdminCarPhotoRepository;
+import pl.domanski.carrent.admin.car.repository.AdminCarPriceRepository;
+import pl.domanski.carrent.admin.car.repository.AdminCarRepository;
+import pl.domanski.carrent.admin.car.repository.AdminCarTechnicalSpecificationRepository;
+import pl.domanski.carrent.admin.car.service.AdminCarService;
+import pl.domanski.carrent.admin.common.repository.AdminCategoryRepository;
 
 import java.math.BigDecimal;
 
@@ -24,16 +24,16 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyList;
 import static org.mockito.BDDMockito.given;
-import static pl.domanski.carRent.admin.car.service.adminCarService.objectCreator.AdminCarServiceDataCreator.creatCarDto;
-import static pl.domanski.carRent.admin.car.service.adminCarService.objectCreator.AdminCarServiceDataCreator.createCar;
-import static pl.domanski.carRent.admin.car.service.adminCarService.objectCreator.AdminCarServiceDataCreator.createCarDtoWithoutDescriptionEquipmentAndPhotos;
-import static pl.domanski.carRent.admin.car.service.adminCarService.objectCreator.AdminCarServiceDataCreator.createCarPrice;
-import static pl.domanski.carRent.admin.car.service.adminCarService.objectCreator.AdminCarServiceDataCreator.createCarTechSpec;
-import static pl.domanski.carRent.admin.car.service.adminCarService.objectCreator.AdminCarServiceDataCreator.createEquipmentList;
-import static pl.domanski.carRent.admin.car.service.adminCarService.objectCreator.AdminCarServiceDataCreator.creteCarDtoWithoutAnyInfo;
-import static pl.domanski.carRent.admin.car.service.adminCarService.objectCreator.AdminCarServiceDataCreator.creteCategory;
-import static pl.domanski.carRent.admin.car.service.adminCarService.objectCreator.AdminCarServiceDataCreator.creteDescriptionList;
-import static pl.domanski.carRent.admin.car.service.adminCarService.objectCreator.AdminCarServiceDataCreator.cretePhotoList;
+import static pl.domanski.carrent.admin.car.service.adminCarService.objectCreator.AdminCarServiceDataCreator.creatCarDto;
+import static pl.domanski.carrent.admin.car.service.adminCarService.objectCreator.AdminCarServiceDataCreator.createCar;
+import static pl.domanski.carrent.admin.car.service.adminCarService.objectCreator.AdminCarServiceDataCreator.createCarDtoWithoutDescriptionEquipmentAndPhotos;
+import static pl.domanski.carrent.admin.car.service.adminCarService.objectCreator.AdminCarServiceDataCreator.createCarPrice;
+import static pl.domanski.carrent.admin.car.service.adminCarService.objectCreator.AdminCarServiceDataCreator.createCarTechSpec;
+import static pl.domanski.carrent.admin.car.service.adminCarService.objectCreator.AdminCarServiceDataCreator.createEquipmentList;
+import static pl.domanski.carrent.admin.car.service.adminCarService.objectCreator.AdminCarServiceDataCreator.creteCarDtoWithoutAnyInfo;
+import static pl.domanski.carrent.admin.car.service.adminCarService.objectCreator.AdminCarServiceDataCreator.creteCategory;
+import static pl.domanski.carrent.admin.car.service.adminCarService.objectCreator.AdminCarServiceDataCreator.creteDescriptionList;
+import static pl.domanski.carrent.admin.car.service.adminCarService.objectCreator.AdminCarServiceDataCreator.cretePhotoList;
 
 @ExtendWith(MockitoExtension.class)
 class AdminCarServiceTest {

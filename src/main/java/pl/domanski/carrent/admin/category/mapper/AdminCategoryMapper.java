@@ -1,7 +1,7 @@
-package pl.domanski.carRent.admin.category.mapper;
+package pl.domanski.carrent.admin.category.mapper;
 
-import pl.domanski.carRent.admin.category.model.AdminCategory;
-import pl.domanski.carRent.admin.common.dto.AdminCategoryDto;
+import pl.domanski.carrent.admin.category.model.AdminCategory;
+import pl.domanski.carrent.admin.common.dto.AdminCategoryDto;
 
 public class AdminCategoryMapper {
 

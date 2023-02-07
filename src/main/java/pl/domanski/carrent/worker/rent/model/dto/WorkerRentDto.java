@@ -1,4 +1,4 @@
-package pl.domanski.carRent.worker.rent.model.dto;
+package pl.domanski.carrent.worker.rent.model.dto;
 
 import lombok.Builder;
 import lombok.Getter;

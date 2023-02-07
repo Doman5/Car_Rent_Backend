@@ -1,10 +1,10 @@
-package pl.domanski.carRent.admin.car.model.dto;
+package pl.domanski.carrent.admin.car.model.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import pl.domanski.carRent.admin.common.dto.AdminCategoryDto;
+import pl.domanski.carrent.admin.common.dto.AdminCategoryDto;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;

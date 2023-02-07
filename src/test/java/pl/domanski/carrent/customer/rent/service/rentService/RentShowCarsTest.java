@@ -1,15 +1,15 @@
-package pl.domanski.carRent.customer.rent.service.rentService;
+package pl.domanski.carrent.customer.rent.service.rentService;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import pl.domanski.carRent.customer.common.repository.CarRepository;
-import pl.domanski.carRent.customer.rent.model.dto.CarToRentDto;
-import pl.domanski.carRent.customer.rent.model.dto.RentDateAndPlace;
-import pl.domanski.carRent.customer.rent.service.RentService;
-import pl.domanski.carRent.customer.rent.utils.CheckCarAvailabilityUtils;
+import pl.domanski.carrent.common.repository.CarRepository;
+import pl.domanski.carrent.rent.model.dto.CarToRentDto;
+import pl.domanski.carrent.rent.model.dto.RentDateAndPlace;
+import pl.domanski.carrent.rent.service.RentService;
+import pl.domanski.carrent.rent.utils.CheckCarAvailabilityUtils;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -21,8 +21,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.BDDMockito.given;
-import static pl.domanski.carRent.customer.rent.service.rentService.RentServiceCreateData.createCarsList;
-import static pl.domanski.carRent.customer.rent.service.rentService.RentServiceCreateData.createRentDateAndPlace;
+import static pl.domanski.carrent.customer.rent.service.rentService.RentServiceCreateData.createCarsList;
+import static pl.domanski.carrent.customer.rent.service.rentService.RentServiceCreateData.createRentDateAndPlace;
 
 @ExtendWith(MockitoExtension.class)
 public class RentShowCarsTest {

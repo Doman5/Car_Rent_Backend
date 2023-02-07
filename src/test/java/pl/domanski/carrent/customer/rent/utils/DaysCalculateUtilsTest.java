@@ -1,15 +1,15 @@
-package pl.domanski.carRent.customer.rent.utils;
+package pl.domanski.carrent.customer.rent.utils;
 
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
-import pl.domanski.carRent.customer.rent.model.dto.RentDateAndPlace;
+import pl.domanski.carrent.rent.model.dto.RentDateAndPlace;
 
 import java.time.LocalDateTime;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static pl.domanski.carRent.customer.rent.utils.DaysCalculateUtils.calculateCountOfDays;
+import static pl.domanski.carrent.rent.utils.DaysCalculateUtils.calculateCountOfDays;
 
 class DaysCalculateUtilsTest {
 

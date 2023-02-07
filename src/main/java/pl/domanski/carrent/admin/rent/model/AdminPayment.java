@@ -1,7 +1,7 @@
-package pl.domanski.carRent.admin.rent.model;
+package pl.domanski.carrent.admin.rent.model;
 
 import lombok.Getter;
-import pl.domanski.carRent.customer.rent.model.PaymentType;
+import pl.domanski.carrent.rent.model.PaymentType;
 
 import javax.persistence.Entity;
 import javax.persistence.EnumType;

@@ -1,20 +1,20 @@
-package pl.domanski.carRent.admin.user.service;
+package pl.domanski.carrent.admin.user.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import pl.domanski.carRent.admin.user.mapper.AdminUserMapper;
-import pl.domanski.carRent.admin.user.model.AdminUser;
-import pl.domanski.carRent.admin.user.model.dto.AdminUserBasicInfo;
-import pl.domanski.carRent.admin.user.model.dto.AdminUserDto;
-import pl.domanski.carRent.admin.user.repository.AdminUserRepository;
-import pl.domanski.carRent.security.model.UserRole;
+import pl.domanski.carrent.admin.user.mapper.AdminUserMapper;
+import pl.domanski.carrent.admin.user.model.AdminUser;
+import pl.domanski.carrent.admin.user.model.dto.AdminUserBasicInfo;
+import pl.domanski.carrent.admin.user.model.dto.AdminUserDto;
+import pl.domanski.carrent.admin.user.repository.AdminUserRepository;
+import pl.domanski.carrent.security.model.UserRole;
 
 import java.util.ArrayList;
 import java.util.Map;
 
-import static pl.domanski.carRent.admin.user.mapper.AdminUserMapper.mapToAdminUserDto;
+import static pl.domanski.carrent.admin.user.mapper.AdminUserMapper.mapToAdminUserDto;
 
 @Service
 @RequiredArgsConstructor

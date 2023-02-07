@@ -1,4 +1,4 @@
-package pl.domanski.carRent.admin.car.controller;
+package pl.domanski.carrent.admin.car.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -10,12 +10,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import pl.domanski.carRent.admin.car.model.dto.AdminCarBasicInfo;
-import pl.domanski.carRent.admin.car.model.dto.AdminCarDto;
-import pl.domanski.carRent.admin.car.model.AdminCar;
-import pl.domanski.carRent.admin.car.service.AdminCarService;
-import pl.domanski.carRent.admin.car.service.AdminCarUpdateInitDataService;
-import pl.domanski.carRent.admin.common.dto.AdminCategoryDto;
+import pl.domanski.carrent.admin.car.model.dto.AdminCarBasicInfo;
+import pl.domanski.carrent.admin.car.model.dto.AdminCarDto;
+import pl.domanski.carrent.admin.car.model.AdminCar;
+import pl.domanski.carrent.admin.car.service.AdminCarService;
+import pl.domanski.carrent.admin.car.service.AdminCarUpdateInitDataService;
+import pl.domanski.carrent.admin.common.dto.AdminCategoryDto;
 
 import javax.validation.Valid;
 import java.util.List;

@@ -1,10 +1,10 @@
-package pl.domanski.carRent.worker.rent.mapper;
+package pl.domanski.carrent.worker.rent.mapper;
 
-import pl.domanski.carRent.worker.rent.model.WorkerRent;
-import pl.domanski.carRent.worker.rent.model.WorkerRentLog;
-import pl.domanski.carRent.worker.rent.model.WorkerRentStatus;
-import pl.domanski.carRent.worker.rent.model.dto.WorkerRentBasicInfo;
-import pl.domanski.carRent.worker.rent.model.dto.WorkerRentDto;
+import pl.domanski.carrent.worker.rent.model.WorkerRent;
+import pl.domanski.carrent.worker.rent.model.WorkerRentLog;
+import pl.domanski.carrent.worker.rent.model.WorkerRentStatus;
+import pl.domanski.carrent.worker.rent.model.dto.WorkerRentBasicInfo;
+import pl.domanski.carrent.worker.rent.model.dto.WorkerRentDto;
 
 import java.time.LocalDateTime;
 
@@ -17,7 +17,6 @@ public class WorkerRentDtoMapper {
                 .slug(rent.getCar().getSlug())
                 .userId(rent.getUserId())
                 .rentStatus(rent.getRentStatus().getValue())
-                // uzupełnić dane użytkownika
                 .rentalPlace(rent.getRentalPlace())
                 .rentalDate(rent.getRentalDate())
                 .returnPlace(rent.getReturnPlace())

@@ -1,10 +1,10 @@
-package pl.domanski.carRent.worker.rent.model;
+package pl.domanski.carrent.worker.rent.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import pl.domanski.carRent.customer.rent.model.PaymentType;
+import pl.domanski.carrent.rent.model.PaymentType;
 
 import javax.persistence.Entity;
 import javax.persistence.EnumType;

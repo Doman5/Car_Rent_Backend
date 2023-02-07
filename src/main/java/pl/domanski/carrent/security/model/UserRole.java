@@ -1,4 +1,4 @@
-package pl.domanski.carRent.security.model;
+package pl.domanski.carrent.security.model;
 
 public enum UserRole {
     ROLE_ADMIN("ADMIN"),

@@ -1,9 +1,9 @@
-package pl.domanski.carRent.worker.rent.repository;
+package pl.domanski.carrent.worker.rent.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import pl.domanski.carRent.worker.rent.model.WorkerRent;
-import pl.domanski.carRent.worker.rent.model.WorkerRentStatus;
+import pl.domanski.carrent.worker.rent.model.WorkerRent;
+import pl.domanski.carrent.worker.rent.model.WorkerRentStatus;
 
 import java.util.List;
 

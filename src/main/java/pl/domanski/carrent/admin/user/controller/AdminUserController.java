@@ -1,4 +1,4 @@
-package pl.domanski.carRent.admin.user.controller;
+package pl.domanski.carrent.admin.user.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -9,9 +9,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import pl.domanski.carRent.admin.user.model.dto.AdminUserBasicInfo;
-import pl.domanski.carRent.admin.user.model.dto.AdminUserDto;
-import pl.domanski.carRent.admin.user.service.AdminUserService;
+import pl.domanski.carrent.admin.user.model.dto.AdminUserBasicInfo;
+import pl.domanski.carrent.admin.user.model.dto.AdminUserDto;
+import pl.domanski.carrent.admin.user.service.AdminUserService;
 
 import java.util.Map;
 

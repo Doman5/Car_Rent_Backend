@@ -1,4 +1,4 @@
-package pl.domanski.carRent;
+package pl.domanski.carrent;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
